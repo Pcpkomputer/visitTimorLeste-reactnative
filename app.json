@@ -1,0 +1,12 @@
+{
+  "name": "visitTimorLeste",
+  "displayName": "visitTimorLeste",
+  "expo": {
+    "name": "visitTimorLeste",
+    "slug": "visitTimorLeste",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
