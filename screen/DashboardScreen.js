@@ -143,8 +143,8 @@ export default function DashboardScreen(props){
 
            {
                (selectedFragment==="discover") &&
-               <Animated.View style={{...shadow,transform:[{translateY:iTranslateYTopBar}],backgroundColor:'white',zIndex:100,opacity:iTopBarFade,justifyContent:'center',alignItems:'center',position:'absolute',width:'100%',marginTop:EStyleSheet.value('28rem'),height:EStyleSheet.value('58rem')}}>
-                    <Text style={{fontSize:EStyleSheet.value('20rem'),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value('8rem'),marginTop:EStyleSheet.value('5rem')}}>Discover <Text style={{color:"#f23545"}}>Timor Leste</Text></Text>
+               <Animated.View style={{...shadow,transform:[{translateY:iTranslateYTopBar}],backgroundColor:'white',zIndex:100,opacity:iTopBarFade,justifyContent:'center',alignItems:'center',position:'absolute',width:'100%',marginTop:EStyleSheet.value('0rem'),height:EStyleSheet.value('86rem')}}>
+                    <Text style={{fontSize:EStyleSheet.value('20rem'),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value('8rem'),marginTop:EStyleSheet.value('33rem')}}>Discover <Text style={{color:"#f23545"}}>Timor Leste</Text></Text>
                 </Animated.View>
            }
 

@@ -9,6 +9,7 @@ import Svg, { Path } from "react-native-svg"
 
 import DashboardScreen from './screen/DashboardScreen';
 import MyTripScreen from './screen/MyTripScreen';
+import EssentialsScreen from './screen/EssentialsScreen';
 
 let shadow = {
   shadowColor: "#000",
@@ -108,7 +109,19 @@ export default function App() {
                    }
                    else if(route.name==="Essentials"){
                         return (
-                          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                          <Pressable
+                          onPress={()=>{
+                              const event = navigation.emit({
+                                type: 'tabPress',
+                                target: route.key,
+                                canPreventDefault: true,
+                              });
+                    
+                              if (!isFocused && !event.defaultPrevented) {
+                                navigation.navigate(route.name);
+                              }
+                          }}
+                          style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                               <Svg
                                   style={{marginTop:EStyleSheet.value('4rem')}}
                                   viewBox="0 0 512 512"
@@ -121,7 +134,7 @@ export default function App() {
                                   <Path  fill={(isFocused) ? "#d1222c":"#8b8b8b"} d="M325 442h42c8.284 0 15-6.716 15-15s-6.716-15-15-15h-42c-8.284 0-15 6.716-15 15s6.716 15 15 15z" />
                               </Svg>
                               <Text style={{fontSize:EStyleSheet.value('11rem'),color:(isFocused) ? "#d1222c":"#8b8b8b",marginTop:EStyleSheet.value('3rem')}}>Essentials</Text>
-                          </View>
+                          </Pressable>
                         )
                    }
                    else if(route.name==="Search"){
@@ -163,7 +176,7 @@ export default function App() {
         }}>
           <Tab.Screen name="Discover" component={DashboardScreen} />
           <Tab.Screen name="MyTrip" component={MyTripScreen} />
-          <Tab.Screen name="Essentials" component={DashboardScreen} />
+          <Tab.Screen name="Essentials" component={EssentialsScreen} />
           <Tab.Screen name="Search" component={DashboardScreen} />
           <Tab.Screen name="Profile" component={DashboardScreen} />
         </Tab.Navigator>
