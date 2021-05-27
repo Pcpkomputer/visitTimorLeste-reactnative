@@ -7,7 +7,7 @@ import { Surface} from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
-import BottomBar from './BottomBar';
+
 
 export default function DashboardScreen(props){
 
