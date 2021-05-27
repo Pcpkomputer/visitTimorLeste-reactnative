@@ -8,8 +8,11 @@ import Carousel from 'react-native-snap-carousel';
 import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
+import { useIsFocused } from "@react-navigation/native";
 
 export default function MyTripScreen(props){
+
+    const isFocused = useIsFocused();
 
     const topBarFade = useRef(new Animated.Value(0)).current;
     const [topBarStop, setTopBarStop] = useState(0);
@@ -40,42 +43,54 @@ export default function MyTripScreen(props){
 
 
     let [favourite, setFavourite] = useState([
-        {
-            category:"Accomodation",
-            place_name:"The Fullerton Hotel Singapore: Staycation Package",
-            address:"1 Fullerton Square Singapore",
-            postal_code:"049178",
-            preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-        },
-        {
-            category:"Accomodation",
-            place_name:"The Fullerton Hotel Singapore: Staycation Package",
-            address:"1 Fullerton Square Singapore",
-            postal_code:"049178",
-            preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-        },
-        {
-            category:"Accomodation",
-            place_name:"The Fullerton Hotel Singapore: Staycation Package",
-            address:"1 Fullerton Square Singapore",
-            postal_code:"049178",
-            preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-        },
-        {
-            category:"Accomodation",
-            place_name:"The Fullerton Hotel Singapore: Staycation Package",
-            address:"1 Fullerton Square Singapore",
-            postal_code:"049178",
-            preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-        },
-        {
-            category:"Accomodation",
-            place_name:"The Fullerton Hotel Singapore: Staycation Package",
-            address:"1 Fullerton Square Singapore",
-            postal_code:"049178",
-            preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-        }
+      
     ]);
+
+    useEffect(()=>{
+        if(isFocused){
+            alert("123");
+            setTimeout(()=>{
+                setFavourite([
+                    {
+                        category:"Accomodation",
+                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
+                        address:"1 Fullerton Square Singapore",
+                        postal_code:"049178",
+                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                    },
+                    {
+                        category:"Accomodation",
+                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
+                        address:"1 Fullerton Square Singapore",
+                        postal_code:"049178",
+                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                    },
+                    {
+                        category:"Accomodation",
+                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
+                        address:"1 Fullerton Square Singapore",
+                        postal_code:"049178",
+                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                    },
+                    {
+                        category:"Accomodation",
+                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
+                        address:"1 Fullerton Square Singapore",
+                        postal_code:"049178",
+                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                    },
+                    {
+                        category:"Accomodation",
+                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
+                        address:"1 Fullerton Square Singapore",
+                        postal_code:"049178",
+                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                    }
+                ])
+            },500)
+        }
+      
+    },[isFocused])
 
     if(favourite.length===0){
         return (
@@ -95,7 +110,7 @@ export default function MyTripScreen(props){
         )
     }
     return (
-        <View style={{flex:1}}>
+        <View style={{flex:1,backgroundColor:"white"}}>
         
             <Animated.View style={{...shadow,transform:[{translateY:iTranslateYTopBar}],backgroundColor:'white',zIndex:100,opacity:iTopBarFade,justifyContent:'center',alignItems:'center',position:'absolute',width:'100%',marginTop:EStyleSheet.value('0rem'),height:EStyleSheet.value('86rem')}}>
                 <Text style={{fontSize:EStyleSheet.value('20rem'),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value('8rem'),marginTop:EStyleSheet.value('33rem')}}>My <Text style={{color:"#f23545"}}>Trip</Text></Text>
@@ -137,7 +152,7 @@ export default function MyTripScreen(props){
                                 return (
                                     <Surface style={{elevation:3,marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",flexDirection:"row",backgroundColor:"white",borderRadius:EStyleSheet.value('5rem')}}>
                                         <View style={{flex:1,padding:EStyleSheet.value('10rem')}}>
-                                            <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                                            <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:EStyleSheet.value("20rem")}}>
                                                 <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem')}}>{item.category.toUpperCase()}</Text>
                                                 <View style={{flexDirection:'row'}}>
                                                     <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />

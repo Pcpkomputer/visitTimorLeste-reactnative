@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Pressable } from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,6 +10,7 @@ import Svg, { Path } from "react-native-svg"
 import DashboardScreen from './screen/DashboardScreen';
 import MyTripScreen from './screen/MyTripScreen';
 import EssentialsScreen from './screen/EssentialsScreen';
+import SearchScreen from './screen/SearchScreen';
 
 let shadow = {
   shadowColor: "#000",
@@ -29,25 +30,50 @@ const Tab = createBottomTabNavigator();
 const entireScreenWidth = Dimensions.get('window').width;
 EStyleSheet.build({$rem: entireScreenWidth / 380});
 
+
 export default function App() {
+
 
   const [loaded] = useFonts({
     HeeboMedium: require('./assets/fonts/Heebo-Medium.ttf'),
     HeeboBold: require('./assets/fonts/Heebo-Bold.ttf'),
   });
 
+
+  let [keyboardShow, setKeyboardShow] = useState(false);
+
+  useEffect(() => {
+    Keyboard.addListener("keyboardDidShow", ()=>{
+      setKeyboardShow(true);
+    });
+    Keyboard.addListener("keyboardDidHide", ()=>{
+      setKeyboardShow(false);
+    });
+
+    // cleanup function
+    return () => {
+      Keyboard.removeListener("keyboardDidShow");
+      Keyboard.removeListener("keyboardDidHide");
+    };
+  }, []);
+
   if(loaded){
     return (
       <NavigationContainer>
-        <Tab.Navigator tabBar={({ state, descriptors, navigation })=>{
+        <Tab.Navigator 
+        tabBarOptions={{
+          keyboardHidesTabBar:true
+        }}
+        tabBar={({ state, descriptors, navigation, keyboardHidesTabBar })=>{
           const focusedOptions = descriptors[state.routes[state.index].key].options;
+
 
           if (focusedOptions.tabBarVisible === false) {
             return null;
           }
 
           return (
-            <View style={{...shadow,backgroundColor:"white",height:EStyleSheet.value("58rem"),flexDirection:'row'}}>
+            <View style={{...shadow,display:(keyboardShow) ? "none":"flex",backgroundColor:"white",height:EStyleSheet.value("58rem"),flexDirection:'row'}}>
                {
                  state.routes.map((route,index)=>{
 
@@ -139,7 +165,19 @@ export default function App() {
                    }
                    else if(route.name==="Search"){
                         return (
-                          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                          <Pressable
+                          onPress={()=>{
+                              const event = navigation.emit({
+                                type: 'tabPress',
+                                target: route.key,
+                                canPreventDefault: true,
+                              });
+                    
+                              if (!isFocused && !event.defaultPrevented) {
+                                navigation.navigate(route.name);
+                              }
+                          }}
+                          style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                               <Svg
                                   style={{marginTop:EStyleSheet.value('4rem')}}
                                   xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +188,7 @@ export default function App() {
                                   <Path fill={(isFocused) ? "#d1222c":"#8b8b8b"} d="M55.146 51.887L41.588 37.786A22.926 22.926 0 0046.984 23c0-12.682-10.318-23-23-23s-23 10.318-23 23 10.318 23 23 23c4.761 0 9.298-1.436 13.177-4.162l13.661 14.208c.571.593 1.339.92 2.162.92.779 0 1.518-.297 2.079-.837a3.004 3.004 0 00.083-4.242zM23.984 6c9.374 0 17 7.626 17 17s-7.626 17-17 17-17-7.626-17-17 7.626-17 17-17z" />
                               </Svg>
                               <Text style={{fontSize:EStyleSheet.value('11rem'),color:(isFocused) ? "#d1222c":"#8b8b8b",marginTop:EStyleSheet.value('3rem')}}>Search</Text>
-                          </View>
+                          </Pressable>
                         )
                    }
                    else if(route.name==="Profile"){
@@ -177,7 +215,11 @@ export default function App() {
           <Tab.Screen name="Discover" component={DashboardScreen} />
           <Tab.Screen name="MyTrip" component={MyTripScreen} />
           <Tab.Screen name="Essentials" component={EssentialsScreen} />
-          <Tab.Screen name="Search" component={DashboardScreen} />
+          <Tab.Screen 
+          tabBarOptions={{
+            keyboardHidesTabBar:true
+          }}
+          name="Search" component={SearchScreen} />
           <Tab.Screen name="Profile" component={DashboardScreen} />
         </Tab.Navigator>
       </NavigationContainer>
