@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState, useRef} from 'react';
-import { StyleSheet, Animated, Text, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Animated, Text, Pressable, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface} from 'react-native-paper';
@@ -174,15 +174,19 @@ export default function DashboardScreen(props){
                         contentContainerStyle={{paddingBottom:EStyleSheet.value('10rem')}}
                         renderItem={({item,index})=>{
                             return (
-                                <Surface style={{marginLeft:(index===0) ? EStyleSheet.value('20rem'):undefined,elevation:4,backgroundColor:'whitesmoke',overflow:"hidden",marginRight:EStyleSheet.value('15rem'),width:EStyleSheet.value('300rem'),borderRadius:EStyleSheet.value('10rem'),height:EStyleSheet.value("350rem")}}>
-                                    <LinearGradient
-                                        // Background Linear Gradient
-                                        colors={['rgba(0,0,0,0.5)', 'transparent']}
-                                        style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('100rem')}}
-                                    />
-                                    <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                    <Text style={{padding:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontWeight:'bold',paddingRight:EStyleSheet.value('15rem'),fontSize:EStyleSheet.value('20rem')}}>5 Less Well-Known Museums To Visit</Text>
-                                </Surface>
+                                <Pressable onPress={()=>{
+                                    props.navigation.navigate("DetailWeeklySpotlight");
+                                }}>
+                                    <Surface style={{marginLeft:(index===0) ? EStyleSheet.value('20rem'):undefined,elevation:4,backgroundColor:'whitesmoke',overflow:"hidden",marginRight:EStyleSheet.value('15rem'),width:EStyleSheet.value('300rem'),borderRadius:EStyleSheet.value('10rem'),height:EStyleSheet.value("350rem")}}>
+                                        <LinearGradient
+                                            // Background Linear Gradient
+                                            colors={['rgba(0,0,0,0.5)', 'transparent']}
+                                            style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('100rem')}}
+                                        />
+                                        <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
+                                        <Text style={{padding:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontWeight:'bold',paddingRight:EStyleSheet.value('15rem'),fontSize:EStyleSheet.value('20rem')}}>5 Less Well-Known Museums To Visit</Text>
+                                    </Surface>
+                                </Pressable>
                             )
                         }}
                         />
@@ -203,16 +207,22 @@ export default function DashboardScreen(props){
                         snapToAlignment={"center"}
                         renderItem={({item,index})=>{
                             return (
-                                <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('20rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
-                                    <LinearGradient
-                                        // Background Linear Gradient
-                                        colors={['rgba(0,0,0,0.5)', 'transparent']}
-                                        style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
-                                    />
-                                    <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                    <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('15rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
-                                    <Text style={{marginTop:EStyleSheet.value('3rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('15rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
-                                </Surface>
+                                <Pressable
+                                onPress={()=>{
+                                    props.navigation.navigate("DetailWhatsNew");
+                                }}
+                                >
+                                    <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('20rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
+                                        <LinearGradient
+                                            // Background Linear Gradient
+                                            colors={['rgba(0,0,0,0.5)', 'transparent']}
+                                            style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
+                                        />
+                                        <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
+                                        <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('15rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
+                                        <Text style={{marginTop:EStyleSheet.value('3rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('15rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
+                                    </Surface>
+                                </Pressable>
                             )
                         }}
                         />

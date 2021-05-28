@@ -7,10 +7,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Svg, { Path } from "react-native-svg"
 
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+
 import DashboardScreen from './screen/DashboardScreen';
 import MyTripScreen from './screen/MyTripScreen';
 import EssentialsScreen from './screen/EssentialsScreen';
 import SearchScreen from './screen/SearchScreen';
+import ProfileScreen from './screen/ProfileScreen';
+
+import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
+import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
 
 let shadow = {
   shadowColor: "#000",
@@ -26,6 +32,8 @@ let shadow = {
 
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
 
 const entireScreenWidth = Dimensions.get('window').width;
 EStyleSheet.build({$rem: entireScreenWidth / 380});
@@ -38,32 +46,29 @@ export default function App() {
     HeeboMedium: require('./assets/fonts/Heebo-Medium.ttf'),
     HeeboBold: require('./assets/fonts/Heebo-Bold.ttf'),
   });
+ 
 
+  let Dashboard_ = ()=>{
 
-  let [keyboardShow, setKeyboardShow] = useState(false);
+      let [keyboardShow, setKeyboardShow] = useState(false);
 
-  useEffect(() => {
-    Keyboard.addListener("keyboardDidShow", ()=>{
-      setKeyboardShow(true);
-    });
-    Keyboard.addListener("keyboardDidHide", ()=>{
-      setKeyboardShow(false);
-    });
+      useEffect(() => {
+        Keyboard.addListener("keyboardDidShow", ()=>{
+          setKeyboardShow(true);
+        });
+        Keyboard.addListener("keyboardDidHide", ()=>{
+          setKeyboardShow(false);
+        });
+    
+        // cleanup function
+        return () => {
+          Keyboard.removeListener("keyboardDidShow");
+          Keyboard.removeListener("keyboardDidHide");
+        };
+      }, []);
 
-    // cleanup function
-    return () => {
-      Keyboard.removeListener("keyboardDidShow");
-      Keyboard.removeListener("keyboardDidHide");
-    };
-  }, []);
-
-  if(loaded){
-    return (
-      <NavigationContainer>
+      return (
         <Tab.Navigator 
-        tabBarOptions={{
-          keyboardHidesTabBar:true
-        }}
         tabBar={({ state, descriptors, navigation, keyboardHidesTabBar })=>{
           const focusedOptions = descriptors[state.routes[state.index].key].options;
 
@@ -193,7 +198,19 @@ export default function App() {
                    }
                    else if(route.name==="Profile"){
                         return (
-                          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                          <Pressable
+                          onPress={()=>{
+                              const event = navigation.emit({
+                                type: 'tabPress',
+                                target: route.key,
+                                canPreventDefault: true,
+                              });
+                    
+                              if (!isFocused && !event.defaultPrevented) {
+                                navigation.navigate(route.name);
+                              }
+                          }}
+                          style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                               <Svg
                               viewBox="0 0 512 512"
                               style={{marginTop:EStyleSheet.value('4rem')}}
@@ -204,7 +221,7 @@ export default function App() {
                               <Path fill={(isFocused) ? "#d1222c":"#8b8b8b"}  d="M437.02 74.98C388.668 26.63 324.379 0 256 0 187.617 0 123.332 26.629 74.98 74.98 26.63 123.332 0 187.617 0 256c0 68.379 26.629 132.668 74.98 181.02C123.332 485.37 187.617 512 256 512c68.379 0 132.668-26.629 181.02-74.98C485.37 388.668 512 324.379 512 256c0-68.383-26.629-132.668-74.98-181.02zM128.34 442.387c10.707-61.649 64.129-107.121 127.66-107.121 63.535 0 116.953 45.472 127.66 107.12C347.312 467.36 303.336 482 256 482s-91.313-14.64-127.66-39.613zm46.262-218.52c0-44.887 36.515-81.398 81.398-81.398s81.398 36.515 81.398 81.398c0 44.883-36.515 81.399-81.398 81.399s-81.398-36.516-81.398-81.399zm235.043 197.711c-8.075-28.7-24.11-54.738-46.586-75.078a159.444 159.444 0 00-46.36-29.27c30.5-19.894 50.703-54.312 50.703-93.363 0-61.426-49.976-111.398-111.402-111.398S144.602 162.44 144.602 223.867c0 39.051 20.203 73.469 50.699 93.363a159.483 159.483 0 00-46.36 29.266c-22.472 20.34-38.511 46.379-46.586 75.078C57.883 380.274 30 321.336 30 256 30 131.383 131.383 30 256 30s226 101.383 226 226c0 65.34-27.883 124.277-72.355 165.578zm0 0" />
                               </Svg>
                               <Text style={{fontSize:EStyleSheet.value('11rem'),color:(isFocused) ? "#d1222c":"#8b8b8b",marginTop:EStyleSheet.value('3rem')}}>Profile</Text>
-                          </View>
+                          </Pressable>
                         )
                    }
                  })
@@ -216,12 +233,35 @@ export default function App() {
           <Tab.Screen name="MyTrip" component={MyTripScreen} />
           <Tab.Screen name="Essentials" component={EssentialsScreen} />
           <Tab.Screen 
-          tabBarOptions={{
-            keyboardHidesTabBar:true
-          }}
           name="Search" component={SearchScreen} />
-          <Tab.Screen name="Profile" component={DashboardScreen} />
+          <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
+      )
+  }
+
+  if(loaded){
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="Home" component={Dashboard_} />
+            <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailWeeklySpotlight" component={DetailWeeklySpotlight} />
+               <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailWhatsNew" component={DetailWhatsNew} />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }

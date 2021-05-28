@@ -7,7 +7,7 @@ import { Surface} from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
-import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
+import { SimpleLineIcons, Ionicons, Entypo, AntDesign, Feather } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
 
@@ -61,7 +61,7 @@ export default function SearchScreen(props){
 
                     if (event.nativeEvent.oldState === State.ACTIVE) {
                         
-                    alert(event.nativeEvent.translationY);
+
                         if(lastOffsetY+event.nativeEvent.translationY<=0 && lastOffsetY+event.nativeEvent.translationY>=-220){
                             setLastOffsetY(lastOffsetY+event.nativeEvent.translationY);
                             translateY.setOffset(lastOffsetY+event.nativeEvent.translationY);
@@ -78,53 +78,53 @@ export default function SearchScreen(props){
                     setCategoryContainerWidth(e.nativeEvent.layout.width);
                 }}
                 style={{flexDirection:'row',flexWrap:"wrap"}}>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Promotions</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Promotions</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Attractions</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Attractions</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Accomodations</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Accomodations</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Food & Beverages</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Food & Beverages</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Bars & Clubs</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Bars & Clubs</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Mall & Shops</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Mall & Shops</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Tours</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Tours</Text>
                     </View>
-                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:categoryContainerWidth/4,justifyContent:"center",alignItems:"center"}}>
+                    <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Surface style={{backgroundColor:"white",elevation:2,justifyContent:"center",alignItems:"center",borderRadius:999,width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem")}}>
                             <Text>123</Text>
                         </Surface>
-                        <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Event</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Event</Text>
                     </View>
                 </View>
                 <View style={{justifyContent:"flex-end",alignItems:"center",paddingBottom:EStyleSheet.value("2.5rem"),height:EStyleSheet.value("30rem")}}>
@@ -138,12 +138,31 @@ export default function SearchScreen(props){
             renderItem={({item,index})=>{
                 return (
                     <Surface style={{marginTop:(index===0) ? EStyleSheet.value("60rem"):undefined,elevation:2,marginHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",borderRadius:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("20rem"),height:EStyleSheet.value("170rem")}}>
-                        <Image source={{uri:"https://www.tracktraceit.com/serialization/images/food%20and%20baverages.jpg"}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></Image>
+                        <Image resizeMode="cover" source={{uri:"https://www.tracktraceit.com/serialization/images/food%20and%20baverages.jpg"}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></Image>
                         <LinearGradient
                             // Background Linear Gradient
-                            colors={['transparent', 'rgba(0,0,0,0.5)']}
+                            colors={['transparent', 'rgba(0,0,0,0.7)']}
                             style={{position:'absolute',bottom:0,zIndex:10,width:"100%",height:EStyleSheet.value('100rem')}}
                         />
+                        <View style={{flexDirection:"row",justifyContent:"flex-end",paddingRight:EStyleSheet.value("20rem"),paddingTop:EStyleSheet.value("15rem")}}>
+                            <Feather name="heart" size={EStyleSheet.value("27rem")} color="white" />
+                        </View>
+                        <View style={{flex:1,zIndex:15,justifyContent:"flex-end",paddingVertical:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("10rem")}}>
+                             <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+                                <View>
+                                    <Text style={{color:"white",fontSize:EStyleSheet.value("13rem")}}>Food & Bevereges</Text>
+                                    <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem")}}>Rivera Forliona</Text>
+                                </View>
+                                <View style={{justifyContent:"flex-end"}}>
+                                    <View style={{flexDirection:'row'}}>
+                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                    </View>
+                                </View>
+                             </View>
+                        </View>
                     </Surface>
                 )
             }}
