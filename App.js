@@ -17,6 +17,8 @@ import ProfileScreen from './screen/ProfileScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
+import LocalRecommendationDetail from './screen/LocalRecommendation/LocalRecommendationDetail';
+import PrecinctGuidesDetail from './screen/PrecinctGuides/PrecinctGuidesDetail';
 
 let shadow = {
   shadowColor: "#000",
@@ -261,6 +263,18 @@ export default function App() {
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="DetailWhatsNew" component={DetailWhatsNew} />
+                  <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailLocalRecommendation" component={LocalRecommendationDetail} />
+                   <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailPrecinctGuides" component={PrecinctGuidesDetail} />
         </Stack.Navigator>
       </NavigationContainer>
     );

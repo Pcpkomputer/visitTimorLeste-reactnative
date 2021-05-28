@@ -142,7 +142,7 @@ export default function SearchScreen(props){
                         <LinearGradient
                             // Background Linear Gradient
                             colors={['transparent', 'rgba(0,0,0,0.7)']}
-                            style={{position:'absolute',bottom:0,zIndex:10,width:"100%",height:EStyleSheet.value('100rem')}}
+                            style={{position:'absolute',bottom:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("10rem"),height:EStyleSheet.value('100rem')}}
                         />
                         <View style={{flexDirection:"row",justifyContent:"flex-end",paddingRight:EStyleSheet.value("20rem"),paddingTop:EStyleSheet.value("15rem")}}>
                             <Feather name="heart" size={EStyleSheet.value("27rem")} color="white" />

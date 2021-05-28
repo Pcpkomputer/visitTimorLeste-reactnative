@@ -43,7 +43,7 @@ export default function ProfileScreen(props){
             />
             <LinearGradient
                 // Background Linear Gradient
-                colors={['transparent','rgba(0,0,0,0.2)', 'rgba(0,0,0,0.6)']}
+                colors={['transparent','rgba(0,0,0,0.2)', 'rgba(0,0,0,0.3)']}
                 style={{position:'absolute',bottom:0,zIndex:10,width:"100%",height:EStyleSheet.value('130rem')}}
             />
             <Image resizeMode="cover" source={{uri:"https://storage.googleapis.com/fastwork-static/35f5ee39-b1b2-4643-9e67-449518aa17c8.jpg"}} style={{position:"absolute",width:Dimensions.get("screen").width,height:Dimensions.get("screen").height,opacity:0.7}}></Image>
@@ -104,7 +104,7 @@ export default function ProfileScreen(props){
                         <Text style={{marginTop:EStyleSheet.value("5rem"),color:"#f5333c"}}>{msgPasswordError}</Text>
                     }
                     <View
-                    style={{marginTop:EStyleSheet.value("25rem"),justifyContent:"center",alignItems:"center",alignSelf:"center",width:EStyleSheet.value("310rem"),backgroundColor:"#f5333c",borderRadius:EStyleSheet.value("30rem")}}>
+                    style={{marginTop:EStyleSheet.value("25rem"),overflow:"hidden",justifyContent:"center",alignItems:"center",alignSelf:"center",width:EStyleSheet.value("310rem"),backgroundColor:"#f5333c",borderRadius:EStyleSheet.value("30rem")}}>
                         <Pressable 
                         disabled={signinLoading}
                         onPress={()=>{
@@ -156,7 +156,7 @@ export default function ProfileScreen(props){
                            }
 
                         }}
-                        android_ripple={{color:"white",borderless:true}} style={{justifyContent:"center",alignItems:"center",paddingVertical:EStyleSheet.value("18rem"),width:"100%"}}>
+                        android_ripple={{color:"white",borderless:false}} style={{justifyContent:"center",alignItems:"center",paddingVertical:EStyleSheet.value("18rem"),width:"100%"}}>
                             {
                                 (signinLoading) ?
                                 <ActivityIndicator color="white"/>

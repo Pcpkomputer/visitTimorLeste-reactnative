@@ -56,14 +56,23 @@ export default function DetailWhatsNew(props){
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item,index})=>{
                         return (
-                         <View style={{marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("280rem")}}>
-                             <Text>123</Text>
-                         </View>
+                         <Surface style={{elevation:4,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("300rem")}}>
+                            <LinearGradient
+                                // Background Linear Gradient
+                                colors={['rgba(0,0,0,0.6)', 'transparent']}
+                                style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
+                            />
+                             <Image source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></Image>
+                             <View style={{paddingHorizontal:EStyleSheet.value("15rem"),zIndex:11,paddingVertical:EStyleSheet.value("15rem")}}>
+                                 <Text style={{color:"white",marginTop:EStyleSheet.value("2rem")}}>HOTEL DEALS</Text>
+                                 <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                             </View>
+                         </Surface>
                         )
                     }}
                     />
                     :
-                    <View style={{height:EStyleSheet.value("280rem"),justifyContent:"center",alignItems:"center"}}>
+                    <View style={{height:EStyleSheet.value("300rem"),justifyContent:"center",alignItems:"center"}}>
                         <MaterialIndicator color="#f23545"/>
                     </View>
                 }
@@ -82,9 +91,18 @@ export default function DetailWhatsNew(props){
                    showsHorizontalScrollIndicator={false}
                    renderItem={({item,index})=>{
                        return (
-                           <View style={{marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("180rem"),height:EStyleSheet.value("135rem")}}>
-                               <Text>123</Text>
-                           </View>
+                           <Surface style={{elevation:3,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("180rem"),height:EStyleSheet.value("135rem")}}>
+                                <LinearGradient
+                                    // Background Linear Gradient
+                                    colors={['rgba(0,0,0,0.6)', 'transparent']}
+                                    style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
+                                />
+                                <Image source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></Image>
+                                <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
+                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontSize:EStyleSheet.value("10rem")}}>HOTEL DEALS</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                </View>
+                           </Surface>
                        )
                    }}
                    />

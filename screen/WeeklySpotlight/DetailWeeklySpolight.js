@@ -61,7 +61,7 @@ export default function DetailWeeklySpotlight(props){
             <ImageBackground 
             source={{uri:"https://insightasean.com/wp-content/uploads/2020/05/religious-tourism-pact-signed-in-timor-leste.jpg"}}
             style={{backgroundColor:"whitesmoke",justifyContent:"flex-end",paddingBottom:EStyleSheet.value("47rem"),height:EStyleSheet.value("300rem")}}>
-                <Text style={{color:"white",zIndex:11,paddingHorizontal:EStyleSheet.value("20rem"),paddingRight:EStyleSheet.value("50rem"),fontFamily:"HeeboBold",fontSize:EStyleSheet.value("21rem")}}>What's Trending: The Curious Case of the Missing Peranakan Treasure</Text>
+                <Text style={{color:"white",zIndex:11,paddingHorizontal:EStyleSheet.value("20rem"),paddingRight:EStyleSheet.value("80rem"),fontFamily:"HeeboBold",fontSize:EStyleSheet.value("21rem")}}>What's Trending: The Curious Case of the Missing Peranakan Treasure</Text>
                 <LinearGradient
                     // Background Linear Gradient
                     colors={['transparent','rgba(0,0,0,0.8)']}

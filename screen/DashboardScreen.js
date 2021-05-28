@@ -215,12 +215,12 @@ export default function DashboardScreen(props){
                                     <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('20rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
                                         <LinearGradient
                                             // Background Linear Gradient
-                                            colors={['rgba(0,0,0,0.5)', 'transparent']}
+                                            colors={['rgba(0,0,0,0.6)', 'transparent']}
                                             style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
                                         />
                                         <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                        <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('15rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
-                                        <Text style={{marginTop:EStyleSheet.value('3rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('15rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
+                                        <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('10rem'),color:'white',marginTop:EStyleSheet.value('8rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
+                                        <Text style={{marginTop:EStyleSheet.value('3rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('10rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
                                     </Surface>
                                 </Pressable>
                             )
@@ -240,29 +240,35 @@ export default function DashboardScreen(props){
                                 data={localrecommendation}
                                 renderItem={({item,index})=>{
                                     return (
-                                        <Surface style={{marginBottom:EStyleSheet.value('10rem'),backgroundColor:'white',marginLeft:EStyleSheet.value("-10rem"),marginRight:EStyleSheet.value("-10rem"),elevation:4,overflow:"hidden",borderRadius:EStyleSheet.value('8rem')}}>
-                                            <ImageBackground resizeMode="stretch" source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),paddingVertical:EStyleSheet.value('20rem'),justifyContent:"flex-end"}}>
-                                                <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11}}>
-                                                    <Text style={{fontSize:EStyleSheet.value('14rem'),color:'white'}}>FOOD & BEVEREGES</Text>
-                                                    <Text style={{fontSize:EStyleSheet.value('20rem'),fontWeight:'bold',color:'white'}}>Punjab Grill</Text>
+                                        <Pressable
+                                        onPress={()=>{
+                                            props.navigation.navigate("DetailLocalRecommendation");
+                                        }}
+                                        >
+                                            <Surface style={{marginBottom:EStyleSheet.value('10rem'),backgroundColor:'white',marginLeft:EStyleSheet.value("-10rem"),marginRight:EStyleSheet.value("-10rem"),elevation:4,overflow:"hidden",borderRadius:EStyleSheet.value('8rem')}}>
+                                                <ImageBackground resizeMode="stretch" source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),paddingVertical:EStyleSheet.value('20rem'),justifyContent:"flex-end"}}>
+                                                    <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11}}>
+                                                        <Text style={{fontSize:EStyleSheet.value('14rem'),color:'white'}}>FOOD & BEVEREGES</Text>
+                                                        <Text style={{fontSize:EStyleSheet.value('20rem'),fontWeight:'bold',color:'white'}}>Punjab Grill</Text>
+                                                    </View>
+                                                    <LinearGradient
+                                                        // Background Linear Gradient
+                                                        colors={['transparent','rgba(0,0,0,0.7)']}
+                                                        style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('150rem')}}
+                                                    />
+                                                </ImageBackground>
+                                                <View style={{backgroundColor:'white',paddingBottom:EStyleSheet.value('15rem')}}>
+                                                    <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),paddingVertical:EStyleSheet.value('10rem')}}>"{item.comment}"</Text>
                                                 </View>
-                                                <LinearGradient
-                                                    // Background Linear Gradient
-                                                    colors={['transparent','rgba(0,0,0,0.7)']}
-                                                    style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('150rem')}}
-                                                />
-                                            </ImageBackground>
-                                            <View style={{backgroundColor:'white',paddingBottom:EStyleSheet.value('15rem')}}>
-                                                <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),paddingVertical:EStyleSheet.value('10rem')}}>"{item.comment}"</Text>
-                                            </View>
-                                            <View style={{paddingHorizontal:EStyleSheet.value('10rem'),flexDirection:'row',marginBottom:EStyleSheet.value('10rem'),height:EStyleSheet.value('70rem'),alignItems:'center'}}>
-                                                <Image source={{uri:item.avatar}} style={{width:EStyleSheet.value('50rem'),height:EStyleSheet.value('50rem'),backgroundColor:"whitesmoke",borderRadius:999}}>
-                                                </Image>
-                                                <View style={{justifyContent:'center',height:'100%',alignItems:'center'}}>
-                                                    <Text style={{marginRight:EStyleSheet.value('50rem'),fontWeight:'bold',marginLeft:EStyleSheet.value('10rem')}} numberOfLines={1}>{item.user_name}</Text>
+                                                <View style={{paddingHorizontal:EStyleSheet.value('10rem'),flexDirection:'row',marginBottom:EStyleSheet.value('10rem'),height:EStyleSheet.value('70rem'),alignItems:'center'}}>
+                                                    <Image source={{uri:item.avatar}} style={{width:EStyleSheet.value('50rem'),height:EStyleSheet.value('50rem'),backgroundColor:"whitesmoke",borderRadius:999}}>
+                                                    </Image>
+                                                    <View style={{justifyContent:'center',height:'100%',alignItems:'center'}}>
+                                                        <Text style={{marginRight:EStyleSheet.value('50rem'),fontWeight:'bold',marginLeft:EStyleSheet.value('10rem')}} numberOfLines={1}>{item.user_name}</Text>
+                                                    </View>
                                                 </View>
-                                            </View>
-                                        </Surface>
+                                            </Surface>
+                                        </Pressable>
                                         )
                                 }}
                                 sliderWidth={Dimensions.get("screen").width}
@@ -285,19 +291,25 @@ export default function DashboardScreen(props){
                         horizontal={true}
                         renderItem={({item,index})=>{
                             return (
-                                <Surface style={{elevation:3,marginRight:[1,2,3,4,5,6,7,8,9,10,11].length-1===index ? EStyleSheet.value('20rem'):EStyleSheet.value('10rem'),justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value('5rem'),backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,height:EStyleSheet.value('400rem'),width:EStyleSheet.value('280rem')}}>
-                                    <LinearGradient
-                                        // Background Linear Gradient
-                                        colors={['rgba(0,0,0,0.5)', 'transparent']}
-                                        style={{position:'absolute',top:0,zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
-                                    />
-                                    <Image source={{uri:"https://images0.westend61.de/0001040218pw/japan-kyoto-gion-alley-and-temple-at-sunset-EPF00487.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></Image>
-                                    <View style={{paddingHorizontal:EStyleSheet.value('20rem'),justifyContent:'center',alignItems:'center'}}>
-                                        <View style={{backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
-                                        <Text style={{color:'white',fontWeight:'bold',marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>CHINATOWN</Text>
-                                        <Text style={{color:"white",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('13rem'),width:'100%',textAlign:'center'}}>Immerse yourself in timeless experiences</Text>
-                                    </View>
-                                </Surface>
+                                <Pressable
+                                onPress={()=>{
+                                    props.navigation.navigate("DetailPrecinctGuides");
+                                }}
+                                >
+                                    <Surface style={{elevation:3,marginRight:[1,2,3,4,5,6,7,8,9,10,11].length-1===index ? EStyleSheet.value('20rem'):EStyleSheet.value('10rem'),justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value('5rem'),backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,height:EStyleSheet.value('400rem'),width:EStyleSheet.value('280rem')}}>
+                                        <LinearGradient
+                                            // Background Linear Gradient
+                                            colors={['rgba(0,0,0,0.5)', 'transparent']}
+                                            style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
+                                        />
+                                        <Image source={{uri:"https://images0.westend61.de/0001040218pw/japan-kyoto-gion-alley-and-temple-at-sunset-EPF00487.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></Image>
+                                        <View style={{paddingHorizontal:EStyleSheet.value('20rem'),justifyContent:'center',alignItems:'center'}}>
+                                            <View style={{backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
+                                            <Text style={{color:'white',fontWeight:'bold',marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>CHINATOWN</Text>
+                                            <Text style={{color:"white",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('13rem'),width:'100%',textAlign:'center'}}>Immerse yourself in timeless experiences</Text>
+                                        </View>
+                                    </Surface>
+                                </Pressable>
                             )
                         }}
                         />
