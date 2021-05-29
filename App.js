@@ -20,6 +20,8 @@ import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
 import LocalRecommendationDetail from './screen/LocalRecommendation/LocalRecommendationDetail';
 import PrecinctGuidesDetail from './screen/PrecinctGuides/PrecinctGuidesDetail';
 
+import DetailPlace from './screen/DetailPlace';
+
 let shadow = {
   shadowColor: "#000",
   shadowOffset: {
@@ -275,6 +277,12 @@ export default function App() {
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="DetailPrecinctGuides" component={PrecinctGuidesDetail} />
+                <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailPlace" component={DetailPlace} />
         </Stack.Navigator>
       </NavigationContainer>
     );

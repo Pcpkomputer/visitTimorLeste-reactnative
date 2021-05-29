@@ -48,7 +48,7 @@ export default function MyTripScreen(props){
 
     useEffect(()=>{
         if(isFocused){
-            alert("123");
+            console.log("123");
             setTimeout(()=>{
                 setFavourite([
                     {

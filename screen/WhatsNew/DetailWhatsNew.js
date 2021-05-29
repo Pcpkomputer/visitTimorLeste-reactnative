@@ -59,7 +59,7 @@ export default function DetailWhatsNew(props){
                          <Surface style={{elevation:4,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("300rem")}}>
                             <LinearGradient
                                 // Background Linear Gradient
-                                colors={['rgba(0,0,0,0.6)', 'transparent']}
+                                colors={['rgba(0,0,0,0.7)', 'transparent']}
                                 style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
                             />
                              <Image source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></Image>

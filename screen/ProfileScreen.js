@@ -43,7 +43,7 @@ export default function ProfileScreen(props){
             />
             <LinearGradient
                 // Background Linear Gradient
-                colors={['transparent','rgba(0,0,0,0.2)', 'rgba(0,0,0,0.3)']}
+                colors={['transparent','rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)']}
                 style={{position:'absolute',bottom:0,zIndex:10,width:"100%",height:EStyleSheet.value('130rem')}}
             />
             <Image resizeMode="cover" source={{uri:"https://storage.googleapis.com/fastwork-static/35f5ee39-b1b2-4643-9e67-449518aa17c8.jpg"}} style={{position:"absolute",width:Dimensions.get("screen").width,height:Dimensions.get("screen").height,opacity:0.7}}></Image>
