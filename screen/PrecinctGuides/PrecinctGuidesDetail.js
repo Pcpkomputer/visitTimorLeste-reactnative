@@ -61,7 +61,7 @@ import {
                     </Animated.View>
                 </Animated.View>
                 <View style={{position:"absolute",opacity:(stickyDescShowed) ? 1:0,top:EStyleSheet.value("80rem"),zIndex:100,backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("10rem")}}>
-                    <Text style={{lineHeight:EStyleSheet.value("18rem")}}>We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd</Text>
+                    <Text style={{lineHeight:EStyleSheet.value("18rem"),fontFamily:"QuicksandMedium"}}>We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd</Text>
                 </View>
             </View>
 
@@ -90,9 +90,9 @@ import {
                         <View style={{position:"absolute",zIndex:12,bottom:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                             <View style={{backgroundColor:"red",height:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("30rem")}}></View>
                             <Animated.View style={{transform:[{translateX:translateXTrack}]}}>
-                                <Text style={{color:"white",opacity:(blackText) ? 0:1,fontSize:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("1rem"),fontFamily:"HeeboBold"}}>CHINATOWN</Text>
+                                <Text style={{color:"white",fontFamily:"QuicksandBold",opacity:(blackText) ? 0:1,fontSize:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("1rem"),fontFamily:"HeeboBold"}}>CHINATOWN</Text>
                             </Animated.View>
-                            <Text style={{color:"white"}}>Immerse yourself in timeless experiences</Text>
+                            <Text style={{color:"white",fontFamily:"QuicksandMedium"}}>Immerse yourself in timeless experiences</Text>
                         </View>
                         <LinearGradient
                             // Background Linear Gradient
@@ -101,7 +101,7 @@ import {
                         />
                     </ImageBackground>
                     <View style={{paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("10rem")}}>
-                        <Text style={{lineHeight:EStyleSheet.value("18rem")}}>We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd</Text>
+                        <Text style={{lineHeight:EStyleSheet.value("18rem"),fontFamily:"QuicksandMedium"}}>We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd We understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawdWe understang sadlksadlasknflasknflaskfnsalkfnaslkfnaslkndlawuadawdwadawd</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("25rem")}}>
                         <FlatList

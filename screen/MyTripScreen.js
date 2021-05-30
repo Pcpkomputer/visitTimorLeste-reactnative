@@ -153,7 +153,7 @@ export default function MyTripScreen(props){
                                     <Surface style={{elevation:3,marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",flexDirection:"row",backgroundColor:"white",borderRadius:EStyleSheet.value('5rem')}}>
                                         <View style={{flex:1,padding:EStyleSheet.value('10rem')}}>
                                             <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:EStyleSheet.value("20rem")}}>
-                                                <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem')}}>{item.category.toUpperCase()}</Text>
+                                                <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem'),fontFamily:"QuicksandBold"}}>{item.category.toUpperCase()}</Text>
                                                 <View style={{flexDirection:'row'}}>
                                                     <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
                                                     <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />

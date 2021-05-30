@@ -143,7 +143,7 @@ import {
                 <View style={{zIndex:2,paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <Surface style={{elevation:4,backgroundColor:"white",borderRadius:EStyleSheet.value("15rem"),padding:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
                         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                            <Text style={{color:"#d1222c"}}>ATTRACTION</Text>
+                            <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>ATTRACTION</Text>
                             <View style={{flexDirection:"row"}}>
                                 <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
                                 <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
@@ -155,7 +155,7 @@ import {
                             <Text style={{fontSize:EStyleSheet.value("19rem"),fontFamily:"HeeboBold"}}>Merlion Park</Text>
                         </View>
                         <View style={{marginTop:EStyleSheet.value("5rem")}}>
-                            <Text style={{fontSize:EStyleSheet.value("12rem")}}>1 Fullerton Road Singapore 3515</Text>
+                            <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>1 Fullerton Road Singapore 3515</Text>
                         </View>
                         <View style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",flexWrap:"wrap"}}>
                             
@@ -182,46 +182,46 @@ import {
                             <View style={{flex:1,marginTop:EStyleSheet.value("3rem")}}>
                                 <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                     <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                     </View>
                                     <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                     <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                     </View>
                                     <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                     <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                     </View>
                                     <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                     <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                     </View>
                                     <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                     </View>
                                 </View>
                                 <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                     <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                     </View>
                                     <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                     </View>
                                 </View>
                                 <View style={{marginTop:EStyleSheet.value("8rem")}}>
-                                    <Text style={{fontSize:EStyleSheet.value("12rem"),lineHeight:EStyleSheet.value("20rem")}}>Opening hours may vary due to extraordinary circumstances.</Text>
+                                    <Text style={{fontSize:EStyleSheet.value("12rem"),lineHeight:EStyleSheet.value("20rem"),fontFamily:"QuicksandMedium"}}>Opening hours may vary due to extraordinary circumstances.</Text>
                                 </View>
                             </View>
                             <View>
@@ -242,10 +242,10 @@ import {
                         <View style={{flex:1,justifyContent:"center",marginTop:EStyleSheet.value("5rem")}}>
                             <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                 <View style={{flex:1}}>
-                                    <Text style={{fontSize:EStyleSheet.value("12rem")}}>Sunday</Text>
+                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
                                 </View>
                                 <View style={{flex:2}}>
-                                    <Text style={{fontSize:EStyleSheet.value("12rem")}}>12:00 AM - 11:59 PM</Text>
+                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
                                 </View>
                             </View>
                         </View>
@@ -297,7 +297,7 @@ import {
                             />
                         </Pressable>
                         <Animated.View style={{overflow:"hidden",height:(firstLoaded) ? descHeight:null}}>
-                            <Text style={{lineHeight:EStyleSheet.value("20rem"),textAlign:"auto",fontSize:EStyleSheet.value("12rem")}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            <Text style={{lineHeight:EStyleSheet.value("20rem"),textAlign:"auto",fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                             </Text>
                         </Animated.View>
                         <View style={{position:"absolute",bottom:0,height:EStyleSheet.value("30rem"),width:"100%"}}>
@@ -338,7 +338,7 @@ import {
                                         </View>
                                     </View>
                                     <View style={{marginTop:EStyleSheet.value("10rem")}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem")}}>One of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanade,ne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanad,ne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanadne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanad</Text>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>One of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanade,ne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanad,ne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanadne of the tourist hotspot in Timor Leste overlooking Marina Bay Sands and Esplanad</Text>
                                     </View>
                                 </Surface>
                             )
@@ -369,12 +369,12 @@ import {
                                         <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('25rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
                                             <LinearGradient
                                                 // Background Linear Gradient
-                                                colors={['rgba(0,0,0,0.5)', 'transparent']}
+                                                colors={['rgba(0,0,0,0.65)', 'transparent']}
                                                 style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
                                             />
                                             <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                            <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('15rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>{item.category}</Text>
-                                            <Text style={{marginTop:EStyleSheet.value('3rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('15rem'),color:'white'}}>{item.place_name}</Text>
+                                            <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('15rem'),color:'white',marginTop:EStyleSheet.value('10rem'),fontFamily:"QuicksandMedium"}}>{item.category}</Text>
+                                            <Text style={{marginTop:EStyleSheet.value('2rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('15rem'),color:'white'}}>{item.place_name}</Text>
                                         </Surface>
                                     </Pressable>
                                 )

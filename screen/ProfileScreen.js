@@ -58,8 +58,8 @@ export default function ProfileScreen(props){
                 </View>
                 <View style={{marginTop:EStyleSheet.value("33rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <View style={{flexDirection:"row"}}>
-                        <Text>Don't have an account?</Text>
-                        <Text style={{marginLeft:EStyleSheet.value("5rem"),color:"#f23545"}}>Sign up</Text>
+                        <Text style={{fontFamily:"QuicksandBold"}}>Don't have an account?</Text>
+                        <Text style={{marginLeft:EStyleSheet.value("5rem"),color:"#f23545",fontFamily:"QuicksandBold"}}>Sign up</Text>
                     </View>
                     <Surface style={{borderColor:(emailError) ? "#f5333c":undefined,borderWidth:(emailError) ? 1:undefined,elevation:3,borderRadius:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("12rem"),backgroundColor:"white",width:"100%"}}>
                         <TextInput 
@@ -69,7 +69,7 @@ export default function ProfileScreen(props){
                     </Surface>
                     {
                         (emailError) &&
-                        <Text style={{marginTop:EStyleSheet.value("5rem"),color:"#f5333c"}}>{msgEmailError}</Text>
+                        <Text style={{marginTop:EStyleSheet.value("5rem"),color:"#f5333c",fontFamily:"QuicksandBold"}}>{msgEmailError}</Text>
                     }
                     <Surface style={{borderColor:(passwordError) ? "#f5333c":undefined,borderWidth:(passwordError) ? 1:undefined,flexDirection:'row',elevation:3,borderRadius:EStyleSheet.value("5rem"),paddingLeft:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("12rem"),backgroundColor:"white",width:"100%"}}>
                         <TextInput 
@@ -101,7 +101,7 @@ export default function ProfileScreen(props){
                     </Surface>
                     {
                         (passwordError) &&
-                        <Text style={{marginTop:EStyleSheet.value("5rem"),color:"#f5333c"}}>{msgPasswordError}</Text>
+                        <Text style={{marginTop:EStyleSheet.value("5rem"),color:"#f5333c",fontFamily:"QuicksandBold"}}>{msgPasswordError}</Text>
                     }
                     <View
                     style={{marginTop:EStyleSheet.value("25rem"),overflow:"hidden",justifyContent:"center",alignItems:"center",alignSelf:"center",width:EStyleSheet.value("310rem"),backgroundColor:"#f5333c",borderRadius:EStyleSheet.value("30rem")}}>
@@ -166,7 +166,7 @@ export default function ProfileScreen(props){
                         </Pressable>                   
                     </View>
                     <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("25rem")}}>
-                        <Text style={{color:"#f5333c"}}>Forgot Password</Text>
+                        <Text style={{color:"#f5333c",fontFamily:"QuicksandMedium"}}>Forgot Password</Text>
                     </View>
                 </View>
             </ScrollView>

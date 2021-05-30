@@ -69,7 +69,7 @@ export default function DetailWeeklySpotlight(props){
                 />
             </ImageBackground>
             <View style={{borderTopRightRadius:EStyleSheet.value("20rem"),borderColor:"grey",borderBottomWidth:0.5,borderTopLeftRadius:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("-28rem"),paddingHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",paddingVertical:EStyleSheet.value("25rem")}}>
-                <Text style={{color:"#f23545"}}>28th May 2021</Text>
+                <Text style={{color:"#f23545",fontFamily:"QuicksandBold"}}>28th May 2021</Text>
                 <HTML 
                 tagsStyles={{
                     p: { color:'black',paddingTop:EStyleSheet.value("15rem") }
@@ -83,12 +83,12 @@ export default function DetailWeeklySpotlight(props){
                 </Surface>
             </View>
             <View style={{paddingHorizontal:EStyleSheet.value("20rem")}}>
-                <Text style={{color:"#f23545",fontFamily:"HeeboBold",fontSize:EStyleSheet.value("16rem")}}>The Curious Case of the Missing Peranakan Treasure</Text>
+                <Text style={{color:"#f23545",fontFamily:"QuicksandBold",fontSize:EStyleSheet.value("16rem")}}>The Curious Case of the Missing Peranakan Treasure</Text>
             </View>
             <View style={{paddingHorizontal:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("25rem")}}>
                 <HTML 
                     tagsStyles={{
-                        p: { color:'black',paddingTop:EStyleSheet.value("15rem") }
+                        p: { color:'black',fontFamily:"QuicksandMedium",paddingTop:EStyleSheet.value("15rem") }
                     }}
                     source={{ html: htmlContent2 }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
             </View>

@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState, useRef} from 'react';
-import { StyleSheet, Animated, Text, Pressable, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Animated, Text, Pressable, View, TouchableOpacity, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface} from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
+
+import ImageLoader from '../components/ImageLoader';
 
 
 export default function DashboardScreen(props){
@@ -183,8 +185,8 @@ export default function DashboardScreen(props){
                                             colors={['rgba(0,0,0,0.6)', 'transparent']}
                                             style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('100rem')}}
                                         />
-                                        <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                        <Text style={{padding:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontWeight:'bold',paddingRight:EStyleSheet.value('15rem'),fontSize:EStyleSheet.value('20rem')}}>5 Less Well-Known Museums To Visit</Text>
+                                        <ImageLoader source={{uri:"https://p0.pikist.com/photos/632/815/universe-tree-sky-silhouette-landscape-cosmos-atmosphere-mystical.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}/>
+                                        <Text style={{fontFamily:"HeeboBold",padding:EStyleSheet.value('20rem'),zIndex:11,color:'white',paddingRight:EStyleSheet.value('15rem'),fontSize:EStyleSheet.value('20rem')}}>5 Less Well-Known Museums To Visit</Text>
                                     </Surface>
                                 </Pressable>
                             )
@@ -218,9 +220,9 @@ export default function DashboardScreen(props){
                                             colors={['rgba(0,0,0,0.7)', 'transparent']}
                                             style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
                                         />
-                                        <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                        <Text style={{fontSize:EStyleSheet.value('11rem'),zIndex:11,marginHorizontal:EStyleSheet.value('10rem'),color:'white',marginTop:EStyleSheet.value('8rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
-                                        <Text style={{marginTop:EStyleSheet.value('1rem'),zIndex:11,fontSize:EStyleSheet.value('12rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('10rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
+                                        <ImageLoader source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></ImageLoader>
+                                        <Text style={{fontSize:EStyleSheet.value('11rem'),fontFamily:"QuicksandMedium",zIndex:11,marginHorizontal:EStyleSheet.value('10rem'),color:'white',marginTop:EStyleSheet.value('8rem')}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
+                                        <Text style={{marginTop:EStyleSheet.value('1rem'),fontFamily:"QuicksandBold",zIndex:11,fontSize:EStyleSheet.value('12rem'),marginHorizontal:EStyleSheet.value('10rem'),color:'white'}}>ACCOMODATION PROMOTIONS</Text>
                                     </Surface>
                                 </Pressable>
                             )
@@ -231,7 +233,14 @@ export default function DashboardScreen(props){
                 <View style={{marginBottom:EStyleSheet.value('25rem')}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('17rem'),paddingHorizontal:EStyleSheet.value('20rem')}}>Local Recommendations</Text>
-                        <Text style={{marginRight:EStyleSheet.value('20rem'),color:"#f23545"}}>See All</Text>
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>{
+                            props.navigation.navigate("SeeAllLocalRecommendation");
+                        }}
+                        >
+                            <Text style={{marginRight:EStyleSheet.value('20rem'),color:"#f23545",fontFamily:"QuicksandMedium"}}>See All</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{marginTop:EStyleSheet.value('15rem')}}>
                         <View style={{flex:1}}>
@@ -248,7 +257,7 @@ export default function DashboardScreen(props){
                                             <Surface style={{marginBottom:EStyleSheet.value('10rem'),backgroundColor:'white',marginLeft:EStyleSheet.value("-10rem"),marginRight:EStyleSheet.value("-10rem"),elevation:4,overflow:"hidden",borderRadius:EStyleSheet.value('8rem')}}>
                                                 <ImageBackground resizeMode="stretch" source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),paddingVertical:EStyleSheet.value('20rem'),justifyContent:"flex-end"}}>
                                                     <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11}}>
-                                                        <Text style={{fontSize:EStyleSheet.value('14rem'),color:'white'}}>FOOD & BEVEREGES</Text>
+                                                        <Text style={{fontSize:EStyleSheet.value('14rem'),fontFamily:"QuicksandMedium",color:'white'}}>FOOD & BEVEREGES</Text>
                                                         <Text style={{fontSize:EStyleSheet.value('20rem'),fontWeight:'bold',color:'white'}}>Punjab Grill</Text>
                                                     </View>
                                                     <LinearGradient
@@ -303,10 +312,15 @@ export default function DashboardScreen(props){
                                             style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
                                         />
                                         <Image source={{uri:"https://images0.westend61.de/0001040218pw/japan-kyoto-gion-alley-and-temple-at-sunset-EPF00487.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></Image>
-                                        <View style={{paddingHorizontal:EStyleSheet.value('20rem'),justifyContent:'center',alignItems:'center'}}>
-                                            <View style={{backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
-                                            <Text style={{color:'white',fontWeight:'bold',marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>CHINATOWN</Text>
-                                            <Text style={{color:"white",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('13rem'),width:'100%',textAlign:'center'}}>Immerse yourself in timeless experiences</Text>
+                                        <View style={{justifyContent:'center',alignItems:'center'}}>
+                                            <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
+                                            <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontFamily:"HeeboBold",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>CHINATOWN</Text>
+                                            <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,color:"white",fontFamily:"QuicksandMedium",marginTop:EStyleSheet.value('3rem'),fontSize:EStyleSheet.value('13rem'),width:'100%',textAlign:'center'}}>Immerse yourself in timeless experiences</Text>
+                                            <LinearGradient
+                                            // Background Linear Gradient
+                                            colors={['transparent','rgba(0,0,0,0.8)', 'transparent']}
+                                            style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
+                                            />
                                         </View>
                                     </Surface>
                                 </Pressable>
@@ -317,7 +331,7 @@ export default function DashboardScreen(props){
                 </View>
                 <View style={{marginBottom:EStyleSheet.value('25rem')}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                        <Text style={{fontFamily:"HeeboBold",fontSfize:EStyleSheet.value('17rem'),paddingHorizontal:EStyleSheet.value('20rem')}}>What's in Timor Leste</Text>
+                        <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('17rem'),paddingHorizontal:EStyleSheet.value('20rem')}}>What's in Timor Leste</Text>
                         <Text style={{marginRight:EStyleSheet.value('20rem'),color:"#f23545"}}>See All</Text>
                     </View>
                     <View style={{marginTop:EStyleSheet.value('15rem')}}>
@@ -343,7 +357,7 @@ export default function DashboardScreen(props){
                                             style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
                                         />
                                         <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
-                                        <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,marginHorizontal:EStyleSheet.value('12rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>{item.category}</Text>
+                                        <Text style={{fontSize:EStyleSheet.value('13rem'),fontFamily:"QuicksandMedium",zIndex:11,marginHorizontal:EStyleSheet.value('12rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>{item.category}</Text>
                                         <Text style={{marginTop:EStyleSheet.value('1rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('12rem'),color:'white'}}>{item.place_name}</Text>
                                     </Surface>
                                 </Pressable>

@@ -30,7 +30,7 @@ export default function LocalRecommendationDetail(props){
                     <Text style={{color:"white",zIndex:11}}>MALLS & SHOPS</Text>
                     <Text style={{color:"white",zIndex:11,fontSize:EStyleSheet.value("22rem"),fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem")}}>BooksActually</Text>
                     <View style={{marginTop:EStyleSheet.value("8rem"),zIndex:11,backgroundColor:"white",paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("28rem"),borderRadius:EStyleSheet.value("20rem")}}>
-                        <Text style={{color:"#f23545"}}>More Info</Text>
+                        <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>More Info</Text>
                     </View>
                 </View>
             </View>
@@ -51,12 +51,12 @@ export default function LocalRecommendationDetail(props){
                 <View style={{backgroundColor:"#f5f5f5",paddingHorizontal:EStyleSheet.value("25rem"),paddingBottom:EStyleSheet.value("25rem")}}>
                     <View style={{width:EStyleSheet.value("40rem"),height:EStyleSheet.value("7rem"),backgroundColor:"red",marginBottom:EStyleSheet.value("8rem")}}></View>
                     <Text style={{fontSize:EStyleSheet.value("18rem"),fontFamily:"HeeboBold"}}>WHY YOU SHOULD VISIT</Text>
-                    <Text style={{marginTop:EStyleSheet.value("15rem"),lineHeight:EStyleSheet.value("20rem")}}>BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd</Text>
+                    <Text style={{marginTop:EStyleSheet.value("15rem"),lineHeight:EStyleSheet.value("20rem"),fontFamily:"QuicksandMedium"}}>BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd</Text>
                 </View>
                 <View style={{backgroundColor:"#f5f5f5",borderBottomLeftRadius:EStyleSheet.value("30rem"),borderBottomRightRadius:EStyleSheet.value("30rem"),paddingHorizontal:EStyleSheet.value("25rem"),paddingBottom:EStyleSheet.value("25rem")}}>
                     <View style={{width:EStyleSheet.value("40rem"),height:EStyleSheet.value("7rem"),backgroundColor:"red",marginBottom:EStyleSheet.value("8rem")}}></View>
                     <Text style={{fontSize:EStyleSheet.value("18rem"),fontFamily:"HeeboBold"}}>SPECIAL TIP</Text>
-                    <Text style={{marginTop:EStyleSheet.value("15rem"),lineHeight:EStyleSheet.value("20rem")}}>BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd</Text>
+                    <Text style={{marginTop:EStyleSheet.value("15rem"),lineHeight:EStyleSheet.value("20rem"),fontFamily:"QuicksandMedium"}}>BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd BooksActually is quite a git to the singapore alksdmasldakdmsalkdmalkdmsalkdmaslkdmaslkmdaslkdmaslkdmaslkdmsaldlakmdlkasmdlkasmdlkasmdlasmdklasmdlkasmdlaskmdlkasmdasldamasjdksajdskadsakjdsakd</Text>
                 </View>
             </View>
             <View style={{justifyContent:"center",alignItems:"center",marginBottom:EStyleSheet.value("35rem")}}>
@@ -64,11 +64,11 @@ export default function LocalRecommendationDetail(props){
                 </View>
                 <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("17rem"),fontFamily:"HeeboBold",}}>Samanta Kwan</Text>
                 <Text style={{marginTop:EStyleSheet.value("3rem")}}>Explorer</Text>
-                <Text style={{textAlign:"center",marginTop:EStyleSheet.value("10rem")}}>
+                <Text style={{textAlign:"center",marginTop:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>
                 I love going on adventures, trying out new things, being in the wilderness, wandering and wondering, wit and wine.
                 </Text>
                 <View style={{marginTop:EStyleSheet.value("15rem"),backgroundColor:"#f5f5f5",borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("8rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                    <Text style={{color:"#f23545"}}>Get to know her</Text>
+                    <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>Get to know her</Text>
                 </View>
             </View>
         </ScrollView>

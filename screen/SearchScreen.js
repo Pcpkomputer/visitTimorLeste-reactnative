@@ -145,7 +145,7 @@ export default function SearchScreen(props){
                                 </Svg>
                             </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Promotions</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Promotions</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -168,7 +168,7 @@ export default function SearchScreen(props){
                                 </Svg>
                             </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Attractions</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Attractions</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -195,7 +195,7 @@ export default function SearchScreen(props){
                             </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Accomodations</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Accomodations</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -221,7 +221,7 @@ export default function SearchScreen(props){
                             </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Food & Beverages</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Food & Beverages</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -262,7 +262,7 @@ export default function SearchScreen(props){
                                 </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Bars & Clubs</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Bars & Clubs</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -286,7 +286,7 @@ export default function SearchScreen(props){
                                 </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Mall & Shops</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Mall & Shops</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                         <Pressable onPress={()=>{
@@ -315,7 +315,7 @@ export default function SearchScreen(props){
                                 </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Tours</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Tours</Text>
                     </View>
                     <View style={{marginBottom:EStyleSheet.value("15rem"),width:EStyleSheet.value("85rem"),justifyContent:"center",alignItems:"center"}}>
                      <Pressable onPress={()=>{
@@ -344,7 +344,7 @@ export default function SearchScreen(props){
                                 </Svg>
                         </Surface>
                         </Pressable>
-                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem")}}>Event</Text>
+                        <Text numberOfLines={1} style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>Event</Text>
                     </View>
                 </View>
                 <View style={{justifyContent:"flex-end",alignItems:"center",paddingBottom:EStyleSheet.value("2.5rem"),height:EStyleSheet.value("30rem")}}>
@@ -373,7 +373,7 @@ export default function SearchScreen(props){
                             <View style={{flex:1,zIndex:15,justifyContent:"flex-end",paddingVertical:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("10rem")}}>
                                 <View style={{flexDirection:"row",justifyContent:"space-between"}}>
                                     <View>
-                                        <Text style={{color:"white",fontSize:EStyleSheet.value("13rem")}}>Food & Bevereges</Text>
+                                        <Text style={{color:"white",fontSize:EStyleSheet.value("13rem"),fontFamily:"QuicksandMedium"}}>Food & Bevereges</Text>
                                         <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem")}}>Rivera Forliona</Text>
                                     </View>
                                     <View style={{justifyContent:"flex-end"}}>
