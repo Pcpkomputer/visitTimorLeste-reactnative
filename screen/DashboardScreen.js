@@ -255,17 +255,18 @@ export default function DashboardScreen(props){
                                         }}
                                         >
                                             <Surface style={{marginBottom:EStyleSheet.value('10rem'),backgroundColor:'white',marginLeft:EStyleSheet.value("-10rem"),marginRight:EStyleSheet.value("-10rem"),elevation:4,overflow:"hidden",borderRadius:EStyleSheet.value('8rem')}}>
-                                                <ImageBackground resizeMode="stretch" source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),paddingVertical:EStyleSheet.value('20rem'),justifyContent:"flex-end"}}>
+                                                <View resizeMode="stretch" source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),justifyContent:"flex-end"}}>
+                                                    <ImageLoader source={{uri:item.image}} style={{backgroundColor:'whitesmoke',width:'100%',height:EStyleSheet.value('240rem'),paddingVertical:EStyleSheet.value('20rem'),justifyContent:"flex-end"}}/>
                                                     <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11}}>
                                                         <Text style={{fontSize:EStyleSheet.value('14rem'),fontFamily:"QuicksandMedium",color:'white'}}>FOOD & BEVEREGES</Text>
-                                                        <Text style={{fontSize:EStyleSheet.value('20rem'),fontWeight:'bold',color:'white'}}>Punjab Grill</Text>
+                                                        <Text style={{fontSize:EStyleSheet.value('20rem'),fontWeight:'bold',color:'white',marginBottom:EStyleSheet.value("20rem")}}>Punjab Grill</Text>
                                                     </View>
                                                     <LinearGradient
                                                         // Background Linear Gradient
                                                         colors={['transparent','rgba(0,0,0,0.7)']}
                                                         style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('150rem')}}
                                                     />
-                                                </ImageBackground>
+                                                </View>
                                                 <View style={{backgroundColor:'white',paddingBottom:EStyleSheet.value('15rem')}}>
                                                     <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),paddingVertical:EStyleSheet.value('10rem')}}>"{item.comment}"</Text>
                                                 </View>

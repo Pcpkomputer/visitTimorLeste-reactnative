@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Svg, { Path } from "react-native-svg"
+import { Asset } from 'expo-asset';
 
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
