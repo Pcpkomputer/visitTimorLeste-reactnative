@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState, useRef} from 'react';
-import { StyleSheet, Animated, Text, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Animated, Text, View, Dimensions,ScrollView, Pressable, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface} from 'react-native-paper';
@@ -9,6 +9,8 @@ import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
+
+import ImageLoader from '../components/ImageLoader';
 
 export default function MyTripScreen(props){
 
@@ -150,30 +152,37 @@ export default function MyTripScreen(props){
                             showsHorizontalScrollIndicator={false}
                             renderItem={({item,index})=>{
                                 return (
-                                    <Surface style={{elevation:3,marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",flexDirection:"row",backgroundColor:"white",borderRadius:EStyleSheet.value('5rem')}}>
-                                        <View style={{flex:1,padding:EStyleSheet.value('10rem')}}>
-                                            <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:EStyleSheet.value("20rem")}}>
-                                                <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem'),fontFamily:"QuicksandBold"}}>{item.category.toUpperCase()}</Text>
-                                                <View style={{flexDirection:'row'}}>
-                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                    <Pressable 
+                                    onPress={()=>{
+                                        props.navigation.navigate("DetailPlace");
+                                    }}
+                                    >
+                                        <Surface style={{elevation:3,marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",flexDirection:"row",backgroundColor:"white",borderRadius:EStyleSheet.value('5rem')}}>
+                                            <View style={{flex:1,padding:EStyleSheet.value('10rem')}}>
+                                                <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:EStyleSheet.value("20rem")}}>
+                                                    <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem'),fontFamily:"QuicksandBold"}}>{item.category.toUpperCase()}</Text>
+                                                    <View style={{flexDirection:'row'}}>
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                                    </View>
+                                                </View>
+                                                <View style={{marginTop:EStyleSheet.value('3rem')}}>
+                                                    <Text style={{fontFamily:"HeeboBold"}}>{item.place_name}</Text>
+                                                </View>
+                                                <View style={{marginTop:EStyleSheet.value('3rem'),marginBottom:EStyleSheet.value('20rem')}}>
+                                                    <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('10rem'),color:"grey"}}>{item.address} {item.postal_code}</Text>
                                                 </View>
                                             </View>
-                                            <View style={{marginTop:EStyleSheet.value('3rem')}}>
-                                                <Text style={{fontFamily:"HeeboBold"}}>{item.place_name}</Text>
+                                            <View source={{uri:item.preview}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}>
+                                                <ImageLoader source={{uri:item.preview}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}/>
+                                                <View style={{position:"absolute",zIndex:100,right:EStyleSheet.value('10rem'),top:EStyleSheet.value('10rem')}}>
+                                                    <AntDesign name="heart" size={24} color="#d1222c" />
+                                                </View>
                                             </View>
-                                            <View style={{marginTop:EStyleSheet.value('3rem'),marginBottom:EStyleSheet.value('20rem')}}>
-                                                <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('10rem'),color:"grey"}}>{item.address} {item.postal_code}</Text>
-                                            </View>
-                                        </View>
-                                        <ImageBackground source={{uri:item.preview}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}>
-                                            <View style={{position:"absolute",right:EStyleSheet.value('10rem'),top:EStyleSheet.value('10rem')}}>
-                                                <AntDesign name="heart" size={24} color="#d1222c" />
-                                            </View>
-                                        </ImageBackground>
-                                    </Surface>
+                                        </Surface>
+                                    </Pressable>
                                 )
                             }}
                             />

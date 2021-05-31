@@ -113,22 +113,28 @@ import {
                         style={{paddingHorizontal:EStyleSheet.value("20rem")}}
                         renderItem={({item,index})=>{
                             return (
-                                <View style={{borderBottomColor:"grey",borderBottomWidth:0.5,flexDirection:"row",paddingVertical:EStyleSheet.value("10rem")}}>
-                                    <View style={{backgroundColor:"whitesmoke",borderRadius:EStyleSheet.value("5rem"),width:EStyleSheet.value("90rem"),height:EStyleSheet.value("70rem")}}>
-                                    </View>
-                                    <View style={{flex:1,paddingHorizontal:EStyleSheet.value("10rem")}}>
-                                        <Text style={{fontSize:EStyleSheet.value("15rem"),fontFamily:"HeeboBold"}} numberOfLines={1}>Chinatown Trishaw Tour (Basdsada)</Text>
-                                        <View style={{flexDirection:"row",marginTop:EStyleSheet.value("2rem")}}>
-                                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                <Pressable
+                                onPress={()=>{
+                                    props.navigation.navigate("DetailPlace");
+                                }}
+                                >
+                                    <View style={{borderBottomColor:"grey",borderBottomWidth:0.5,flexDirection:"row",paddingVertical:EStyleSheet.value("10rem")}}>
+                                        <View style={{backgroundColor:"whitesmoke",borderRadius:EStyleSheet.value("5rem"),width:EStyleSheet.value("90rem"),height:EStyleSheet.value("70rem")}}>
+                                        </View>
+                                        <View style={{flex:1,paddingHorizontal:EStyleSheet.value("10rem")}}>
+                                            <Text style={{fontSize:EStyleSheet.value("15rem"),fontFamily:"HeeboBold"}} numberOfLines={1}>Chinatown Trishaw Tour (Basdsada)</Text>
+                                            <View style={{flexDirection:"row",marginTop:EStyleSheet.value("2rem")}}>
+                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                    <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                            </View>
+                                        </View>
+                                        <View style={{width:EStyleSheet.value("50rem"),justifyContent:"center",alignItems:"center"}}>
+                                            <Ionicons name="ios-heart-outline" size={EStyleSheet.value("27rem")} color="black" />
                                         </View>
                                     </View>
-                                    <View style={{width:EStyleSheet.value("50rem"),justifyContent:"center",alignItems:"center"}}>
-                                        <Ionicons name="ios-heart-outline" size={EStyleSheet.value("27rem")} color="black" />
-                                    </View>
-                                </View>
+                                </Pressable>
                             )
                         }}
                         />

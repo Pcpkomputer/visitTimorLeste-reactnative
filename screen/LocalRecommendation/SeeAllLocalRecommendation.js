@@ -12,10 +12,15 @@ import { Fontisto, Entypo } from '@expo/vector-icons';
 
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
+import ImageLoader from '../../components/ImageLoader';
+
 import HTML from "react-native-render-html";
 import { FlatList } from 'react-native-gesture-handler';
 
-const FirstRoute = () => (
+
+let nav = null;
+
+const FirstRoute = (props) => (
     <View style={{ flex: 1, backgroundColor: 'white',paddingHorizontal:EStyleSheet.value("15rem"),paddingTop:EStyleSheet.value("15rem") }}>
         <FlatList
         showsVerticalScrollIndicator={false}
@@ -24,36 +29,44 @@ const FirstRoute = () => (
         keyExtractor={(item,index)=>`localreccomendation-${index}`}
         renderItem={()=>{
             return (
-                <Surface style={{marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",backgroundColor:"white",elevation:3,borderRadius:EStyleSheet.value("5rem")}}>
-                    <ImageBackground 
-                    source={{uri:"https://i1.wp.com/blog.tripfez.com/wp-content/uploads/2016/08/shutterstock_741884605.jpg?fit=1920%2C1280&ssl=1"}}
-                    style={{height:EStyleSheet.value("180rem"),backgroundColor:"whitesmoke",justifyContent:"flex-end"}}>
-                        <LinearGradient
-                            // Background Linear Gradient
-                            colors={['transparent','rgba(0,0,0,0.7)']}
-                            style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
-                        />
-                        <Text style={{zIndex:11,color:"white",fontFamily:"QuicksandMedium",marginHorizontal:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("3rem")}}>FOOD & BEVEREGES</Text>
-                        <Text style={{marginHorizontal:EStyleSheet.value("10rem"),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value("15rem"),color:"white",zIndex:11,fontSize:EStyleSheet.value("16rem")}}>Tiong Bahru Market and Food Centre</Text>
-                    </ImageBackground>
-                    <View style={{paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("15rem")}}>
-                        <Text style={{fontFamily:"QuicksandBold"}}>"Rustic memem asmkdaskdasfbafbasjkdbakdbaskjdbaskjdbsajkdbsakjdbsakdbsakjbaskjbksabjdas"</Text>
-                    </View>
-                    <View style={{marginVertical:EStyleSheet.value("15rem"),flexDirection:"row",marginTop:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                        <View style={{width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
+                <Pressable
+                onPress={()=>{
+                    props.navigation.navigate("DetailLocalRecommendation");
+                }}
+                >
+                    <Surface style={{marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",backgroundColor:"white",elevation:3,borderRadius:EStyleSheet.value("5rem")}}>
+                        <View
+                        source={{uri:"https://i1.wp.com/blog.tripfez.com/wp-content/uploads/2016/08/shutterstock_741884605.jpg?fit=1920%2C1280&ssl=1"}}
+                        style={{height:EStyleSheet.value("180rem"),backgroundColor:"whitesmoke",justifyContent:"flex-end"}}>
+                            <ImageLoader  source={{uri:"https://i1.wp.com/blog.tripfez.com/wp-content/uploads/2016/08/shutterstock_741884605.jpg?fit=1920%2C1280&ssl=1"}}
+                            style={{height:EStyleSheet.value("180rem"),backgroundColor:"whitesmoke",justifyContent:"flex-end"}}></ImageLoader>
+                            <LinearGradient
+                                // Background Linear Gradient
+                                colors={['transparent','rgba(0,0,0,0.7)']}
+                                style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
+                            />
+                            <Text style={{zIndex:11,color:"white",fontFamily:"QuicksandMedium",marginHorizontal:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("3rem")}}>FOOD & BEVEREGES</Text>
+                            <Text style={{marginHorizontal:EStyleSheet.value("10rem"),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value("15rem"),color:"white",zIndex:11,fontSize:EStyleSheet.value("16rem")}}>Tiong Bahru Market and Food Centre</Text>
                         </View>
-                        <View style={{marginLeft:EStyleSheet.value("10rem"),justifyContent:"center"}}>
-                            <Text style={{fontFamily:"HeeboBold"}}>Yao Ming</Text>
+                        <View style={{paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("15rem")}}>
+                            <Text style={{fontFamily:"QuicksandBold"}}>"Rustic memem asmkdaskdasfbafbasjkdbakdbaskjdbaskjdbsajkdbsakjdbsakdbsakjbaskjbksabjdas"</Text>
                         </View>
-                    </View>
-                </Surface>
+                        <View style={{marginVertical:EStyleSheet.value("15rem"),flexDirection:"row",marginTop:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
+                            <View style={{width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
+                            </View>
+                            <View style={{marginLeft:EStyleSheet.value("10rem"),justifyContent:"center"}}>
+                                <Text style={{fontFamily:"HeeboBold"}}>Yao Ming</Text>
+                            </View>
+                        </View>
+                    </Surface>
+                </Pressable>
             )
         }}
         />
     </View>
   );
   
-  const SecondRoute = () => (
+  const SecondRoute = (props) => (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
         <View style={{paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("20rem")}}>
             <FlatList
@@ -80,13 +93,15 @@ const FirstRoute = () => (
   );
 
   const renderScene = SceneMap({
-    first: FirstRoute,
+    first: ()=><FirstRoute navigation={nav}/>,
     second: SecondRoute,
   });
   
   
 
 export default function SeeAllLocalRecommendation(props){
+
+    nav = props.navigation;
 
     const layout = useWindowDimensions();
 

@@ -22,14 +22,12 @@ export default function ImageLoader(props){
                 <Image style={{...props.style,width:'100%',height:'100%',opacity:0.2}} source={require("../assets/image.jpg")}></Image>
             }
             <Animated.Image style={{display:(imageLoaded) ? null:"none",width:'100%',opacity:fadeAnim,height:'100%',borderRadius:props.style.borderRadius}} onLoad={()=>{
-                setTimeout(()=>{
                     setImageLoaded(true);
                     Animated.timing(fadeAnim, {
                         toValue: 1,
                         duration: 100,
                         useNativeDriver:true
                       }).start();
-                },1000)
             }} source={props.source}>
             </Animated.Image>
         </View>

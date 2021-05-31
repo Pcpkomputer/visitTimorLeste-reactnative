@@ -10,6 +10,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign, Feather } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
+import ImageLoader from '../components/ImageLoader';
+
 
 export default function SearchScreen(props){
 
@@ -38,6 +40,8 @@ export default function SearchScreen(props){
     let [selectedCategory, setSelectedCategory] = useState([
         "Promotions"
     ]);
+
+    
 
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
@@ -361,7 +365,7 @@ export default function SearchScreen(props){
                         alert(lastOffsetY);
                     }}>
                         <Surface style={{marginTop:(index===0) ? EStyleSheet.value("60rem"):undefined,elevation:2,marginHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",borderRadius:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("20rem"),height:EStyleSheet.value("170rem")}}>
-                            <Image resizeMode="cover" source={{uri:"https://www.tracktraceit.com/serialization/images/food%20and%20baverages.jpg"}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></Image>
+                            <ImageLoader resizeMode="cover" source={{uri:"https://www.tracktraceit.com/serialization/images/food%20and%20baverages.jpg"}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></ImageLoader>
                             <LinearGradient
                                 // Background Linear Gradient
                                 colors={['transparent', 'rgba(0,0,0,0.7)']}

@@ -24,6 +24,7 @@ import PrecinctGuidesDetail from './screen/PrecinctGuides/PrecinctGuidesDetail';
 import SeeAllLocalRecommendation from './screen/LocalRecommendation/SeeAllLocalRecommendation';
 
 import DetailPlace from './screen/DetailPlace';
+import DetailPromotion from './screen/WhatsNew/DetailPromotion';
 
 let shadow = {
   shadowColor: "#000",
@@ -294,6 +295,12 @@ export default function App() {
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="SeeAllLocalRecommendation" component={SeeAllLocalRecommendation} />
+               <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailPromotion" component={DetailPromotion} />
         </Stack.Navigator>
       </NavigationContainer>
     );

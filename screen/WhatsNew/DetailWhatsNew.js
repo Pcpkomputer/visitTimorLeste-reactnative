@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useRef, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, FlatList, Dimensions, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, Dimensions, TouchableOpacity, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { Surface} from 'react-native-paper';
@@ -21,6 +21,8 @@ import {
     UIActivityIndicator,
     WaveIndicator,
   } from 'react-native-indicators';
+
+  import ImageLoader from '../../components/ImageLoader';
 
 export default function DetailWhatsNew(props){
 
@@ -56,18 +58,24 @@ export default function DetailWhatsNew(props){
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item,index})=>{
                         return (
-                         <Surface style={{elevation:4,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("320rem")}}>
-                            <LinearGradient
-                                // Background Linear Gradient
-                                colors={['rgba(0,0,0,0.7)', 'transparent']}
-                                style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
-                            />
-                             <Image source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></Image>
-                             <View style={{paddingHorizontal:EStyleSheet.value("15rem"),zIndex:11,paddingVertical:EStyleSheet.value("15rem")}}>
-                                 <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium"}}>HOTEL DEALS</Text>
-                                 <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
-                             </View>
-                         </Surface>
+                        <Pressable
+                        onPress={()=>{
+                            props.navigation.navigate("DetailPromotion");
+                        }}
+                        >
+                            <Surface style={{elevation:4,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("320rem")}}>
+                                <LinearGradient
+                                    // Background Linear Gradient
+                                    colors={['rgba(0,0,0,0.7)', 'transparent']}
+                                    style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
+                                />
+                                <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
+                                <View style={{paddingHorizontal:EStyleSheet.value("15rem"),zIndex:11,paddingVertical:EStyleSheet.value("15rem")}}>
+                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium"}}>HOTEL DEALS</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                </View>
+                            </Surface>
+                         </Pressable>
                         )
                     }}
                     />
@@ -79,7 +87,14 @@ export default function DetailWhatsNew(props){
             </View>
             <View style={{marginTop:EStyleSheet.value("25rem"),flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:EStyleSheet.value("20rem")}}>
                <Text style={{fontSize:EStyleSheet.value("15rem"),fontFamily:"HeeboBold"}}>All Accomodation Promotion</Text>
+               <TouchableOpacity
+               activeOpacity={0.7}
+               onPress={()=>{
+                   props.navigation.navigate("Search");
+               }}
+               >
                <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>See All</Text>
+               </TouchableOpacity>
             </View>
             <View style={{marginBottom:EStyleSheet.value("30rem"),marginTop:EStyleSheet.value("20rem")}}>
                {
@@ -97,7 +112,7 @@ export default function DetailWhatsNew(props){
                                     colors={['rgba(0,0,0,0.6)', 'transparent']}
                                     style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
                                 />
-                                <Image source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></Image>
+                                <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
                                 <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
                                     <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>HOTEL DEALS</Text>
                                     <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>

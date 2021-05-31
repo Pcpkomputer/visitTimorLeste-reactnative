@@ -10,6 +10,8 @@ import Svg, { Path } from "react-native-svg"
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
 
+import ImageLoader from '../components/ImageLoader';
+
 import HTML from "react-native-render-html";
 import {
     BallIndicator,
@@ -116,7 +118,8 @@ import {
                       topBarFade.setValue(e.nativeEvent.contentOffset.y);
               }}
             >
-                <ImageBackground source={{uri:"https://www.trawell.in/admin/images/upload/935304121Merlion_Park_Singapore.jpg"}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}>
+                <View source={{uri:"https://www.trawell.in/admin/images/upload/935304121Merlion_Park_Singapore.jpg"}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}>
+                        <ImageLoader source={{uri:"https://www.trawell.in/admin/images/upload/935304121Merlion_Park_Singapore.jpg"}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}/>
                         <LinearGradient
                             // Background Linear Gradient
                             colors={['rgba(0,0,0,0.5)', 'transparent']}
@@ -127,7 +130,7 @@ import {
                             colors={['transparent','white']}
                             style={{position:'absolute',bottom:0,zIndex:10,width:"100%",height:EStyleSheet.value('30rem')}}
                         />
-                </ImageBackground>
+                </View>
 
                 <View style={{height:EStyleSheet.value("260rem"),zIndex:2,paddingBottom:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("20rem"),justifyContent:"flex-end"}}>
                     <View style={{width:EStyleSheet.value("60rem"),justifyContent:"center",alignItems:"center",height:EStyleSheet.value("60rem"),borderRadius:999}}>
@@ -364,7 +367,7 @@ import {
                             renderItem={({item,index})=>{
                                 return (
                                     <Pressable onPress={()=>{
-                                        props.navigation.navigate("DetailPlace");
+                                        props.navigation.replace("DetailPlace");
                                     }}>
                                         <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('25rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
                                             <LinearGradient

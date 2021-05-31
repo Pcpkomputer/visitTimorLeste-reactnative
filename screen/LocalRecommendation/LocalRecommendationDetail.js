@@ -10,6 +10,8 @@ import Svg, { Path } from "react-native-svg"
 import { LinearGradient } from 'expo-linear-gradient';
 import { Fontisto } from '@expo/vector-icons'; 
 
+import ImageLoader from '../../components/ImageLoader';
+
 import HTML from "react-native-render-html";
 
 export default function LocalRecommendationDetail(props){
@@ -17,8 +19,9 @@ export default function LocalRecommendationDetail(props){
         <ScrollView style={{flex:1,backgroundColor:"white"}}>
             <View style={{height:EStyleSheet.value("28rem"),backgroundColor:"white"}}></View>
 
-            <ImageBackground source={{uri:"https://media.gettyimages.com/photos/grill-seafood-picture-id1079470588?s=612x612"}} style={{backgroundColor:"grey",position:"absolute",zIndex:1,height:EStyleSheet.value("318rem"),width:"100%"}}>
-            </ImageBackground>
+            <View source={{uri:"https://media.gettyimages.com/photos/grill-seafood-picture-id1079470588?s=612x612"}} style={{backgroundColor:"grey",position:"absolute",zIndex:1,height:EStyleSheet.value("318rem"),width:"100%"}}>
+                <ImageLoader source={{uri:"https://media.gettyimages.com/photos/grill-seafood-picture-id1079470588?s=612x612"}} style={{backgroundColor:"grey",position:"absolute",zIndex:1,height:EStyleSheet.value("318rem"),width:"100%"}}></ImageLoader>
+            </View>
 
             <View style={{marginHorizontal:EStyleSheet.value("0rem"),zIndex:2,height:EStyleSheet.value("210rem"),justifyContent:"center",alignItems:"center"}}>
                 <View style={{width:"100%",justifyContent:"center",alignItems:"center"}}>

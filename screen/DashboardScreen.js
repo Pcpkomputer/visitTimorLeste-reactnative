@@ -312,7 +312,7 @@ export default function DashboardScreen(props){
                                             colors={['rgba(0,0,0,0.5)', 'transparent']}
                                             style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
                                         />
-                                        <Image source={{uri:"https://images0.westend61.de/0001040218pw/japan-kyoto-gion-alley-and-temple-at-sunset-EPF00487.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></Image>
+                                        <ImageLoader source={{uri:"https://images0.westend61.de/0001040218pw/japan-kyoto-gion-alley-and-temple-at-sunset-EPF00487.jpg"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></ImageLoader>
                                         <View style={{justifyContent:'center',alignItems:'center'}}>
                                             <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
                                             <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontFamily:"HeeboBold",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>CHINATOWN</Text>
@@ -333,7 +333,14 @@ export default function DashboardScreen(props){
                 <View style={{marginBottom:EStyleSheet.value('25rem')}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('17rem'),paddingHorizontal:EStyleSheet.value('20rem')}}>What's in Timor Leste</Text>
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>{
+                            props.navigation.navigate("Search");
+                        }}
+                        >
                         <Text style={{marginRight:EStyleSheet.value('20rem'),color:"#f23545"}}>See All</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{marginTop:EStyleSheet.value('15rem')}}>
                         <FlatList
@@ -357,7 +364,7 @@ export default function DashboardScreen(props){
                                             colors={['rgba(0,0,0,0.7)', 'transparent']}
                                             style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem')}}
                                         />
-                                        <Image source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></Image>
+                                        <ImageLoader source={{uri:item.image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('10rem')}}></ImageLoader>
                                         <Text style={{fontSize:EStyleSheet.value('13rem'),fontFamily:"QuicksandMedium",zIndex:11,marginHorizontal:EStyleSheet.value('12rem'),color:'white',marginTop:EStyleSheet.value('10rem')}}>{item.category}</Text>
                                         <Text style={{marginTop:EStyleSheet.value('1rem'),zIndex:11,fontSize:EStyleSheet.value('13rem'),fontWeight:'bold',marginHorizontal:EStyleSheet.value('12rem'),color:'white'}}>{item.place_name}</Text>
                                     </Surface>
