@@ -43,7 +43,7 @@ export default function DashboardScreen(props){
     let [weeklySpotlight, setWeeklySpotlight] = useState([
         {
             title: "10 Days Itinerary For Timor Leste",
-            image: "https://assets.bucketlistly.blog/sites/5adf778b6eabcc00190b75b1/content_entry5adf77af6eabcc00190b75b6/5b8cff41ad4bdc07deb7c937/files/10-days-itinerary-timor-leste-main-image-op.webp",
+            image: "https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
             content:`
                 <p>Timor Leste is probably one of the least traveled country in Southeast Asia getting only around 60,000 travelers per year. The majority of those travelers are on a visa run from Indonesia, and they often stay just in Dili which is a shame as the country shines on its own when you started to go out of the capital city.</p>
                 <p>In August 2018, I decided to spend 10 days traveling in Timor Leste trying my best to get off the beaten path as much as possible and even though I had mixed feelings about traveling East, I had the greatest time exploring Atauro and the mountain region of the country, so here is a 10 days guide to exploring Timor-Leste cities, culture, and stunning countrysides.</p>
@@ -110,7 +110,7 @@ export default function DashboardScreen(props){
             user_name:"Suzy"
         },
         {
-            image:"https://lh3.googleusercontent.com/proxy/tv-2r9sqpdvQ-aq3rg4Au8IUo5RyzDDu6PGeS9fO4xJo6hghbHySqnXJTj2qc_duaYc53LW55ncI90N8iLutWhW1ZZIYaR2J8bI2KdfZmbf_lIchPRvKEg",
+            image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
             category:"ATTRACTIONS",
             place_name:"JACO",
             comment:"Feel the breezy wind.",
@@ -144,7 +144,7 @@ export default function DashboardScreen(props){
             user_name:"Suzy"
         },
         {
-            image:"https://lh3.googleusercontent.com/proxy/tv-2r9sqpdvQ-aq3rg4Au8IUo5RyzDDu6PGeS9fO4xJo6hghbHySqnXJTj2qc_duaYc53LW55ncI90N8iLutWhW1ZZIYaR2J8bI2KdfZmbf_lIchPRvKEg",
+            image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
             category:"ATTRACTIONS",
             place_name:"JACO",
             comment:"Feel the breezy wind.",

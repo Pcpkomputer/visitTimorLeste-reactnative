@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, {useState, useRef, useEffect} from 'react';
-import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable, StatusBar } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -252,6 +251,7 @@ export default function App() {
   if(loaded){
     return (
       <NavigationContainer>
+        <StatusBar translucent backgroundColor="transparent" />
         <Stack.Navigator>
             <Stack.Screen 
              options={{

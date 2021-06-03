@@ -54,7 +54,7 @@ export default function SearchScreen(props){
             user_name:"Suzy"
         },
         {
-            image:"https://lh3.googleusercontent.com/proxy/tv-2r9sqpdvQ-aq3rg4Au8IUo5RyzDDu6PGeS9fO4xJo6hghbHySqnXJTj2qc_duaYc53LW55ncI90N8iLutWhW1ZZIYaR2J8bI2KdfZmbf_lIchPRvKEg",
+            image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
             category:"ATTRACTIONS",
             place_name:"JACO",
             comment:"Feel the breezy wind.",
@@ -77,7 +77,7 @@ export default function SearchScreen(props){
 
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
-            <View style={{height:EStyleSheet.value('28rem'),zIndex:100}}></View>
+            <View style={{height:EStyleSheet.value('28rem'),zIndex:100,backgroundColor:"white"}}></View>
             <View style={{paddingTop:EStyleSheet.value('58rem'),backgroundColor:"white",zIndex:100,paddingHorizontal:EStyleSheet.value('20rem'),paddingBottom:EStyleSheet.value('20rem')}}>
                 <View style={{backgroundColor:'#f23545',height:EStyleSheet.value('5rem'),width:EStyleSheet.value('35rem')}}></View>
                 <Text style={{fontSize:EStyleSheet.value('27rem'),fontFamily:"HeeboBold",marginTop:EStyleSheet.value('5rem')}}>Search</Text>

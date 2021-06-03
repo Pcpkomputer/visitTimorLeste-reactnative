@@ -69,7 +69,7 @@ import {
                 user_name:"Suzy"
             },
             {
-                image:"https://lh3.googleusercontent.com/proxy/tv-2r9sqpdvQ-aq3rg4Au8IUo5RyzDDu6PGeS9fO4xJo6hghbHySqnXJTj2qc_duaYc53LW55ncI90N8iLutWhW1ZZIYaR2J8bI2KdfZmbf_lIchPRvKEg",
+                image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
                 category:"ATTRACTIONS",
                 place_name:"JACO",
                 comment:"Feel the breezy wind.",
