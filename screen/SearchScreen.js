@@ -42,6 +42,38 @@ export default function SearchScreen(props){
     ]);
 
     
+    let [list, setList] = useState([
+        {
+            image:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg",
+            category:"ATTRACTIONS",
+            place_name:"Gunung Ramelau",
+            comment:"The scenery looks so good.",
+            avatar:"",
+            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            user_name:"Suzy"
+        },
+        {
+            image:"https://lh3.googleusercontent.com/proxy/tv-2r9sqpdvQ-aq3rg4Au8IUo5RyzDDu6PGeS9fO4xJo6hghbHySqnXJTj2qc_duaYc53LW55ncI90N8iLutWhW1ZZIYaR2J8bI2KdfZmbf_lIchPRvKEg",
+            category:"ATTRACTIONS",
+            place_name:"JACO",
+            comment:"Feel the breezy wind.",
+            avatar:"",
+            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            user_name:"Jacob"
+        },
+        {
+            image:"https://media-cdn.tripadvisor.com/media/photo-s/08/35/43/60/immaculate-conception.jpg",
+            category:"ATTRACTIONS",
+            place_name:"Katedral Dili",
+            comment:"Nice katedral.",
+            avatar:"",
+            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            user_name:"Thomas"
+        },
+    ]);
 
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
@@ -358,14 +390,14 @@ export default function SearchScreen(props){
             </PanGestureHandler>
             <Animated.FlatList
             keyExtractor={(item,index)=>`searchresult-${index}`}
-            data={[1,2,3,4,5,6,7,8,9,10,11,12,13]}
+            data={list}
             renderItem={({item,index})=>{
                 return (
                     <Pressable onPress={()=>{
                         alert(lastOffsetY);
                     }}>
                         <Surface style={{marginTop:(index===0) ? EStyleSheet.value("60rem"):undefined,elevation:2,marginHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",borderRadius:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("20rem"),height:EStyleSheet.value("170rem")}}>
-                            <ImageLoader resizeMode="cover" source={{uri:"https://www.tracktraceit.com/serialization/images/food%20and%20baverages.jpg"}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></ImageLoader>
+                            <ImageLoader resizeMode="cover" source={{uri:item.image}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></ImageLoader>
                             <LinearGradient
                                 // Background Linear Gradient
                                 colors={['transparent', 'rgba(0,0,0,0.7)']}
@@ -377,8 +409,8 @@ export default function SearchScreen(props){
                             <View style={{flex:1,zIndex:15,justifyContent:"flex-end",paddingVertical:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("10rem")}}>
                                 <View style={{flexDirection:"row",justifyContent:"space-between"}}>
                                     <View>
-                                        <Text style={{color:"white",fontSize:EStyleSheet.value("13rem"),fontFamily:"QuicksandMedium"}}>Food & Bevereges</Text>
-                                        <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem")}}>Rivera Forliona</Text>
+                                        <Text style={{color:"white",fontSize:EStyleSheet.value("13rem"),fontFamily:"QuicksandMedium"}}>{item.category}</Text>
+                                        <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem")}}>{item.place_name}</Text>
                                     </View>
                                     <View style={{justifyContent:"flex-end"}}>
                                         <View style={{flexDirection:'row'}}>

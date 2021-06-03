@@ -72,7 +72,7 @@ export default function DetailWhatsNew(props){
                                 <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
                                 <View style={{paddingHorizontal:EStyleSheet.value("15rem"),zIndex:11,paddingVertical:EStyleSheet.value("15rem")}}>
                                     <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium"}}>HOTEL DEALS</Text>
-                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W TIMOR LESTE US$200 CREDIT WITH 2 NIGHT STAY</Text>
                                 </View>
                             </Surface>
                          </Pressable>
@@ -115,7 +115,7 @@ export default function DetailWhatsNew(props){
                                 <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
                                 <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
                                     <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>HOTEL DEALS</Text>
-                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>W SINGAPORE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>W TIMOR LESTE US$200 CREDIT WITH 2 NIGHT STAY</Text>
                                 </View>
                            </Surface>
                        )

@@ -55,39 +55,32 @@ export default function MyTripScreen(props){
                 setFavourite([
                     {
                         category:"Accomodation",
-                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
-                        address:"1 Fullerton Square Singapore",
+                        place_name:"Gunung Ramelau",
+                        address:"1 Dili Road Timor Leste",
                         postal_code:"049178",
-                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
                     },
                     {
                         category:"Accomodation",
-                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
-                        address:"1 Fullerton Square Singapore",
+                        place_name:"Gunung Ramelau",
+                        address:"1 Dili Road Timor Leste",
                         postal_code:"049178",
-                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
                     },
                     {
                         category:"Accomodation",
-                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
-                        address:"1 Fullerton Square Singapore",
+                        place_name:"Gunung Ramelau",
+                        address:"1 Dili Road Timor Leste",
                         postal_code:"049178",
-                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
                     },
                     {
                         category:"Accomodation",
-                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
-                        address:"1 Fullerton Square Singapore",
+                        place_name:"Gunung Ramelau",
+                        address:"1 Dili Road Timor Leste",
                         postal_code:"049178",
-                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
+                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
                     },
-                    {
-                        category:"Accomodation",
-                        place_name:"The Fullerton Hotel Singapore: Staycation Package",
-                        address:"1 Fullerton Square Singapore",
-                        postal_code:"049178",
-                        preview:"https://cdn-2.tstatic.net/travel/foto/bank/images/buckingham-palace_20170330_134327.jpg"
-                    }
                 ])
             },500)
         }
