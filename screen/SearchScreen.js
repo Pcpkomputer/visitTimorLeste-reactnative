@@ -10,12 +10,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign, Feather } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
+import {ip} from '../utils/env';
+
 import ImageLoader from '../components/ImageLoader';
 
 
 export default function SearchScreen(props){
 
-    const translateY = useRef(new Animated.Value(0)).current;
+    const translateY = useRef(new Animated.Value(-220)).current;
       
     let shadow = {
         shadowColor: "black",
@@ -23,6 +25,27 @@ export default function SearchScreen(props){
         shadowRadius: 6,
         shadowOpacity: 0.2,
         elevation: 3,
+    }
+
+    let fetchWhatsIn = async()=>{
+        try {
+            let result = await fetch(`${ip}/api/tours`);
+            let json = await result.json();
+            if(json.success){
+              let preprocessed = json.data.map((item,index)=>{
+                  return {
+                      ...item,
+                      image:`${ip}/static/image/tours/${item.image}`,
+                      category:item.category_name.toUpperCase(),
+                      place_name:item.name
+                  }
+              });
+              setList(preprocessed);
+            
+            }
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
     let [draggableToDown, setDraggableToDown] = useState(false);
@@ -38,9 +61,12 @@ export default function SearchScreen(props){
 
 
     let [selectedCategory, setSelectedCategory] = useState([
-        "Promotions"
     ]);
+    
 
+    useEffect(()=>{
+        fetchWhatsIn();
+    },[])
     
     let [list, setList] = useState([
         {

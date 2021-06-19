@@ -15,6 +15,12 @@ import ImageLoader from '../../components/ImageLoader';
 import HTML from "react-native-render-html";
 
 export default function LocalRecommendationDetail(props){
+
+
+    useEffect(()=>{
+        console.log(props.route.params.item);
+    },[])
+
     return (
         <ScrollView style={{flex:1,backgroundColor:"white"}}>
             <View style={{height:EStyleSheet.value("28rem"),backgroundColor:"white"}}></View>
@@ -40,8 +46,8 @@ export default function LocalRecommendationDetail(props){
 
             <View style={{zIndex:2,marginHorizontal:EStyleSheet.value("25rem"),marginBottom:EStyleSheet.value("20rem")}}>
                 <View style={{backgroundColor:"white",padding:EStyleSheet.value("20rem"),flexDirection:"row",paddingVertical:EStyleSheet.value("15rem"),height:EStyleSheet.value("80rem"),borderTopLeftRadius:EStyleSheet.value("30rem"),borderTopRightRadius:EStyleSheet.value("30rem")}}>
-                    <View style={{backgroundColor:"whitesmoke",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),borderRadius:999}}>
-                    </View>
+                    <ImageBackground source={{uri:props.route.params.item.avatar}} style={{backgroundColor:"whitesmoke",overflow:"hidden",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),borderRadius:999}}>
+                    </ImageBackground>
                     <View style={{justifyContent:"center",alignItems:"center",marginLeft:EStyleSheet.value("10rem")}}>
                         <Text>{props.route.params.item.user_name}</Text>
                     </View>
@@ -63,15 +69,15 @@ export default function LocalRecommendationDetail(props){
                 </View>
             </View>
             <View style={{justifyContent:"center",alignItems:"center",marginBottom:EStyleSheet.value("35rem")}}>
-                <View style={{width:EStyleSheet.value("100rem"),height:EStyleSheet.value("100rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
-                </View>
+                <ImageBackground source={{uri:props.route.params.item.avatar}} style={{overflow:"hidden",width:EStyleSheet.value("100rem"),height:EStyleSheet.value("100rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
+                </ImageBackground>
                 <Text style={{marginTop:EStyleSheet.value("10rem"),fontSize:EStyleSheet.value("17rem"),fontFamily:"HeeboBold",}}>{props.route.params.item.user_name}</Text>
-                <Text style={{marginTop:EStyleSheet.value("3rem")}}>Explorer</Text>
+                <Text style={{marginTop:EStyleSheet.value("3rem")}}>{props.route.params.item.minitype}</Text>
                 <Text style={{textAlign:"center",marginTop:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>
-                I love going on adventures, trying out new things, being in the wilderness, wandering and wondering, wit and wine.
+                    {props.route.params.item.aboutme}
                 </Text>
                 <View style={{marginTop:EStyleSheet.value("15rem"),backgroundColor:"#f5f5f5",borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("8rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                    <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>Get to know her</Text>
+                    <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>Get to know me</Text>
                 </View>
             </View>
         </ScrollView>

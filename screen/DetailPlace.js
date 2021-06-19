@@ -7,8 +7,10 @@ import { Surface} from 'react-native-paper';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Svg, { Path } from "react-native-svg"
-import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
+import { SimpleLineIcons, Ionicons, Entypo, MaterialCommunityIcons, Feather, AntDesign } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
+
+import {ip} from '../utils/env';
 
 import ImageLoader from '../components/ImageLoader';
 
@@ -24,9 +26,44 @@ import {
     UIActivityIndicator,
     WaveIndicator,
   } from 'react-native-indicators';
+import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
 
 
   export default function DetailPlace(props){
+      
+        function tConvert (time) {
+            // Check correct time format and split into components
+            time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        
+            let pmoram = "";
+            
+            if (time.length > 1) { // If time format correct
+            time = time.slice (1);  // Remove full string match value
+            pmoram = +time[0] < 12 ? ' AM' : ' PM';
+            time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+            time[0] = +time[0] % 12 || 12; // Adjust hours
+            }
+
+            let t = time.join('');
+            let [_,jam,menit,detik] = t.match(/(^\d+):(\d+):(\d+)/);
+
+            return `${jam<=9 ? '0'+jam:jam}:${menit} ${pmoram}` // return adjusted time or original string
+        }
+
+        let [detail, setDetail] = useState({});
+
+        let fetchDetailPlace = async(idtours)=>{
+            let request = await fetch(`${ip}/api/getdetailtours/${idtours}`);
+            let json = await request.json();
+            console.log(json);
+            setDetail(json);
+        }
+
+        useEffect(()=>{
+            fetchDetailPlace(props?.route?.params?.item?.id_tours || 1);
+        },[])
+
+        let [dataLoaded, setDataLoaded] = useState(true);
 
         let shadow = {
             shadowColor: "#000",
@@ -56,38 +93,33 @@ import {
         })
 
 
+        let fetchWhatsIn = async()=>{
+            try {
+                let result = await fetch(`${ip}/api/tours`);
+                let json = await result.json();
+                if(json.success){
+                  let preprocessed = json.data.map((item,index)=>{
+                      return {
+                          ...item,
+                          image:`${ip}/static/image/tours/${item.image}`,
+                          category:item.category_name.toUpperCase(),
+                          place_name:item.name
+                      }
+                  });
+                  setWhatsIn(preprocessed.slice(0.5));
+                
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        useEffect(()=>{
+            fetchWhatsIn();
+        },[])
+
     
         let [whatsIn, setWhatsIn] = useState([
-            {
-                image:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg",
-                category:"ATTRACTIONS",
-                place_name:"Gunung Ramelau",
-                comment:"The scenery looks so good.",
-                avatar:"",
-                whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                user_name:"Suzy"
-            },
-            {
-                image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
-                category:"ATTRACTIONS",
-                place_name:"JACO",
-                comment:"Feel the breezy wind.",
-                avatar:"",
-                whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                user_name:"Jacob"
-            },
-            {
-                image:"https://media-cdn.tripadvisor.com/media/photo-s/08/35/43/60/immaculate-conception.jpg",
-                category:"ATTRACTIONS",
-                place_name:"Katedral Dili",
-                comment:"Nice katedral.",
-                avatar:"",
-                whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                user_name:"Thomas"
-            },
     ])
 
       let [detailScheduleOpened, setDetailScheduleOpened] = useState(false);
@@ -109,7 +141,7 @@ import {
           <View style={{flex:1,backgroundColor:"white"}}>
 
             <Animated.View style={{...shadow,transform:[{translateY:iTranslateYTopBar}],backgroundColor:'white',zIndex:100,opacity:iTopBarFade,justifyContent:'center',alignItems:'center',position:'absolute',width:'100%',marginTop:EStyleSheet.value('0rem'),height:EStyleSheet.value('86rem')}}>
-                <Text style={{fontSize:EStyleSheet.value('20rem'),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value('8rem'),marginTop:EStyleSheet.value('33rem')}}>{props.route.params.item.place_name}</Text>
+                <Text style={{fontSize:EStyleSheet.value('20rem'),fontFamily:"HeeboBold",marginBottom:EStyleSheet.value('8rem'),marginTop:EStyleSheet.value('33rem')}}>{props?.route?.params?.item?.place_name || ""}</Text>
             </Animated.View>
 
             <ScrollView
@@ -118,8 +150,8 @@ import {
                       topBarFade.setValue(e.nativeEvent.contentOffset.y);
               }}
             >
-                <View source={{uri:props.route.params.item.image}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}>
-                        <ImageLoader source={{uri:props.route.params.item.image}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}/>
+                <View source={{uri:props?.route?.params?.image || ""}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}>
+                        <ImageLoader source={{uri:props?.route?.params?.image || ""}} style={{backgroundColor:"whitesmoke",position:"absolute",zIndex:1,height:EStyleSheet.value("330rem"),width:"100%"}}/>
                         <LinearGradient
                             // Background Linear Gradient
                             colors={['rgba(0,0,0,0.5)', 'transparent']}
@@ -145,31 +177,53 @@ import {
                 </View>
                 <View style={{zIndex:2,paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <Surface style={{elevation:4,backgroundColor:"white",borderRadius:EStyleSheet.value("15rem"),padding:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
-                        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                            <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>ATTRACTION</Text>
-                            <View style={{flexDirection:"row"}}>
-                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
-                            </View>
-                        </View>
-                        <View style={{marginTop:EStyleSheet.value("8rem")}}>
-                            <Text style={{fontSize:EStyleSheet.value("19rem"),fontFamily:"HeeboBold"}}>{props.route.params.item.place_name}</Text>
-                        </View>
-                        <View style={{marginTop:EStyleSheet.value("5rem")}}>
-                            <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>1 Dili Road Timor Leste 3515</Text>
-                        </View>
-                        <View style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",flexWrap:"wrap"}}>
-                            
-                                <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
-                                    <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
-                                        <Ionicons name="ios-heart-outline" size={24} color="black" />
-                                    </Surface>
-                                    <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
+                            <View>
+                                <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+                                        <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>{props?.route?.params?.category || ""}</Text>
+                                        <View style={{flexDirection:"row"}}>
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                        </View>
+                                    </View>
+                                    <View style={{marginTop:EStyleSheet.value("8rem")}}>
+                                        <Text style={{fontSize:EStyleSheet.value("19rem"),fontFamily:"HeeboBold"}}>{props?.route?.params?.name || ""}</Text>
+                                    </View>
+                                    <View style={{marginTop:EStyleSheet.value("5rem")}}>
+                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>{detail?.tours?.address || ""}</Text>
+                                    </View>
+                                    <View style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",flexWrap:"wrap"}}>
+                                        
+                                            <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
+                                                    <Ionicons name="ios-heart-outline" size={24} color="black" />
+                                                </Surface>
+                                                <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
+                                            </View>
+
+                                            {
+                                                (detail?.tours?.phone && detail.tours.phone.length>0) &&
+                                                <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                    <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
+                                                        <Feather name="phone" size={24} color="black" />
+                                                    </Surface>
+                                                    <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Phone</Text>
+                                                </View>
+                                            }
+
+                                          {
+                                              (detail?.tours?.website && detail.tours.website.length>0) &&
+                                              <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
+                                                    <MaterialCommunityIcons name="web" size={24} color="black" />
+                                                </Surface>
+                                                <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
+                                            </View>
+                                          }
+                                
                                 </View>
-                    
-                        </View>
+                            </View>
                     </Surface>
                 </View>
                 <View style={{paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("20rem")}}>
@@ -181,48 +235,28 @@ import {
                             setDetailScheduleOpened(false);
                         }}>
                         
-                        <Surface style={{elevation:1,backgroundColor:"white",flexDirection:"row",borderRadius:EStyleSheet.value("15rem"),paddingVertical:EStyleSheet.value("12rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
-                            <View style={{flex:1,marginTop:EStyleSheet.value("3rem")}}>
-                                <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
-                                    <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
-                                    </View>
-                                    <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
-                                    <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
-                                    </View>
-                                    <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
-                                    <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
-                                    </View>
-                                    <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
-                                    <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
-                                    </View>
-                                    <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
-                                    </View>
-                                </View>
-                                <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
-                                    <View style={{flex:1}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
-                                    </View>
-                                    <View style={{flex:2}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
-                                    </View>
-                                </View>
+                        <Surface style={{elevation:1,backgroundColor:"white",flexDirection:"column",borderRadius:EStyleSheet.value("15rem"),paddingVertical:EStyleSheet.value("12rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
+                        {
+                            (detail?.schedule!==null && detail?.schedule?.length>0 || false) ?
+                            <View style={{flexDirection:"row"}}>
+                                <View style={{flex:1,marginTop:EStyleSheet.value("3rem")}}>
+                                    
+                                {
+                                    detail.schedule.map((item,index)=>{
+                                        return (
+                                            <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
+                                                <View style={{flex:1}}>
+                                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>{item.days}</Text>
+                                                </View>
+                                                <View style={{flex:2}}>
+                                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>{tConvert(item.from_time)} - {tConvert(item.to_time)}</Text>
+                                                </View>
+                                            </View>
+                                        )
+                                    })
+                                }
+
+                                
                                 <View style={{marginTop:EStyleSheet.value("8rem")}}>
                                     <Text style={{fontSize:EStyleSheet.value("12rem"),lineHeight:EStyleSheet.value("20rem"),fontFamily:"QuicksandMedium"}}>Opening hours may vary due to extraordinary circumstances.</Text>
                                 </View>
@@ -234,6 +268,10 @@ import {
                                     <Ionicons name="chevron-up" size={24} color="black" />
                                 </Pressable>
                             </View>
+                        </View>
+                        :
+                        null
+                        }
                         </Surface>
                         </Pressable>
                         :
@@ -241,14 +279,16 @@ import {
                     onPress={()=>{
                         setDetailScheduleOpened(true);
                     }}>
-                    <Surface style={{elevation:1,backgroundColor:"white",flexDirection:"row",borderRadius:EStyleSheet.value("15rem"),paddingVertical:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
+                    {
+                        (detail?.schedule!==null && detail?.schedule?.length>0 || false) ?
+                        <Surface style={{elevation:1,backgroundColor:"white",flexDirection:"row",borderRadius:EStyleSheet.value("15rem"),paddingVertical:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
                         <View style={{flex:1,justifyContent:"center",marginTop:EStyleSheet.value("5rem")}}>
                             <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("5rem")}}>
                                 <View style={{flex:1}}>
-                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Sunday</Text>
+                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>{detail.schedule[0].days}</Text>
                                 </View>
                                 <View style={{flex:2}}>
-                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>12:00 AM - 11:59 PM</Text>
+                                    <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>{tConvert(detail.schedule[0].from_time)} - {tConvert(detail.schedule[0].to_time)}</Text>
                                 </View>
                             </View>
                         </View>
@@ -262,98 +302,122 @@ import {
                             </Pressable>
                         </View>
                     </Surface>
+                    :
+                    null
+                    }
                     </Pressable>
                     }
-                    <View onLayout={(e)=>{
-                        if(!firstLoaded){            
-                             setActualDescriptionHeight(e.nativeEvent.layout.height);
-                             setFirstLoaded(true);
-                        }
-                       
-                    }} style={{marginTop:EStyleSheet.value("20rem"),paddingBottom:EStyleSheet.value("10rem")}}>
-                        <Pressable 
-                        onPress={()=>{
-                            if(!descriptionExpanded){
-                                setDescriptionExpanded(true);
-                                Animated.spring(descHeight,{
-                                    toValue:actualDescriptionHeight,
-                                    duration:10000,
-                                    useNativeDriver:false
-                                }).start()
+                    {
+                        (dataLoaded) ?
+                        <View onLayout={(e)=>{
+                            if(!firstLoaded){            
+                                 setActualDescriptionHeight(e.nativeEvent.layout.height);
+                                 setFirstLoaded(true);
                             }
-                            else{
-                                setDescriptionExpanded(false);
-                                Animated.spring(descHeight,{
-                                    toValue:actualDescriptionHeight/2,
-                                    duration:10000,
-                                    useNativeDriver:false
-                                }).start()
-                            }
-                            
-                        }}
-                        style={{position:"absolute",right:EStyleSheet.value("15rem"),bottom:EStyleSheet.value("12rem"),zIndex:100,paddingHorizontal:EStyleSheet.value("8rem"),paddingVertical:EStyleSheet.value("3rem")}}>
-                            <Text style={{zIndex:11,textShadowColor:"white",fontSize:EStyleSheet.value("12rem"),textShadowRadius:5,color:"#d1222c"}}>{descriptionExpanded ? "Less":"More"}</Text>
-                            <LinearGradient
-                                // Background Linear Gradient
-                                colors={[ 'rgba(255,255,255,0.5)','white','white','white']}
-                                style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
-                            />
-                        </Pressable>
-                        <Animated.View style={{overflow:"hidden",height:(firstLoaded) ? descHeight:null}}>
-                            <Text style={{lineHeight:EStyleSheet.value("20rem"),textAlign:"auto",fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor iet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </Text>
-                        </Animated.View>
-                        <View style={{position:"absolute",bottom:0,height:EStyleSheet.value("30rem"),width:"100%"}}>
-                            <LinearGradient
-                                // Background Linear Gradient
-                                colors={[ 'transparent','white','white','white','white','white']}
-                                style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
-                            />
+                           
+                        }} style={{marginTop:EStyleSheet.value("20rem"),paddingBottom:EStyleSheet.value("10rem")}}>
+                            <Pressable 
+                            onPress={()=>{
+                                if(!descriptionExpanded){
+                                    setDescriptionExpanded(true);
+                                    Animated.spring(descHeight,{
+                                        toValue:actualDescriptionHeight,
+                                        duration:10000,
+                                        useNativeDriver:false
+                                    }).start()
+                                }
+                                else{
+                                    setDescriptionExpanded(false);
+                                    Animated.spring(descHeight,{
+                                        toValue:actualDescriptionHeight/2,
+                                        duration:10000,
+                                        useNativeDriver:false
+                                    }).start()
+                                }
+                                
+                            }}
+                            style={{position:"absolute",right:EStyleSheet.value("15rem"),bottom:EStyleSheet.value("12rem"),zIndex:100,paddingHorizontal:EStyleSheet.value("8rem"),paddingVertical:EStyleSheet.value("3rem")}}>
+                                {
+                                    (descHeight>150) &&
+                                    <Text style={{zIndex:11,textShadowColor:"white",fontSize:EStyleSheet.value("12rem"),textShadowRadius:5,color:"#d1222c"}}>{descriptionExpanded ? "Less":"More"}</Text>
+                                }
+                                <LinearGradient
+                                    // Background Linear Gradient
+                                    colors={[ 'rgba(255,255,255,0.5)','white','white','white']}
+                                    style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
+                                />
+                            </Pressable>
+                            <Animated.View style={{overflow:"hidden",height:(firstLoaded) ? (descHeight>150) ? descHeight:null:null}}>
+                                <Text style={{lineHeight:EStyleSheet.value("20rem"),textAlign:"auto",fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>
+                                    {
+                                        detail?.tours?.description || ""
+                                    }
+                                </Text>
+                            </Animated.View>
+                            <View style={{position:"absolute",bottom:0,height:EStyleSheet.value("30rem"),width:"100%"}}>
+                               {
+                                   (descHeight>150) &&
+                                   <LinearGradient
+                                   // Background Linear Gradient
+                                   colors={[ 'transparent','white','white','white','white','white']}
+                                   style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
+                                    />
+                               }
+                            </View>
                         </View>
-                    </View>
+                        :
+                        null
+                    }
                 </View>
 
-                <View style={{marginTop:EStyleSheet.value("15rem"),marginBottom:EStyleSheet.value("0rem")}}>
+                {/* <View style={{marginTop:EStyleSheet.value("15rem"),marginBottom:EStyleSheet.value("0rem")}}>
                     <View style={{paddingHorizontal:EStyleSheet.value("20rem")}}>
                         <Text style={{fontFamily:"HeeboBold"}}>Reviews</Text>
                     </View>
-                    <View style={{marginTop:EStyleSheet.value("10rem")}}>
-                        <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        contentContainerStyle={{paddingVertical:EStyleSheet.value("5rem")}}
-                        keyExtractor={(item,index)=>`reviews-${index}`}
-                        data={[1,2,3,4,5]}
-                        renderItem={({item,index})=>{
-                            return (
-                                <Surface style={{marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,padding:EStyleSheet.value("15rem"),elevation:3,borderRadius:EStyleSheet.value("10rem"),width:EStyleSheet.value("280rem"),backgroundColor:"white",marginRight:EStyleSheet.value("15rem"),paddingBottom:EStyleSheet.value("20rem")}}>
-                                    <View style={{flexDirection:"row"}}>
-                                        <View style={{backgroundColor:"whitesmoke",width:EStyleSheet.value("50rem"),borderRadius:999,height:EStyleSheet.value("50rem")}}>
-                                        </View>
-                                        <View style={{flex:1,justifyContent:"flex-end",paddingHorizontal:EStyleSheet.value("10rem")}}>
-                                            <Text style={{fontWeight:"bold"}}>LL Low</Text>
-                                        </View>
-                                        <View style={{flexDirection:"row"}}>
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
-                                        </View>
-                                    </View>
-                                    <View style={{marginTop:EStyleSheet.value("10rem")}}>
-                                        <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Lorem ipsum</Text>
-                                    </View>
-                                </Surface>
-                            )
-                        }}
-                        />
-                    </View>
-                </View>
+                   {
+                       (dataLoaded) ?
+                       <View style={{marginTop:EStyleSheet.value("10rem")}}>
+                       <FlatList
+                       showsHorizontalScrollIndicator={false}
+                       horizontal={true}
+                       contentContainerStyle={{paddingVertical:EStyleSheet.value("5rem")}}
+                       keyExtractor={(item,index)=>`reviews-${index}`}
+                       data={[1,2,3,4,5]}
+                       renderItem={({item,index})=>{
+                           return (
+                               <Surface style={{marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,padding:EStyleSheet.value("15rem"),elevation:3,borderRadius:EStyleSheet.value("10rem"),width:EStyleSheet.value("280rem"),backgroundColor:"white",marginRight:EStyleSheet.value("15rem"),paddingBottom:EStyleSheet.value("20rem")}}>
+                                   <View style={{flexDirection:"row"}}>
+                                       <View style={{backgroundColor:"whitesmoke",width:EStyleSheet.value("50rem"),borderRadius:999,height:EStyleSheet.value("50rem")}}>
+                                       </View>
+                                       <View style={{flex:1,justifyContent:"flex-end",paddingHorizontal:EStyleSheet.value("10rem")}}>
+                                           <Text style={{fontWeight:"bold"}}>LL Low</Text>
+                                       </View>
+                                       <View style={{flexDirection:"row"}}>
+                                           <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                           <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                           <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                           <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                       </View>
+                                   </View>
+                                   <View style={{marginTop:EStyleSheet.value("10rem")}}>
+                                       <Text style={{fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>Lorem ipsum</Text>
+                                   </View>
+                               </Surface>
+                           )
+                       }}
+                       />
+                   </View>
+                   :
+                   null
+                   }
+                </View> */}
                 <View style={{marginTop:EStyleSheet.value("15rem"),marginBottom:EStyleSheet.value("20rem")}}>
                     <View style={{paddingHorizontal:EStyleSheet.value("20rem")}}>
                         <Text style={{fontFamily:"HeeboBold"}}>What's in Timor Leste</Text>
                     </View>
-                    <View style={{marginTop:EStyleSheet.value("15rem")}}>
+                    {
+                        (dataLoaded) ?
+                        <View style={{marginTop:EStyleSheet.value("15rem")}}>
                         <FlatList
                             showsHorizontalScrollIndicator={false}
                             keyExtractor={(item,index)=>{`Whatisnew-${index}`}}
@@ -384,6 +448,9 @@ import {
                             }}
                             />
                     </View>
+                    :
+                    null
+                    }
                 </View>
             </ScrollView>
           </View>

@@ -24,16 +24,26 @@ import {
 
   import ImageLoader from '../../components/ImageLoader';
 
+import {ip} from '../../utils/env';
+
 export default function DetailWhatsNew(props){
+
+    let [promotions, setPromotions] = useState([]);
 
     let [promoLoaded, setPromoLoaded] = useState(false);
     let [otherLoaded, setOtherLoaded] = useState(false);
 
+    let fetchDetailPromotions = async()=>{
+        let request = await fetch(`${ip}/api/getpromotions/${props.route.params.item.id_category}`);
+        let json = await request.json();
+        setPromotions(json);
+
+        setPromoLoaded(true);
+        setOtherLoaded(true);
+    }
+
     useEffect(()=>{
-        setTimeout(()=>{
-            setPromoLoaded(true);
-            setOtherLoaded(true);
-        },500)
+       fetchDetailPromotions();
     },[])
 
     return (
@@ -42,11 +52,11 @@ export default function DetailWhatsNew(props){
             </View>
             <View style={{borderBottomWidth:0.6,borderColor:"grey",marginHorizontal:EStyleSheet.value("20rem")}}>
                 <Text style={{fontSize:EStyleSheet.value('13rem'),zIndex:11,color:'black',marginTop:EStyleSheet.value('10rem'),fontFamily:"QuicksandMedium"}}>TIMO<Text style={{color:'#f23545'}}>REDISCOVERS</Text></Text>
-                <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),fontSize:EStyleSheet.value("22rem")}}>ACCOMODATION PROMOTIONS</Text>
+                <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),fontSize:EStyleSheet.value("22rem")}}>{props.route.params.item.category_name.toUpperCase()} PROMOTIONS</Text>
                 <Text style={{fontFamily:"HeeboBold",marginBottom:EStyleSheet.value("20rem"),fontSize:EStyleSheet.value("17rem"),color:"#f23545",marginTop:EStyleSheet.value("10rem")}}>Eat. Shop. Play. Stay</Text>
             </View>
             <View style={{marginTop:EStyleSheet.value("15rem"),marginHorizontal:EStyleSheet.value("20rem")}}>
-                <Text style={{lineHeight:EStyleSheet.value("25rem"),fontSize:EStyleSheet.value("14rem"),fontFamily:"QuicksandMedium"}}>Spend quality time with the people you love with these irresistible bundle delas for staycations.</Text>
+                <Text style={{lineHeight:EStyleSheet.value("25rem"),fontSize:EStyleSheet.value("14rem"),fontFamily:"QuicksandMedium"}}>Spend quality time with the people you love with these irresistible bundle deals for staycations.</Text>
             </View>
             <View style={{marginTop:EStyleSheet.value("20rem")}}>
                 {
@@ -54,7 +64,7 @@ export default function DetailWhatsNew(props){
                     <FlatList
                     keyExtractor={(item,index)=>`promotions-${index}`}
                     horizontal={true}
-                    data={[1,2,3,4,5]}
+                    data={promotions}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({item,index})=>{
                         return (
@@ -69,10 +79,10 @@ export default function DetailWhatsNew(props){
                                     colors={['rgba(0,0,0,0.7)', 'transparent']}
                                     style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
                                 />
-                                <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
+                                <ImageLoader source={{uri:`${ip}/static/image/tours/${item.image}`}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
                                 <View style={{paddingHorizontal:EStyleSheet.value("15rem"),zIndex:11,paddingVertical:EStyleSheet.value("15rem")}}>
-                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium"}}>HOTEL DEALS</Text>
-                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>W TIMOR LESTE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium"}}>{props.route.params.item.category_name.toUpperCase()} DEALS</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("17rem")}}>{item.promotions_name}</Text>
                                 </View>
                             </Surface>
                          </Pressable>
@@ -86,7 +96,7 @@ export default function DetailWhatsNew(props){
                 }
             </View>
             <View style={{marginTop:EStyleSheet.value("25rem"),flexDirection:"row",alignItems:"center",justifyContent:"space-between",paddingHorizontal:EStyleSheet.value("20rem")}}>
-               <Text style={{fontSize:EStyleSheet.value("15rem"),fontFamily:"HeeboBold"}}>All Accomodation Promotion</Text>
+               <Text style={{fontSize:EStyleSheet.value("15rem"),fontFamily:"HeeboBold"}}>All {props.route.params.item.category_name} Promotions</Text>
                <TouchableOpacity
                activeOpacity={0.7}
                onPress={()=>{
@@ -102,7 +112,7 @@ export default function DetailWhatsNew(props){
                    <FlatList
                    keyExtractor={(item,index)=>`allaccomodation-${index}`}
                    horizontal={true}
-                   data={[1,2,3,4,5]}
+                   data={promotions}
                    showsHorizontalScrollIndicator={false}
                    renderItem={({item,index})=>{
                        return (
@@ -112,10 +122,10 @@ export default function DetailWhatsNew(props){
                                     colors={['rgba(0,0,0,0.6)', 'transparent']}
                                     style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
                                 />
-                                <ImageLoader source={{uri:"https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8dmlsbGF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
+                                <ImageLoader source={{uri:`${ip}/static/image/tours/${item.image}`}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
                                 <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
-                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>HOTEL DEALS</Text>
-                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>W TIMOR LESTE US$200 CREDIT WITH 2 NIGHT STAY</Text>
+                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>{props.route.params.item.category_name.toUpperCase()}</Text>
+                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>{item.name}</Text>
                                 </View>
                            </Surface>
                        )

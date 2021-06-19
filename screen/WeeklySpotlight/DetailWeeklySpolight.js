@@ -14,45 +14,17 @@ import HTML from "react-native-render-html";
 export default function DetailWeeklySpotlight(props){
 
     const htmlContent = `
-    <p style="text-align:justify">This HTML snippet is now rendered with native components !
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    </p>
+  
 `;
 
     const htmlContent2 = `
-    <p style="text-align:justify">This HTML snippet is now rendered with native components !
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    </p>
-    <p style="text-align:justify">This HTML snippet is now rendered with native components !
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    </p>
-    <p style="text-align:justify">This HTML snippet is now rendered with native components !
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    </p>
-    <p style="text-align:justify">This HTML snippet is now rendered with native components !
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    This HTML snippet is now rendered with native components
-    </p>
+  
     `;
+
+    let handleDate = (date)=>{
+        let d = new Date(date);
+        return d.toDateString();
+    }
 
     const contentWidth = useWindowDimensions().width;
 
@@ -69,7 +41,7 @@ export default function DetailWeeklySpotlight(props){
                 />
             </ImageBackground>
             <View style={{borderTopRightRadius:EStyleSheet.value("20rem"),borderColor:"grey",borderBottomWidth:0,borderTopLeftRadius:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("-28rem"),paddingHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",paddingVertical:EStyleSheet.value("25rem")}}>
-                <Text style={{color:"#f23545",fontFamily:"QuicksandBold"}}>{props.route.params.item.dateposted}</Text>
+                <Text style={{color:"#f23545",fontFamily:"QuicksandBold"}}>{handleDate(props.route.params.item.dateposted)}</Text>
                 <HTML 
                 tagsStyles={{
                     p: { color:'black',paddingTop:EStyleSheet.value("15rem") }

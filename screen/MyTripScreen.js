@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState, useRef} from 'react';
-import { StyleSheet, Animated, Text, View, Dimensions,ScrollView, Pressable, ImageBackground, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, AsyncStorage, Animated, Text, View, Dimensions,ScrollView, Pressable, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface} from 'react-native-paper';
@@ -50,39 +50,47 @@ export default function MyTripScreen(props){
 
     useEffect(()=>{
         if(isFocused){
-            console.log("123");
-            setTimeout(()=>{
-                setFavourite([
-                    {
-                        category:"Accomodation",
-                        place_name:"Gunung Ramelau",
-                        address:"1 Dili Road Timor Leste",
-                        postal_code:"049178",
-                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
-                    },
-                    {
-                        category:"Accomodation",
-                        place_name:"Gunung Ramelau",
-                        address:"1 Dili Road Timor Leste",
-                        postal_code:"049178",
-                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
-                    },
-                    {
-                        category:"Accomodation",
-                        place_name:"Gunung Ramelau",
-                        address:"1 Dili Road Timor Leste",
-                        postal_code:"049178",
-                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
-                    },
-                    {
-                        category:"Accomodation",
-                        place_name:"Gunung Ramelau",
-                        address:"1 Dili Road Timor Leste",
-                        postal_code:"049178",
-                        preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
-                    },
-                ])
-            },500)
+            AsyncStorage.getItem("favourite",(err,value)=>{
+                if(value===null){
+                    setFavourite([]);
+                }
+                else{
+                    let parsed = JSON.parse(value);
+                    setFavourite(parsed);
+                }
+            })
+            // setTimeout(()=>{
+            //     setFavourite([
+            //         {
+            //             category:"Accomodation",
+            //             place_name:"Gunung Ramelau",
+            //             address:"1 Dili Road Timor Leste",
+            //             postal_code:"049178",
+            //             preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
+            //         },
+            //         {
+            //             category:"Accomodation",
+            //             place_name:"Gunung Ramelau",
+            //             address:"1 Dili Road Timor Leste",
+            //             postal_code:"049178",
+            //             preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
+            //         },
+            //         {
+            //             category:"Accomodation",
+            //             place_name:"Gunung Ramelau",
+            //             address:"1 Dili Road Timor Leste",
+            //             postal_code:"049178",
+            //             preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
+            //         },
+            //         {
+            //             category:"Accomodation",
+            //             place_name:"Gunung Ramelau",
+            //             address:"1 Dili Road Timor Leste",
+            //             postal_code:"049178",
+            //             preview:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg"
+            //         },
+            //     ])
+            // },500)
         }
       
     },[isFocused])
@@ -97,9 +105,14 @@ export default function MyTripScreen(props){
                 </View>
                 <View style={{flex:1,justifyContent:'center',paddingBottom:EStyleSheet.value("80rem"),alignItems:'center',marginHorizontal:EStyleSheet.value("20rem")}}>
                     <Text style={{fontSize:EStyleSheet.value("20rem"),color:"grey"}}>Your Favourites List is Empty</Text>
-                    <View style={{backgroundColor:"#d1222c",marginTop:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("10rem"),borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("5rem")}}>
+                    <TouchableOpacity 
+                    activeOpacity={0.7}
+                    onPress={()=>{
+                        props.navigation.navigate("Search");
+                    }}
+                    style={{backgroundColor:"#d1222c",marginTop:EStyleSheet.value("10rem"),paddingHorizontal:EStyleSheet.value("10rem"),borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("5rem")}}>
                         <Text style={{color:"white"}}>Start Exploring</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
