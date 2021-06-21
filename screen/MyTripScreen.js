@@ -10,6 +10,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
+import {ip} from '../utils/env';
+
 import ImageLoader from '../components/ImageLoader';
 
 export default function MyTripScreen(props){
@@ -45,7 +47,6 @@ export default function MyTripScreen(props){
 
 
     let [favourite, setFavourite] = useState([
-      
     ]);
 
     useEffect(()=>{
@@ -160,7 +161,7 @@ export default function MyTripScreen(props){
                                 return (
                                     <Pressable 
                                     onPress={()=>{
-                                        props.navigation.navigate("DetailPlace");
+                                        props.navigation.navigate("DetailPlace",{item:item,image:`${ip}/static/image/tours/${item.preview}`,category:item.category,name:item.place_name});
                                     }}
                                     >
                                         <Surface style={{elevation:3,marginBottom:EStyleSheet.value("20rem"),overflow:"hidden",flexDirection:"row",backgroundColor:"white",borderRadius:EStyleSheet.value('5rem')}}>
@@ -168,9 +169,9 @@ export default function MyTripScreen(props){
                                                 <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center',height:EStyleSheet.value("20rem")}}>
                                                     <Text style={{flex:2,color:"#f8323a",fontSize:EStyleSheet.value('10rem'),fontFamily:"QuicksandBold"}}>{item.category.toUpperCase()}</Text>
                                                     <View style={{flexDirection:'row'}}>
-                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                                        <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                                         <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                                     </View>
                                                 </View>
@@ -178,14 +179,30 @@ export default function MyTripScreen(props){
                                                     <Text style={{fontFamily:"HeeboBold"}}>{item.place_name}</Text>
                                                 </View>
                                                 <View style={{marginTop:EStyleSheet.value('3rem'),marginBottom:EStyleSheet.value('20rem')}}>
-                                                    <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('10rem'),color:"grey"}}>{item.address} {item.postal_code}</Text>
+                                                    <Text style={{fontFamily:"HeeboBold",fontSize:EStyleSheet.value('10rem'),color:"grey"}}>{item.address}</Text>
                                                 </View>
                                             </View>
                                             <View source={{uri:item.preview}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}>
-                                                <ImageLoader source={{uri:item.preview}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}/>
-                                                <View style={{position:"absolute",zIndex:100,right:EStyleSheet.value('10rem'),top:EStyleSheet.value('10rem')}}>
+                                                <ImageLoader source={{uri:`${ip}/static/image/tours/${item.preview}`}} style={{width:EStyleSheet.value('130rem'),backgroundColor:"whitesmoke"}}/>
+                                                <Pressable 
+                                                onPress={()=>{
+                                                    AsyncStorage.getItem("favourite",(err,value)=>{
+                                                        let parsed = JSON.parse(value);
+                                                        let filtered = parsed.filter((item_,index)=>{
+                                                            return item_.id_tours!==item.id_tours;
+                                                        })
+                                                        AsyncStorage.setItem("favourite",JSON.stringify(filtered));
+                                                    });
+
+                                                    setFavourite((item_,index)=>{
+                                                        return item_.filter((el,index)=>{
+                                                            return el.id_tours!==item.id_tours;
+                                                        })
+                                                    })
+                                                }}
+                                                style={{position:"absolute",zIndex:100,right:EStyleSheet.value('10rem'),top:EStyleSheet.value('10rem')}}>
                                                     <AntDesign name="heart" size={24} color="#d1222c" />
-                                                </View>
+                                                </Pressable>
                                             </View>
                                         </Surface>
                                     </Pressable>

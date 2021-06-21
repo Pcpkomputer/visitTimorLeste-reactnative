@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useRef, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, FlatList, Animated, Dimensions, ImageBackground, Keyboard, Pressable, useWindowDimensions, EventSubscriptionVendor } from 'react-native';
+import { StyleSheet, Text, AsyncStorage, View, Image, FlatList, Animated, Dimensions, ImageBackground, Keyboard, Pressable, useWindowDimensions, EventSubscriptionVendor } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { Surface} from 'react-native-paper';
@@ -25,20 +25,42 @@ import {
   } from 'react-native-indicators';
 
   import {ip} from '../../utils/env';
-
+  
   export default function PrecinctGuidesDetail(props){
 
       let [tours,setTours] = useState([]);
 
+      let [favourite, setFavourite] = useState([]);
+
+     
       let fetchItemTours = async()=>{
-          let request = await fetch(`${ip}/api/gettoursprecinct/${props.route.params.item.id_precinct}`);
-          let json = await request.json();
-          console.log(json);
-          setTours(json);
+            let listfavourite = [];
+            let favourite = await AsyncStorage.getItem("favourite");
+            if(favourite!==null){
+                let parsed = JSON.parse(favourite);
+                listfavourite = parsed;
+                setFavourite(parsed);
+            }
+            else{
+                listfavourite = [];
+            }
+            let request = await fetch(`${ip}/api/gettoursprecinct/${props.route.params.item.id_precinct}`);
+            let json = await request.json();
+
+            let idtoursfavourite = listfavourite.map((item,_)=>{
+                return item.id_tours;
+            })
+
+            let json_ = json.map((item,index)=>{
+                return {
+                    ...item,
+                    favourite:(idtoursfavourite.includes(item.id_tours)) ? true:false
+                }
+            })
+            setTours(json_);
       }
 
       useEffect(()=>{
-        console.log(props.route.params.item);
         fetchItemTours();
       },[])
 
@@ -131,7 +153,8 @@ import {
                             return (
                                 <Pressable
                                 onPress={()=>{
-                                    props.navigation.navigate("DetailPlace");
+                                   console.log(item);
+                                   props.navigation.navigate("DetailPlace",{item:item,image:`${ip}/static/image/tours/${item.image}`,category:item.category_name,name:item.name});
                                 }}
                                 >
                                     <View style={{borderBottomColor:"grey",borderBottomWidth:0.5,flexDirection:"row",paddingVertical:EStyleSheet.value("10rem")}}>
@@ -146,9 +169,80 @@ import {
                                                     <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                             </View>
                                         </View>
-                                        <View style={{width:EStyleSheet.value("50rem"),justifyContent:"center",alignItems:"center"}}>
-                                            <Ionicons name="ios-heart-outline" size={EStyleSheet.value("27rem")} color="black" />
-                                        </View>
+                                        {
+                                            (item.favourite) ?
+                                            <Pressable 
+                                            onPress={()=>{
+
+                                                AsyncStorage.getItem("favourite",(err,value)=>{
+                                                    let parsed = JSON.parse(value);
+                                                    let filtered = parsed.filter((item_,index)=>{
+                                                        return item_.id_tours!==item.id_tours;
+                                                    })
+                                                    AsyncStorage.setItem("favourite",JSON.stringify(filtered));
+                                                })
+
+                                                setTours((prev)=>{
+                                                    return prev.map((item,i)=>{
+                                                        if(index===i){
+                                                            return {
+                                                                ...item,
+                                                                favourite:false
+                                                            }
+                                                        }
+                                                        return item;
+                                                    })
+                                                })
+                                            }}
+                                            style={{width:EStyleSheet.value("50rem"),justifyContent:"center",alignItems:"center"}}>
+                                                <Ionicons name="ios-heart" size={EStyleSheet.value("27rem")} color="red" />
+                                            </Pressable>
+                                            :
+                                            <Pressable 
+                                            onPress={()=>{
+                               
+                                                let payload = {
+                                                    id_tours:item.id_tours,
+                                                    category:item.category_name,
+                                                    place_name:item.name,
+                                                    address:item.address,
+                                                    postal_code:"-",
+                                                    preview:item.image
+                                                };
+                                                
+                                                AsyncStorage.getItem("favourite",(err,value)=>{
+                                                    if(value===null){
+                                                        AsyncStorage.setItem("favourite",JSON.stringify([
+                                                            payload
+                                                        ]))
+                                                    }  
+                                                    else{
+                                                        let parsed = JSON.parse(value);
+                                                        AsyncStorage.setItem("favourite",JSON.stringify([
+                                                            payload,
+                                                            ...parsed
+                                                        ]));
+                                                    }
+                                                })
+
+                                                setTours((prev)=>{
+                                                    return prev.map((item,i)=>{
+                                                        if(index===i){
+                                                            return {
+                                                                ...item,
+                                                                favourite:true
+                                                            }
+                                                        }
+                                                        return item;
+                                                    })
+                                                })
+    
+    
+                                            }}
+                                            style={{width:EStyleSheet.value("50rem"),justifyContent:"center",alignItems:"center"}}>
+                                                <Ionicons name="ios-heart-outline" size={EStyleSheet.value("27rem")} color="black" />
+                                            </Pressable>
+                                        }
                                     </View>
                                 </Pressable>
                             )

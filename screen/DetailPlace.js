@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useRef, useEffect, useMemo} from 'react';
-import { StyleSheet, Text, View, Image, FlatList, Dimensions,Animated, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions } from 'react-native';
+import { StyleSheet, Linking, TouchableOpacity, Text, View, Image, FlatList, Dimensions,Animated, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions, AsyncStorage } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { Surface} from 'react-native-paper';
@@ -59,8 +59,19 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
             setDetail(json);
         }
 
+        let [listFavourite, setListFavourite] = useState([]);
+        let fetchFavourite = async()=>{
+            let favourite = await AsyncStorage.getItem("favourite");
+            if(favourite!==null){
+                let parsed = JSON.parse(favourite);
+                let filtered = parsed.map((item)=>item.id_tours);
+                setListFavourite(filtered);
+            }
+        }
+
         useEffect(()=>{
             fetchDetailPlace(props?.route?.params?.item?.id_tours || 1);
+            fetchFavourite();
         },[])
 
         let [dataLoaded, setDataLoaded] = useState(true);
@@ -181,9 +192,9 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                                 <View style={{flexDirection:"row",justifyContent:"space-between"}}>
                                         <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>{props?.route?.params?.category || ""}</Text>
                                         <View style={{flexDirection:"row"}}>
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                             <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                         </View>
                                     </View>
@@ -195,31 +206,113 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                                     </View>
                                     <View style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",flexWrap:"wrap"}}>
                                         
-                                            <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
-                                                <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
-                                                    <Ionicons name="ios-heart-outline" size={24} color="black" />
-                                                </Surface>
-                                                <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
-                                            </View>
+                                            {
+                                                (detail?.tours?.id_tours) ?
+                                                (listFavourite.includes(detail?.tours?.id_tours || 0)) ?
+                                                <TouchableOpacity 
+                                                activeOpacity={0.7}
+                                                onPress={()=>{
+
+                                                    AsyncStorage.getItem("favourite",(err,value)=>{
+                                                        let parsed = JSON.parse(value);
+                                                        let filtered = parsed.filter((item_,index)=>{
+                                                            return item_.id_tours!==detail.tours.id_tours;
+                                                        })
+                                                        AsyncStorage.setItem("favourite",JSON.stringify(filtered));
+                                                    })
+    
+
+                                                    setListFavourite((prev)=>{
+                                                        return prev.filter((item,index)=>{
+                                                            return item!==detail.tours.id_tours;
+                                                        })
+                                                    });
+                                                    
+                                                }}
+                                                style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                    <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
+                                                        <Ionicons name="ios-heart" size={24} color="red" />
+                                                    </Surface>
+                                                    <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
+                                                </TouchableOpacity>
+                                                :
+                                                <TouchableOpacity 
+                                                activeOpacity={0.7}
+                                                onPress={()=>{
+                                                    
+
+                                                    let payload = {
+                                                        id_tours:detail.tours.id_tours,
+                                                        category:detail.tours.category_name,
+                                                        place_name:detail.tours.name,
+                                                        address:detail.tours.address,
+                                                        postal_code:"-",
+                                                        preview:detail.tours.imagetours
+                                                    };
+
+                                                    
+                                                          
+                                                    AsyncStorage.getItem("favourite",(err,value)=>{
+                                                        if(value===null){
+                                                            AsyncStorage.setItem("favourite",JSON.stringify([
+                                                                payload
+                                                            ]))
+                                                        }  
+                                                        else{
+                                                            let parsed = JSON.parse(value);
+                                                            AsyncStorage.setItem("favourite",JSON.stringify([
+                                                                payload,
+                                                                ...parsed
+                                                            ]));
+                                                        }
+                                                    })
+
+
+                                                    setListFavourite((prev)=>{
+                                                        return [
+                                                            ...prev,
+                                                            detail.tours.id_tours
+                                                        ]
+                                                    });
+                                                }}
+                                                style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                    <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
+                                                        <Ionicons name="ios-heart-outline" size={24} color="black" />
+                                                    </Surface>
+                                                    <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
+                                                </TouchableOpacity>
+                                                :
+                                                null
+                                            }
 
                                             {
                                                 (detail?.tours?.phone && detail.tours.phone.length>0) &&
-                                                <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                                <TouchableOpacity 
+                                                activeOpacity={0.7}
+                                                onPress={()=>{
+                                                    Linking.openURL(`tel://${detail.tours.phone}`);
+                                                }}
+                                                style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
                                                     <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
                                                         <Feather name="phone" size={24} color="black" />
                                                     </Surface>
                                                     <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Phone</Text>
-                                                </View>
+                                                </TouchableOpacity>
                                             }
 
                                           {
                                               (detail?.tours?.website && detail.tours.website.length>0) &&
-                                              <View style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
+                                              <TouchableOpacity
+                                              activeOpacity={0.7} 
+                                              onPress={()=>{
+                                                  Linking.openURL(detail.tours.website);
+                                              }}
+                                              style={{marginHorizontal:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("50rem")}}>
                                                 <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"white",borderRadius:999}}>
                                                     <MaterialCommunityIcons name="web" size={24} color="black" />
                                                 </Surface>
-                                                <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Fave</Text>
-                                            </View>
+                                                <Text style={{textAlign:"center",fontSize:EStyleSheet.value("11rem"),marginTop:EStyleSheet.value("8rem")}}>Web</Text>
+                                            </TouchableOpacity>
                                           }
                                 
                                 </View>
@@ -431,7 +524,7 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                             renderItem={({item,index})=>{
                                 return (
                                     <Pressable onPress={()=>{
-                                        props.navigation.replace("DetailPlace");
+                                        props.navigation.replace("DetailPlace",{item:item,image:item.image,category:item.category,name:item.place_name});
                                     }}>
                                         <Surface source={{uri:item.image}} imageStyle={{borderRadius:EStyleSheet.value('10rem')}} style={{elevation:4,overflow:"hidden",backgroundColor:'whitesmoke',marginLeft:(index===0) ? EStyleSheet.value('25rem'):undefined,width:EStyleSheet.value('150rem'),height:EStyleSheet.value('100rem'),marginRight:EStyleSheet.value('10rem'),borderRadius:EStyleSheet.value('10rem')}}>
                                             <LinearGradient

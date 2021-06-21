@@ -17,6 +17,8 @@ import ImageLoader from '../components/ImageLoader';
 
 export default function SearchScreen(props){
 
+    let interval = useRef(null);
+
     const translateY = useRef(new Animated.Value(-220)).current;
       
     let shadow = {
@@ -102,6 +104,8 @@ export default function SearchScreen(props){
        
     },[selectedCategory])
 
+    let [queryValue, setQueryValue] = useState("");
+
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
             <View style={{height:EStyleSheet.value('28rem'),zIndex:100,backgroundColor:"white"}}></View>
@@ -114,7 +118,37 @@ export default function SearchScreen(props){
                     <View style={{width:EStyleSheet.value("40rem"),justifyContent:"center",alignItems:"center"}}>
                         <Ionicons name="search-outline" style={{marginLeft:EStyleSheet.value("18rem")}} size={24} color="grey" />
                     </View>
-                    <TextInput placeholder="What are you looking for?" style={{height:EStyleSheet.value("50rem"),flex:1,paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("10rem")}}></TextInput>
+                    <TextInput 
+                    onSubmitEditing={()=>{
+                        if(queryValue===""){
+                            setList(actualList);
+                        }
+                        else{
+                            let filtered = actualList.filter((item,index)=>{
+                                let regex = new RegExp(`${queryValue}`,"i");
+                                return item.place_name.match(regex);
+                            });
+                            setList(filtered);
+                        }
+                    }}
+                    onChangeText={(text)=>{
+                        clearTimeout(interval.current);
+                        setQueryValue(text);
+                        interval.current = setTimeout(()=>{
+                            if(queryValue===""){
+                                setList(actualList);
+                            }
+                            else{
+                                let filtered = actualList.filter((item,index)=>{
+                                    let regex = new RegExp(`${queryValue}`,"i");
+                                    return item.place_name.match(regex);
+                                });
+                                setList(filtered);
+                            }
+                        },1000)
+                    }}
+                    value={queryValue}
+                    placeholder="What are you looking for?" style={{height:EStyleSheet.value("50rem"),flex:1,paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("10rem")}}></TextInput>
                 </Surface>
             </View>
            
@@ -441,9 +475,9 @@ export default function SearchScreen(props){
                                     </View>
                                     <View style={{justifyContent:"flex-end"}}>
                                         <View style={{flexDirection:'row'}}>
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
-                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="#eba83a" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
+                                            <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                             <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                         </View>
                                     </View>

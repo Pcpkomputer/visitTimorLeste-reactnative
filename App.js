@@ -91,8 +91,6 @@ export default function App() {
                {
                  state.routes.map((route,index)=>{
 
-                   console.log(route);
-
                    const isFocused = state.index === index;
 
                    if(route.name==="Discover"){

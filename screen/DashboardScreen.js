@@ -357,7 +357,7 @@ export default function DashboardScreen(props){
                                         <ImageLoader source={{uri:item.precinct_image}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></ImageLoader>
                                         <View style={{justifyContent:'center',alignItems:'center'}}>
                                             <View style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,backgroundColor:'#f23545',width:EStyleSheet.value('50rem'),borderRadius:EStyleSheet.value('5rem'),height:EStyleSheet.value('8rem')}}></View>
-                                            <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,color:'white',fontFamily:"HeeboBold",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),width:'100%',textAlign:'center'}}>{item.precinct_name}</Text>
+                                            <Text style={{paddingHorizontal:EStyleSheet.value('30rem'),zIndex:11,color:'white',fontFamily:"HeeboBold",marginTop:EStyleSheet.value('5rem'),fontSize:EStyleSheet.value('25rem'),textAlign:'center'}}>{item.precinct_name}</Text>
                                             <Text style={{paddingHorizontal:EStyleSheet.value('20rem'),zIndex:11,color:"white",fontFamily:"QuicksandMedium",marginTop:EStyleSheet.value('3rem'),fontSize:EStyleSheet.value('13rem'),width:EStyleSheet.value("300rem"),textAlign:'center'}}>{item.precinct_minidescription}</Text>
                                             <LinearGradient
                                             // Background Linear Gradient
