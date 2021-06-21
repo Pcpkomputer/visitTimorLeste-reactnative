@@ -70,7 +70,8 @@ export default function DetailWhatsNew(props){
                         return (
                         <Pressable
                         onPress={()=>{
-                            props.navigation.navigate("DetailPromotion");
+                            console.log(item);
+                            props.navigation.navigate("DetailPromotion",{item:item});
                         }}
                         >
                             <Surface style={{elevation:4,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("260rem"),height:EStyleSheet.value("320rem")}}>

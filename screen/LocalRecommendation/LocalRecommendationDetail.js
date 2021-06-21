@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useRef, useEffect} from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions, ScrollView, ImageBackground, Keyboard, Pressable, useWindowDimensions } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { Surface} from 'react-native-paper';
@@ -38,9 +38,14 @@ export default function LocalRecommendationDetail(props){
                     />
                     <Text style={{color:"white",zIndex:11}}>{props.route.params.item.category}</Text>
                     <Text style={{color:"white",zIndex:11,fontSize:EStyleSheet.value("22rem"),fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem")}}>{props.route.params.item.place_name}</Text>
-                    <View style={{marginTop:EStyleSheet.value("8rem"),zIndex:11,backgroundColor:"white",paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("28rem"),borderRadius:EStyleSheet.value("20rem")}}>
+                    <TouchableOpacity 
+                    activeOpacity={0.7}
+                    onPress={()=>{
+                        props.navigation.navigate("DetailPlace", {item:props.route.params.item,image:props.route.params.item.image,category:props.route.params.item.category,name:props.route.params.item.place_name});
+                    }}
+                    style={{marginTop:EStyleSheet.value("8rem"),zIndex:11,backgroundColor:"white",paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("28rem"),borderRadius:EStyleSheet.value("20rem")}}>
                         <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>More Info</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
 

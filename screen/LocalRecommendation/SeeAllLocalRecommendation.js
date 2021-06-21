@@ -17,6 +17,7 @@ import ImageLoader from '../../components/ImageLoader';
 import HTML from "react-native-render-html";
 import { FlatList } from 'react-native-gesture-handler';
 
+import {ip} from '../../utils/env';
 
 let nav = null;
 let listrecommendation = [];
@@ -62,8 +63,10 @@ const FirstRoute = (props) =>
                             <Text style={{fontFamily:"QuicksandBold"}}>"{item.comment}"</Text>
                         </View>
                         <View style={{marginVertical:EStyleSheet.value("15rem"),flexDirection:"row",marginTop:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                            <View style={{width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
-                            </View>
+                            <ImageBackground 
+                            source={{uri:item.avatar}}
+                            style={{overflow:"hidden",width:EStyleSheet.value("50rem"),height:EStyleSheet.value("50rem"),backgroundColor:"whitesmoke",borderRadius:999}}>
+                            </ImageBackground>
                             <View style={{marginLeft:EStyleSheet.value("10rem"),justifyContent:"center"}}>
                                 <Text style={{fontFamily:"HeeboBold"}}>{item.user_name}</Text>
                             </View>
@@ -85,11 +88,11 @@ const FirstRoute = (props) =>
             renderItem={({item,index})=>{
                 return (
                     <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("20rem")}}>
-                        <View style={{backgroundColor:"whitesmoke",width:EStyleSheet.value("80rem"),borderRadius:999,height:EStyleSheet.value("80rem")}}>
-                        </View>
+                        <ImageBackground source={{uri:item.avatar}} style={{overflow:"hidden",backgroundColor:"whitesmoke",width:EStyleSheet.value("80rem"),borderRadius:999,height:EStyleSheet.value("80rem")}}>
+                        </ImageBackground>
                         <View style={{flex:1,justifyContent:"center",borderBottomWidth:0.5,borderColor:"grey",paddingHorizontal:EStyleSheet.value("12rem")}}>
                             <Text style={{fontFamily:"HeeboBold"}}>{item.user_name}</Text>
-                            <Text style={{fontSize:EStyleSheet.value("12rem"),color:"grey"}}>Traveler</Text>
+                            <Text style={{fontSize:EStyleSheet.value("12rem"),color:"grey"}}>{item.minitype}</Text>
                         </View>
                         <View style={{borderBottomWidth:0.5,borderColor:"grey",justifyContent:"center",alignItems:"center"}}>
                             <Entypo name="chevron-thin-right" size={24} color="grey" />
@@ -113,6 +116,10 @@ export default function SeeAllLocalRecommendation(props){
 
     nav = props.navigation;
     listrecommendation = props.route.params.localrecommendation;
+
+    useEffect(()=>{
+        console.log(props.route.params.localrecommendation);
+    },[])
 
     const layout = useWindowDimensions();
 

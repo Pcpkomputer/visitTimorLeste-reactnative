@@ -41,6 +41,7 @@ export default function SearchScreen(props){
                   }
               });
               setList(preprocessed);
+              setActualList(preprocessed);
             
             }
         } catch (error) {
@@ -67,39 +68,39 @@ export default function SearchScreen(props){
     useEffect(()=>{
         fetchWhatsIn();
     },[])
+
+    useEffect(()=>{
+        Animated.spring(translateY,{
+            toValue:0,
+            duration:10000,
+            useNativeDriver:true
+        }).start(()=>{
+            setLastOffsetY(0);
+            translateY.setOffset(0);
+            translateY.setValue(0);
+        });
+        setDraggableToDown(false);
+    },[])
     
     let [list, setList] = useState([
-        {
-            image:"https://dtceasttimor.com/wp-content/uploads/2018/08/SENHORA-RAMELAU-1200x800.jpg",
-            category:"ATTRACTIONS",
-            place_name:"Gunung Ramelau",
-            comment:"The scenery looks so good.",
-            avatar:"",
-            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            user_name:"Suzy"
-        },
-        {
-            image:"https://i.pinimg.com/originals/de/fb/f2/defbf248014a47062919b4d6096f46ab.jpg",
-            category:"ATTRACTIONS",
-            place_name:"JACO",
-            comment:"Feel the breezy wind.",
-            avatar:"",
-            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            user_name:"Jacob"
-        },
-        {
-            image:"https://media-cdn.tripadvisor.com/media/photo-s/08/35/43/60/immaculate-conception.jpg",
-            category:"ATTRACTIONS",
-            place_name:"Katedral Dili",
-            comment:"Nice katedral.",
-            avatar:"",
-            whyshouldvisit:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            specialtip:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            user_name:"Thomas"
-        },
     ]);
+
+
+    let [actualList, setActualList] = useState([]);
+
+    useEffect(()=>{
+
+        if(selectedCategory.length===0){
+            setList(actualList);
+        }else{
+            let filtered = actualList.filter((item,index)=>{
+                return selectedCategory.includes(item.category_name);
+            })
+    
+            setList(filtered);
+        }
+       
+    },[selectedCategory])
 
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
@@ -420,7 +421,7 @@ export default function SearchScreen(props){
             renderItem={({item,index})=>{
                 return (
                     <Pressable onPress={()=>{
-                        alert(lastOffsetY);
+                        props.navigation.navigate("DetailPlace", {item:item,image:item.image,category:item.category,name:item.place_name});
                     }}>
                         <Surface style={{marginTop:(index===0) ? EStyleSheet.value("60rem"):undefined,elevation:2,marginHorizontal:EStyleSheet.value("20rem"),backgroundColor:"white",borderRadius:EStyleSheet.value("10rem"),marginBottom:EStyleSheet.value("20rem"),height:EStyleSheet.value("170rem")}}>
                             <ImageLoader resizeMode="cover" source={{uri:item.image}} style={{borderRadius:EStyleSheet.value("10rem"),position:"absolute",width:"100%",height:"100%"}}></ImageLoader>

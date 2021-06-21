@@ -24,50 +24,20 @@ import {
 
   import ImageLoader from '../../components/ImageLoader';
 
-
-  
-  const htmlContent2 = `
-  <p style="text-align:justify">This HTML snippet is now rendered with native components !
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  </p>
-  <p style="text-align:justify">This HTML snippet is now rendered with native components !
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  </p>
-  <p style="text-align:justify">This HTML snippet is now rendered with native components !
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  </p>
-  <p style="text-align:justify">This HTML snippet is now rendered with native components !
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  This HTML snippet is now rendered with native components
-  </p>
-  `;
+  import {ip} from '../../utils/env';
 
 
 
-  export default function DetailPromotion(){
+  export default function DetailPromotion(props){
 
     const contentWidth = useWindowDimensions().width;
 
       return (
           <View style={{flex:1,backgroundColor:"white"}}>
               <ScrollView>
-                    <View style={{backgroundColor:"whitesmoke",height:EStyleSheet.value("230rem")}}>
-                        <Text>123</Text>
+                    <View style={{backgroundColor:"whitesmoke",justifyContent:'flex-end',height:EStyleSheet.value("230rem")}}>
+                        {/* <Text>123</Text> */}
+                        <Image source={{uri:`${ip}/static/image/tours/${props.route.params.item.image}`}} style={{position:"absolute",width:"100%",height:"100%"}}></Image>
                     </View>
                     <View style={{borderBottomWidth:0.4,borderColor:"grey"}}>
                         <View style={{backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("20rem")}}>
@@ -78,7 +48,7 @@ import {
                             tagsStyles={{
                                 p: { color:'black',fontFamily:"QuicksandMedium",paddingBottom:EStyleSheet.value("15rem") }
                             }}
-                            source={{ html: htmlContent2 }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
+                            source={{ html: props.route.params.item.description }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
                         </View>
                     </View>
                     <View style={{borderBottomWidth:0.4,borderColor:"grey"}}>
@@ -90,7 +60,31 @@ import {
                             tagsStyles={{
                                 p: { color:'black',fontFamily:"QuicksandMedium",paddingBottom:EStyleSheet.value("15rem") }
                             }}
-                            source={{ html: htmlContent2 }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
+                            source={{ html: props.route.params.item.redemptioninstruction }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
+                        </View>
+                    </View>
+                    <View style={{borderBottomWidth:0.4,borderColor:"grey"}}>
+                        <View style={{backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("20rem")}}>
+                            <Text style={{fontFamily:"HeeboBold"}}>Terms and Conditions</Text>
+                        </View>
+                        <View style={{paddingHorizontal:EStyleSheet.value("20rem"),paddingBottom:EStyleSheet.value("20rem")}}>
+                            <HTML 
+                            tagsStyles={{
+                                p: { color:'black',fontFamily:"QuicksandMedium",paddingBottom:EStyleSheet.value("15rem") }
+                            }}
+                            source={{ html: props.route.params.item.termsandconditions }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
+                        </View>
+                    </View>
+                    <View style={{borderBottomWidth:0.4,borderColor:"grey"}}>
+                        <View style={{backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("20rem")}}>
+                            <Text style={{fontFamily:"HeeboBold"}}>Disclaimer</Text>
+                        </View>
+                        <View style={{paddingHorizontal:EStyleSheet.value("20rem"),paddingBottom:EStyleSheet.value("20rem")}}>
+                            <HTML 
+                            tagsStyles={{
+                                p: { color:'black',fontFamily:"QuicksandMedium",paddingBottom:EStyleSheet.value("15rem") }
+                            }}
+                            source={{ html: props.route.params.item.disclaimer }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
                         </View>
                     </View>
               </ScrollView>
