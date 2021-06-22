@@ -135,17 +135,17 @@ export default function SearchScreen(props){
                         clearTimeout(interval.current);
                         setQueryValue(text);
                         interval.current = setTimeout(()=>{
-                            if(queryValue===""){
+                            if(text===""){
                                 setList(actualList);
                             }
                             else{
                                 let filtered = actualList.filter((item,index)=>{
-                                    let regex = new RegExp(`${queryValue}`,"i");
+                                    let regex = new RegExp(`${text}`,"i");
                                     return item.place_name.match(regex);
                                 });
                                 setList(filtered);
                             }
-                        },1000)
+                        },500)
                     }}
                     value={queryValue}
                     placeholder="What are you looking for?" style={{height:EStyleSheet.value("50rem"),flex:1,paddingVertical:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("10rem")}}></TextInput>

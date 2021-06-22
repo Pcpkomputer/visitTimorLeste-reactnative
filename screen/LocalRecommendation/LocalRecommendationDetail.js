@@ -81,9 +81,14 @@ export default function LocalRecommendationDetail(props){
                 <Text style={{textAlign:"center",marginTop:EStyleSheet.value("10rem"),fontFamily:"QuicksandMedium"}}>
                     {props.route.params.item.aboutme}
                 </Text>
-                <View style={{marginTop:EStyleSheet.value("15rem"),backgroundColor:"#f5f5f5",borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("8rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
+                <TouchableOpacity 
+                activeOpacity={0.7}
+                onPress={()=>{
+                    props.navigation.navigate("DetailLocal", {item:props.route.params.item});
+                }}
+                style={{marginTop:EStyleSheet.value("15rem"),backgroundColor:"#f5f5f5",borderRadius:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("8rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <Text style={{color:"#f23545",fontFamily:"QuicksandMedium"}}>Get to know me</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

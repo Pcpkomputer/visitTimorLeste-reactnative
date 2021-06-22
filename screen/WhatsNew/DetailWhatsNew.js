@@ -70,7 +70,6 @@ export default function DetailWhatsNew(props){
                         return (
                         <Pressable
                         onPress={()=>{
-                            console.log(item);
                             props.navigation.navigate("DetailPromotion",{item:item});
                         }}
                         >
@@ -117,18 +116,26 @@ export default function DetailWhatsNew(props){
                    showsHorizontalScrollIndicator={false}
                    renderItem={({item,index})=>{
                        return (
-                           <Surface style={{elevation:3,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("180rem"),height:EStyleSheet.value("135rem")}}>
-                                <LinearGradient
-                                    // Background Linear Gradient
-                                    colors={['rgba(0,0,0,0.6)', 'transparent']}
-                                    style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
-                                />
-                                <ImageLoader source={{uri:`${ip}/static/image/tours/${item.image}`}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
-                                <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
-                                    <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>{props.route.params.item.category_name.toUpperCase()}</Text>
-                                    <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>{item.name}</Text>
-                                </View>
-                           </Surface>
+                           <Pressable
+                           onPress={()=>{
+                               console.log(item);
+                                props.navigation.navigate("DetailPlace", {item:item,image:`${ip}/static/image/tours/${item.imagetours}`,category:item.category_name.toUpperCase(),name:item.name});
+                               
+                           }}
+                           >
+                                <Surface style={{elevation:3,marginLeft:(index===0) ? EStyleSheet.value("20rem"):undefined,borderRadius:EStyleSheet.value("10rem"),backgroundColor:"whitesmoke",marginRight:EStyleSheet.value("15rem"),width:EStyleSheet.value("180rem"),height:EStyleSheet.value("135rem")}}>
+                                        <LinearGradient
+                                            // Background Linear Gradient
+                                            colors={['rgba(0,0,0,0.6)', 'transparent']}
+                                            style={{position:'absolute',zIndex:10,width:"100%",height:EStyleSheet.value('80rem'),borderRadius:EStyleSheet.value("10rem")}}
+                                        />
+                                        <ImageLoader source={{uri:`${ip}/static/image/tours/${item.image}`}} style={{position:"absolute",width:"100%",height:"100%",borderRadius:EStyleSheet.value("10rem")}}></ImageLoader>
+                                        <View style={{paddingHorizontal:EStyleSheet.value("10rem"),zIndex:11,paddingVertical:EStyleSheet.value("10rem")}}>
+                                            <Text style={{color:"white",marginTop:EStyleSheet.value("2rem"),fontFamily:"QuicksandMedium",fontSize:EStyleSheet.value("10rem")}}>{props.route.params.item.category_name.toUpperCase()}</Text>
+                                            <Text style={{fontFamily:"HeeboBold",marginTop:EStyleSheet.value("5rem"),color:"white",fontSize:EStyleSheet.value("12rem")}}>{item.name}</Text>
+                                        </View>
+                                </Surface>
+                           </Pressable>
                        )
                    }}
                    />

@@ -14,6 +14,7 @@ import MyTripScreen from './screen/MyTripScreen';
 import EssentialsScreen from './screen/EssentialsScreen';
 import SearchScreen from './screen/SearchScreen';
 import ProfileScreen from './screen/ProfileScreen';
+import DetailLocalScreen  from './screen/DetailLocalScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -299,6 +300,12 @@ export default function App() {
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
             name="DetailPromotion" component={DetailPromotion} />
+               <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="DetailLocal" component={DetailLocalScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -44,7 +44,7 @@ export default function DetailWeeklySpotlight(props){
                 <Text style={{color:"#f23545",fontFamily:"QuicksandBold"}}>{handleDate(props.route.params.item.dateposted)}</Text>
                 <HTML 
                 tagsStyles={{
-                    p: { color:'black',paddingTop:EStyleSheet.value("15rem") }
+                    p: { color:'black',fontFamily:"QuicksandBold",lineHeight:EStyleSheet.value("25rem"),paddingTop:EStyleSheet.value("15rem") }
                 }}
                 source={{ html: props.route.params.item.content }} contentWidth={contentWidth-EStyleSheet.value("40rem")} />
             </View>
