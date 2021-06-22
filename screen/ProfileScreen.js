@@ -59,7 +59,14 @@ export default function ProfileScreen(props){
                 <View style={{marginTop:EStyleSheet.value("33rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <View style={{flexDirection:"row"}}>
                         <Text style={{fontFamily:"QuicksandBold"}}>Don't have an account?</Text>
-                        <Text style={{marginLeft:EStyleSheet.value("5rem"),color:"#f23545",fontFamily:"QuicksandBold"}}>Sign up</Text>
+                        <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={()=>{
+                            alert("123");
+                        }}
+                        >
+                            <Text style={{marginLeft:EStyleSheet.value("5rem"),color:"#f23545",fontFamily:"QuicksandBold"}}>Sign up</Text>
+                        </TouchableOpacity>
                     </View>
                     <Surface style={{borderColor:(emailError) ? "#f5333c":undefined,borderWidth:(emailError) ? 1:undefined,elevation:3,borderRadius:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("12rem"),backgroundColor:"white",width:"100%"}}>
                         <TextInput 
@@ -165,9 +172,9 @@ export default function ProfileScreen(props){
                             }
                         </Pressable>                   
                     </View>
-                    <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("25rem")}}>
+                    {/* <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("25rem")}}>
                         <Text style={{color:"#f5333c",fontFamily:"QuicksandMedium"}}>Forgot Password</Text>
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
         </View>

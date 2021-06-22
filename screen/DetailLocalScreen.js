@@ -13,32 +13,70 @@ import ImageLoader from '../components/ImageLoader';
 
 import {ip} from '../utils/env';
 
-const FirstRoute = () => (
-    <View style={{ flex:1, backgroundColor: 'white', paddingHorizontal:EStyleSheet.value("15rem") }}>
-        <FlatList
-        contentContainerStyle={{paddingHorizontal:EStyleSheet.value("5rem")}}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={(item,index)=>`${index}-recommendationlocal`}
-        data={[1,2,3,4,5]}
-        renderItem={({item,index})=>{
-            return (
-                <Surface style={{marginTop:(index)===0 ? EStyleSheet.value("20rem"):null,elevation:2,marginBottom:EStyleSheet.value("20rem"),borderRadius:EStyleSheet.value("20rem")}}>
-                    <View style={{backgroundColor:"whitesmoke",borderTopRightRadius:EStyleSheet.value("20rem"),borderTopLeftRadius:EStyleSheet.value("20rem"),height:EStyleSheet.value("190rem")}}>
-                    </View>
-                    <View style={{paddingVertical:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                        <Text style={{fontFamily:"QuicksandBold",fontSize:EStyleSheet.value("15rem")}}>"Great food, central, and accessible"</Text>
-                    </View>
-                </Surface>
-            )
-        }}
-        >
-        </FlatList>
-    </View>
-  );
+
+const FirstRoute = (props) => {
+
+    let [recommendation ,setRecommendation] = useState([]);
+
+    let fetchRecommendation = async()=>{
+        let request = await fetch(`${ip}/api/getrecommendationbyiduser/${props.route.params.item.id_user}`);
+        let json = await request.json();
+        setRecommendation(json);
+    }
+
+    useEffect(()=>{
+        fetchRecommendation();
+    },[])
+
+    return (
+        <View style={{ flex:1, backgroundColor: 'white', paddingHorizontal:EStyleSheet.value("15rem") }}>
+            <FlatList
+            contentContainerStyle={{paddingHorizontal:EStyleSheet.value("5rem")}}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item,index)=>`${index}-recommendationlocal`}
+            data={recommendation}
+            renderItem={({item,index})=>{
+                return (
+                    <Pressable
+                    onPress={()=>{
+                        props.navigation.navigate("DetailLocalRecommendation",{item:{
+                            ...item,
+                            image:`${ip}/static/image/user/${item.toursimage}`,
+                            category:item.category_name.toUpperCase(),
+                            place_name:item.toursname,
+                            avatar:`${ip}/static/image/user/${item.avatar}`,
+                            user_name:item.name,
+                            comment:item.quote
+                        }});
+                    }}
+                    >
+                        <Surface style={{marginTop:(index)===0 ? EStyleSheet.value("20rem"):null,elevation:2,marginBottom:EStyleSheet.value("20rem"),borderRadius:EStyleSheet.value("20rem")}}>
+                            <View style={{backgroundColor:"whitesmoke",overflow:"hidden",justifyContent:"flex-end",borderTopRightRadius:EStyleSheet.value("20rem"),borderTopLeftRadius:EStyleSheet.value("20rem"),height:EStyleSheet.value("190rem")}}>
+                                <ImageLoader source={{uri:`${ip}/static/image/tours/${item.toursimage}`}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></ImageLoader>
+                                <LinearGradient
+                                    // Background Linear Gradient
+                                    colors={['transparent','rgba(0,0,0,0.8)']}
+                                    style={{position:'absolute',bottom:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
+                                />
+                                <View style={{paddingHorizontal:EStyleSheet.value("20rem"),zIndex:12,paddingVertical:EStyleSheet.value("10rem")}}>
+                                    <Text style={{fontSize:EStyleSheet.value("18rem"),color:"white"}}>{item.toursname}</Text>
+                                </View>
+                            </View>
+                            <View style={{paddingVertical:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
+                                <Text style={{fontFamily:"QuicksandBold",fontSize:EStyleSheet.value("15rem")}}>"{item.quote}"</Text>
+                            </View>
+                        </Surface>
+                    </Pressable>
+                )
+            }}
+            >
+            </FlatList>
+        </View>
+      );
+}
   
   const SecondRoute = () => (
     <View style={{ height:500, backgroundColor: 'white' }}>
-        <Text>123</Text>
     </View>
   );
   
@@ -47,7 +85,11 @@ export default function DetailLocalScreen(props){
 
 
     const renderScene = SceneMap({
-        first: FirstRoute,
+        first: ()=>{
+           return (
+            <FirstRoute route={props.route} navigation={props.navigation}/>
+           )
+        },
         second: SecondRoute,
       });
     
@@ -63,7 +105,7 @@ export default function DetailLocalScreen(props){
     return (
         <View style={{flex:1,backgroundColor:"white"}}>
             <View style={{position:"absolute",backgroundColor:"whitesmoke",width:"100%",height:EStyleSheet.value("250rem")}}>
-                <Text>555</Text>
+                <ImageLoader source={{uri:"http://"}} style={{position:"absolute",width:'100%',height:'100%',borderRadius:EStyleSheet.value('5rem')}}></ImageLoader>
             </View>
             
             <ScrollView>

@@ -153,7 +153,6 @@ import {
                             return (
                                 <Pressable
                                 onPress={()=>{
-                                   console.log(item);
                                    props.navigation.navigate("DetailPlace",{item:item,image:`${ip}/static/image/tours/${item.image}`,category:item.category_name,name:item.name});
                                 }}
                                 >

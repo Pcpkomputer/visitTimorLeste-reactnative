@@ -15,6 +15,7 @@ import EssentialsScreen from './screen/EssentialsScreen';
 import SearchScreen from './screen/SearchScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import DetailLocalScreen  from './screen/DetailLocalScreen';
+import CreateAccountScreen from './screen/CreateAccountScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -252,6 +253,12 @@ export default function App() {
       <NavigationContainer>
         <StatusBar translucent backgroundColor="transparent" />
         <Stack.Navigator>
+          <Stack.Screen 
+             options={{
+              headerShown:false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+            name="CreateAccount" component={CreateAccountScreen} />
             <Stack.Screen 
              options={{
               headerShown:false,
