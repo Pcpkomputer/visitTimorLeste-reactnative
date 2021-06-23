@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useContext, useState, useRef} from 'react';
 import { StyleSheet, Animated, Pressable, ActivityIndicator, Text, TouchableOpacity, View, useWindowDimensions, TextInput, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
@@ -10,9 +10,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
+import {GlobalContext} from '../App';
+
+import {ip} from '../utils/env';
+
 export default function ProfileScreen(props){
 
     let height = useWindowDimensions().width;
+
+    let globalContext = useContext(GlobalContext);
 
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -62,7 +68,7 @@ export default function ProfileScreen(props){
                         <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={()=>{
-                            alert("123");
+                            props.navigation.navigate("CreateAccount");
                         }}
                         >
                             <Text style={{marginLeft:EStyleSheet.value("5rem"),color:"#f23545",fontFamily:"QuicksandBold"}}>Sign up</Text>
@@ -114,7 +120,9 @@ export default function ProfileScreen(props){
                     style={{marginTop:EStyleSheet.value("25rem"),overflow:"hidden",justifyContent:"center",alignItems:"center",alignSelf:"center",width:EStyleSheet.value("310rem"),backgroundColor:"#f5333c",borderRadius:EStyleSheet.value("30rem")}}>
                         <Pressable 
                         disabled={signinLoading}
-                        onPress={()=>{
+                        onPress={async ()=>{
+
+                            
                            let checkEmail = (email)=>{
                                  try {
                                     if(email.length===0){
@@ -160,6 +168,34 @@ export default function ProfileScreen(props){
                            
                            if(_email && _password){
                                 setSignInLoading(true);
+
+                                let request = await fetch(`${ip}/api/loginaccount`,{
+                                    method:"POST",
+                                    headers:{
+                                        "content-type":"application/json"
+                                    },
+                                    body:JSON.stringify({
+                                        email:email,
+                                        password:password
+                                    })
+                                });
+                                let response = await request.json();
+                                
+                                if(response.success){
+                                    let data = response.data;
+                                    let token = response.token;
+                                    
+                                    globalContext.setCredentials({
+                                        data:data,
+                                        token:token
+                                    });
+                                }
+                                else{
+                                    alert(response.msg);
+                                }
+
+                                setSignInLoading(false);
+                                
                            }
 
                         }}

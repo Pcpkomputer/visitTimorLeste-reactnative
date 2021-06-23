@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, createContext, useContext, useRef, useEffect} from 'react';
 import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable, StatusBar } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
@@ -16,6 +16,7 @@ import SearchScreen from './screen/SearchScreen';
 import ProfileScreen from './screen/ProfileScreen';
 import DetailLocalScreen  from './screen/DetailLocalScreen';
 import CreateAccountScreen from './screen/CreateAccountScreen';
+import ProfileLoggedScreen from './screen/ProfileLoggedScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -47,8 +48,11 @@ const Stack = createStackNavigator();
 const entireScreenWidth = Dimensions.get('window').width;
 EStyleSheet.build({$rem: entireScreenWidth / 380});
 
+export let GlobalContext = createContext();
 
 export default function App() {
+
+  const [credentials, setCredentials] = useState(null);
 
 
   const [loaded] = useFonts({
@@ -243,78 +247,86 @@ export default function App() {
           <Tab.Screen name="Essentials" component={EssentialsScreen} />
           <Tab.Screen 
           name="Search" component={SearchScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Profile" component={(credentials) ? ProfileLoggedScreen:ProfileScreen} />
         </Tab.Navigator>
       )
   }
 
   if(loaded){
     return (
-      <NavigationContainer>
-        <StatusBar translucent backgroundColor="transparent" />
-        <Stack.Navigator>
-          <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="CreateAccount" component={CreateAccountScreen} />
-            <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="Home" component={Dashboard_} />
-            <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailWeeklySpotlight" component={DetailWeeklySpotlight} />
-               <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailWhatsNew" component={DetailWhatsNew} />
-                  <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailLocalRecommendation" component={LocalRecommendationDetail} />
-                   <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailPrecinctGuides" component={PrecinctGuidesDetail} />
+      <GlobalContext.Provider
+      value={{
+        credentials,
+        setCredentials
+      }}
+      >
+          <NavigationContainer>
+            <StatusBar translucent backgroundColor="transparent" />
+            <Stack.Navigator>
+            
                 <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailPlace" component={DetailPlace} />
-                 <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="SeeAllLocalRecommendation" component={SeeAllLocalRecommendation} />
-               <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailPromotion" component={DetailPromotion} />
-               <Stack.Screen 
-             options={{
-              headerShown:false,
-              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            }}
-            name="DetailLocal" component={DetailLocalScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="Home" component={Dashboard_} />
+                <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailWeeklySpotlight" component={DetailWeeklySpotlight} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailWhatsNew" component={DetailWhatsNew} />
+                      <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailLocalRecommendation" component={LocalRecommendationDetail} />
+                      <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailPrecinctGuides" component={PrecinctGuidesDetail} />
+                    <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailPlace" component={DetailPlace} />
+                    <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="SeeAllLocalRecommendation" component={SeeAllLocalRecommendation} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailPromotion" component={DetailPromotion} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailLocal" component={DetailLocalScreen} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="CreateAccount" component={CreateAccountScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+      </GlobalContext.Provider>
     );
   }
   else{

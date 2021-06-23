@@ -10,6 +10,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SimpleLineIcons, Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { useIsFocused } from "@react-navigation/native";
 
+import {ip} from '../utils/env';
+
 export default function CreateAccountScreen(props){
 
     let [passwordHidden, setPasswordHidden] = useState(true);
@@ -69,8 +71,18 @@ export default function CreateAccountScreen(props){
             <View style={{paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("10rem")}}>
                 <Text style={{fontSize:EStyleSheet.value("18rem"),fontWeight:"bold"}}>Create an Account</Text>
             </View>
-            <View style={{paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("10rem")}}>
-                <Text>Or <Text style={{color:"#f23545"}}>Sign In Here</Text> if you already have an account.</Text>
+            <View style={{flexDirection:"row",paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("10rem")}}>
+                <Text>Or</Text>
+                <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={()=>{
+                    props.navigation.navigate("Profile");
+                }}
+                style={{justifyContent:"center",marginHorizontal:EStyleSheet.value("3rem"),alignItems:"center"}}
+                >
+                    <Text style={{color:"#f23545",textAlign:"center",textAlignVertical:"center"}}>Sign In Here</Text> 
+                </TouchableOpacity>
+                <Text>if you already have an account.</Text>
             </View>
             <View style={{marginTop:EStyleSheet.value("10rem"),paddingBottom:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                 <Surface style={{borderRadius:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("12rem"),backgroundColor:"#f4f4f4",width:"100%"}}>
@@ -164,8 +176,34 @@ export default function CreateAccountScreen(props){
                        :
                        (canPress) ?
                        <Pressable 
-                       onPress={()=>{
-                           alert("register");
+                       onPress={async ()=>{
+                            setSignupLoading(true);
+
+                            let payload = {
+                                firstname:firstName,
+                                lastname:lastName,
+                                email:emailAddress,
+                                password:password
+                            };
+                            let request = await fetch(`${ip}/api/registeraccount`,{
+                                method:"POST",
+                                headers:{
+                                    "content-type":"application/json"
+                                },
+                                body:JSON.stringify(payload)
+                            });
+                            let json = await request.json();
+                           
+                            if(json.success){
+                                alert("sukses");
+                                setSignupLoading(false);
+                            }   
+                            else{
+                                alert(json.msg);
+                                setSignupLoading(false);
+                            }
+
+                            
                        }}
                         android_ripple={{color:"white",borderless:false}}
                        style={{width:"100%",justifyContent:"center",alignItems:"center",borderRadius:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem"),backgroundColor:"#f5333c"}}>
