@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useContext, useState, useRef} from 'react';
-import { StyleSheet, Animated, Pressable, ActivityIndicator, Text, TouchableOpacity, View, useWindowDimensions, TextInput, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Animated, Pressable, ActivityIndicator, Text, TouchableOpacity, View, useWindowDimensions, TextInput, Dimensions,ScrollView, ImageBackground, Image, AsyncStorage } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface, TouchableRipple} from 'react-native-paper';
@@ -189,6 +189,11 @@ export default function ProfileScreen(props){
                                         data:data,
                                         token:token
                                     });
+                                    
+                                    await AsyncStorage.setItem("credentials",JSON.stringify({
+                                        data:data,
+                                        token:token
+                                    }));
                                 }
                                 else{
                                     alert(response.msg);

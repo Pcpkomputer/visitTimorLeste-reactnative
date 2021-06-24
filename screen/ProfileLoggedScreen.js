@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useContext, useState, useRef} from 'react';
-import { StyleSheet, Animated, Pressable, ActivityIndicator, Text, TouchableOpacity, View, useWindowDimensions, TextInput, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Animated, Pressable, ActivityIndicator, Text, TouchableOpacity, View, useWindowDimensions, TextInput, Dimensions,ScrollView, ImageBackground, Image, AsyncStorage } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface, TouchableRipple} from 'react-native-paper';
@@ -35,6 +35,10 @@ export default function ProfileLoggedScreen(props){
         return greet;
     }
 
+    useEffect(()=>{
+        console.log(globalContext);
+    },[])
+
     return (
         <ScrollView style={{flex:1,backgroundColor:"white"}}>
 
@@ -56,12 +60,17 @@ export default function ProfileLoggedScreen(props){
                     <View style={{marginLeft:EStyleSheet.value("15rem"),backgroundColor:"white",justifyContent:"center",alignItems:"center",width:EStyleSheet.value("100rem"),height:EStyleSheet.value("100rem"),borderRadius:999}}>
                         <AntDesign name="user" size={EStyleSheet.value("53rem")} color="grey" />
                     </View>
-                    <View>
+                    <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={()=>{
+                        props.navigation.navigate("EditProfile")
+                    }}
+                    >
                         <AntDesign name="edit" size={EStyleSheet.value("30rem")} color="white" />
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <Text style={{color:"white",marginVertical:EStyleSheet.value("10rem")}}>{greeting()}</Text>
-                <Text style={{fontWeight:"bold",color:"white",fontSize:EStyleSheet.value("20rem")}}>{globalContext.credentials.data.first_name} {globalContext.credentials.data.last_name}</Text>
+                <Text style={{fontWeight:"bold",color:"white",fontSize:EStyleSheet.value("20rem")}}>{globalContext?.credentials?.data?.first_name || ""} {globalContext?.credentials?.data?.last_name || ""}</Text>
             </View>
             <Surface style={{backgroundColor:"white",paddingTop:EStyleSheet.value("40rem"),borderRadius:EStyleSheet.value("30rem"),marginHorizontal:EStyleSheet.value("30rem")}}>
                 <View style={{backgroundColor:"white",alignItems:"center",justifyContent:"center",height:EStyleSheet.value("300rem")}}>
@@ -82,8 +91,9 @@ export default function ProfileLoggedScreen(props){
                     <Text style={{fontSize:EStyleSheet.value("15rem"),marginTop:EStyleSheet.value("25rem"),fontFamily:"HeeboBold"}}>Action</Text>
                     <View style={{justifyContent:"center",flexDirection:"row",alignItems:"center",marginTop:EStyleSheet.value("15rem"),width:"100%"}}>
                         <Pressable
-                        onPress={()=>{
+                        onPress={async ()=>{
                             globalContext.setCredentials(null);
+                            await AsyncStorage.removeItem("credentials");
                         }}
                         >
                             <Surface style={{elevation:2,justifyContent:"center",alignItems:"center",borderRadius:EStyleSheet.value("10rem"),backgroundColor:"white",height:EStyleSheet.value("60rem"),width:EStyleSheet.value("60rem")}}>

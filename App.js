@@ -1,5 +1,5 @@
 import React, {useState, createContext, useContext, useRef, useEffect} from 'react';
-import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Keyboard, Pressable, StatusBar, AsyncStorage } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useFonts } from 'expo-font';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -17,6 +17,8 @@ import ProfileScreen from './screen/ProfileScreen';
 import DetailLocalScreen  from './screen/DetailLocalScreen';
 import CreateAccountScreen from './screen/CreateAccountScreen';
 import ProfileLoggedScreen from './screen/ProfileLoggedScreen';
+import EditProfileScreen from './screen/EditProfileScreen';
+import EditProfileDetailScreen from './screen/EditProfileDetailScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -50,10 +52,62 @@ EStyleSheet.build({$rem: entireScreenWidth / 380});
 
 export let GlobalContext = createContext();
 
+import {ip} from './utils/env';
+
 export default function App() {
 
   const [credentials, setCredentials] = useState(null);
 
+  const [entireAppLoaded, setEntireAppLoaded] = useState(false);
+
+  let refreshCredentials = async ()=>{
+          let request = await fetch(`${ip}/api/loginaccount`,{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify({
+                email:credentials.data.email,
+                password:credentials.data.password
+            })
+        });
+        let response = await request.json();
+        
+        if(response.success){
+            let data = response.data;
+            let token = response.token;
+            
+            setCredentials({
+                data:data,
+                token:token
+            });
+            
+            await AsyncStorage.setItem("credentials",JSON.stringify({
+                data:data,
+                token:token
+            }));
+        }
+        else{
+            alert(response.msg);
+        }
+  }
+
+  let fetchCredentials = async ()=>{
+    let credentials = await AsyncStorage.getItem("credentials");
+    if(credentials===null){
+      setCredentials(null);
+      setEntireAppLoaded(true);
+    }
+    else{
+      let parsed = JSON.parse(credentials);
+      setCredentials(parsed);
+      setEntireAppLoaded(true);
+    }
+  };
+
+  useEffect(()=>{
+    fetchCredentials();
+  },[])
 
   const [loaded] = useFonts({
     HeeboMedium: require('./assets/fonts/Heebo-Medium.ttf'),
@@ -252,12 +306,13 @@ export default function App() {
       )
   }
 
-  if(loaded){
+  if(loaded && entireAppLoaded){
     return (
       <GlobalContext.Provider
       value={{
         credentials,
-        setCredentials
+        setCredentials,
+        refreshCredentials
       }}
       >
           <NavigationContainer>
@@ -324,6 +379,19 @@ export default function App() {
                   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 }}
                 name="CreateAccount" component={CreateAccountScreen} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="EditProfile" component={EditProfileScreen} />
+                     <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  animationEnabled:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="EditProfileDetail" component={EditProfileDetailScreen} />
             </Stack.Navigator>
           </NavigationContainer>
       </GlobalContext.Provider>
