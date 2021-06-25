@@ -52,7 +52,7 @@ export default function EditProfileScreen(props){
             </View>
             <Pressable 
             onPress={()=>{
-                alert("123");
+                props.navigation.navigate("EditProfileEmail");
             }}
             style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",justifyContent:"space-between",alignItems:"center",paddingHorizontal:EStyleSheet.value("20rem")}}>
                 <Text style={{fontSize:EStyleSheet.value("17rem")}}>Email</Text>
@@ -60,7 +60,7 @@ export default function EditProfileScreen(props){
             </Pressable>
             <Pressable 
             onPress={()=>{
-                alert("555");
+                props.navigation.navigate("EditProfilePassword");
             }}
             style={{marginTop:EStyleSheet.value("20rem"),flexDirection:"row",justifyContent:"space-between",alignItems:"center",paddingHorizontal:EStyleSheet.value("20rem")}}>
                 <Text style={{fontSize:EStyleSheet.value("17rem")}}>Password</Text>

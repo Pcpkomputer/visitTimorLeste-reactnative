@@ -22,22 +22,33 @@ export default function EditProfileDetailScreen(props){
  
     let globalContext = useContext(GlobalContext);
 
-    let [firstname, setFirstName] = useState(globalContext.credentials.data.first_name);
-    let [lastname, setLastName] = useState(globalContext.credentials.data.last_name);
+    let [password,setPassword] = useState("");
+    let [confirmation, setConfirmation] = useState("");
+
+    let [realPassword, setRealPassword] = useState(globalContext.credentials.data.password);
+    
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
 
     useEffect(()=>{
         try {
-            if(firstname.length===0){
+            if(password.length===0){
                 throw new Error();
             }
-            if(lastname.length===0){
+            if(confirmation.length===0){
+                throw new Error();
+            }
+            if(confirmation!==realPassword){
                 throw new Error();
             }
             setReadyToClick(true);
         } catch (error) {
             setReadyToClick(false);
         }
-    },[firstname,lastname])
+    },[password])
 
     return (
         <ScrollView style={{flex:1,backgroundColor:"white"}}>
@@ -53,19 +64,20 @@ export default function EditProfileDetailScreen(props){
                         <TextInput 
                         editable={buttonLoading ? false:true}
                         onChangeText={(text)=>{
-                            setFirstName(text);
+                            setConfirmation(text);
                         }}
-                        value={firstname}
-                        placeholder="First Name" style={{height:EStyleSheet.value("53rem")}}></TextInput>
+                        value={confirmation}
+                        placeholder="Old Password" secureTextEntry={true} style={{height:EStyleSheet.value("53rem")}}></TextInput>
                 </Surface>
                 <Surface style={{borderRadius:EStyleSheet.value("5rem"),paddingHorizontal:EStyleSheet.value("20rem"),marginTop:EStyleSheet.value("12rem"),backgroundColor:"#f4f4f4",width:"100%"}}>
                         <TextInput 
                         editable={buttonLoading ? false:true}
                         onChangeText={(text)=>{
-                            setLastName(text);
+                            setPassword(text);
                         }}
-                        value={lastname}
-                        placeholder="Last Name" style={{height:EStyleSheet.value("53rem")}}></TextInput>
+                        value={password}
+                        secureTextEntry={true}
+                        placeholder="New Password" style={{height:EStyleSheet.value("53rem")}}></TextInput>
                 </Surface>
              {
                  (readyToClick) ?
@@ -78,22 +90,22 @@ export default function EditProfileDetailScreen(props){
                  onPress={async ()=>{
                     setButtonLoading(true);
 
-                    let request = await fetch(`${ip}/api/updatedetailaccount`,{
+                    let request = await fetch(`${ip}/api/updatepasswordaccount`,{
                         method:"POST",
                         headers:{
                             "content-type":"application/json",
                             "authorization":`Bearer ${globalContext.credentials.token}`
                         },
                         body:JSON.stringify({
-                            first_name:firstname,
-                            last_name:lastname
+                            password
                         })
                     });
 
                     let response = await request.json();
 
+                    
                     if(response.success){
-                        await globalContext.refreshCredentials(globalContext.credentials.data.email,globalContext.credentials.data.password);
+                        await globalContext.refreshCredentials(globalContext.credentials.data.email,password);
                         props.navigation.goBack();
                     }   
                     else{

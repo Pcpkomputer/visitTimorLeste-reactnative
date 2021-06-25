@@ -19,6 +19,8 @@ import CreateAccountScreen from './screen/CreateAccountScreen';
 import ProfileLoggedScreen from './screen/ProfileLoggedScreen';
 import EditProfileScreen from './screen/EditProfileScreen';
 import EditProfileDetailScreen from './screen/EditProfileDetailScreen';
+import EditProfileEmailScreen from './screen/EditProfileEmailScreen';
+import EditProfilePasswordScreen from './screen/EditProfilePasswordScreen';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -60,15 +62,15 @@ export default function App() {
 
   const [entireAppLoaded, setEntireAppLoaded] = useState(false);
 
-  let refreshCredentials = async ()=>{
+  let refreshCredentials = async (email,password)=>{
           let request = await fetch(`${ip}/api/loginaccount`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
             },
             body:JSON.stringify({
-                email:credentials.data.email,
-                password:credentials.data.password
+                email:email,
+                password:password
             })
         });
         let response = await request.json();
@@ -392,6 +394,20 @@ export default function App() {
                   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 }}
                 name="EditProfileDetail" component={EditProfileDetailScreen} />
+                 <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  animationEnabled:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="EditProfileEmail" component={EditProfileEmailScreen} />
+                   <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  animationEnabled:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="EditProfilePassword" component={EditProfilePasswordScreen} />
             </Stack.Navigator>
           </NavigationContainer>
       </GlobalContext.Provider>
