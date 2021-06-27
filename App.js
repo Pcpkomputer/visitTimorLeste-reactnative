@@ -21,6 +21,8 @@ import EditProfileScreen from './screen/EditProfileScreen';
 import EditProfileDetailScreen from './screen/EditProfileDetailScreen';
 import EditProfileEmailScreen from './screen/EditProfileEmailScreen';
 import EditProfilePasswordScreen from './screen/EditProfilePasswordScreen';
+import CurrencyConverter from './screen/Essentials/CurrencyConverter';
+
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -408,6 +410,13 @@ export default function App() {
                   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 }}
                 name="EditProfilePassword" component={EditProfilePasswordScreen} />
+             <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="CurrencyConverter" component={CurrencyConverter} />
+            
             </Stack.Navigator>
           </NavigationContainer>
       </GlobalContext.Provider>

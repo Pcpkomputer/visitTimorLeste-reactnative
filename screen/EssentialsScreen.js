@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState, useRef} from 'react';
-import { StyleSheet, Animated, Text, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
+import { StyleSheet, Pressable, Animated, Text, View, Dimensions,ScrollView, ImageBackground, Image } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { FlatList } from 'react-native-gesture-handler';
 import { Surface} from 'react-native-paper';
@@ -80,7 +80,11 @@ export default function EssentialsScreen(props){
                                 <Text style={{fontFamily:"HeeboBold"}}>Handy Tips</Text>
                             </View>
                         </View>
-                        <View style={{flex:1,marginLeft:EStyleSheet.value("3rem")}}>
+                        <Pressable 
+                        onPress={()=>{
+                            props.navigation.navigate("CurrencyConverter");
+                        }}
+                        style={{flex:1,marginLeft:EStyleSheet.value("3rem")}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                     <Svg
                                     viewBox="0 0 510 510"
@@ -96,7 +100,7 @@ export default function EssentialsScreen(props){
                             <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("5rem")}}>
                                 <Text style={{fontFamily:"HeeboBold"}}>Currency Conventer</Text>
                             </View>
-                        </View>
+                        </Pressable>
                     </View>
                     <View style={{flexDirection:'row',marginBottom:EStyleSheet.value("30rem")}}>
                         <View style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
