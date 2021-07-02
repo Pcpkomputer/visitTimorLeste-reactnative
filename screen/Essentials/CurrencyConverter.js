@@ -43,10 +43,10 @@ export default function CurrencyConverter(){
                             <AntDesign name="arrowright" size={24} color="white" />
                         </View>
                         <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                            <View style={{backgroundColor:"whitesmoke",height:EStyleSheet.value("50rem"),width:EStyleSheet.value("70rem"),borderRadius:EStyleSheet.value("5rem")}}>
+                            <ImageBackground source={require("../../assets/flag.jpeg")} style={{backgroundColor:"whitesmoke",height:EStyleSheet.value("50rem"),width:EStyleSheet.value("70rem"),borderRadius:EStyleSheet.value("5rem")}}>
                                 
-                            </View>
-                            <Text style={{marginLeft:EStyleSheet.value("10rem"),color:"white",fontWeight:"bold"}}>SGD</Text>
+                            </ImageBackground>
+                            <Text style={{marginLeft:EStyleSheet.value("10rem"),color:"white",fontWeight:"bold"}}>TL</Text>
                         </View>
                     </View>
                 </View>
@@ -57,17 +57,17 @@ export default function CurrencyConverter(){
                     </View>
                     <View style={{flex:1,paddingLeft:EStyleSheet.value("10rem")}}>
                         <TextInput style={{fontSize:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem")}} placeholder=""></TextInput>
-                        <Text style={{color:"grey",marginBottom:EStyleSheet.value("5rem")}}>Singapore Dollar</Text>
+                        <Text style={{color:"grey",marginBottom:EStyleSheet.value("5rem")}}>Timor Leste Dollar</Text>
                     </View>
                 </View>
                 <View style={{marginTop:EStyleSheet.value("30rem")}}>
                     <Text style={{fontSize:EStyleSheet.value("20rem"),fontFamily:"HeeboBold"}}>Currencies</Text>
                 </View>
                 <View style={{flexDirection:"row",marginTop:EStyleSheet.value("10rem"),borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("45rem"),backgroundColor:"#e8e8e8"}}>
-                    <View style={{justifyContent:"center",alignItems:"center",height:"100%",width:EStyleSheet.value("50rem")}}>
+                    <View style={{justifyContent:"center",alignItems:"center",height:"100%",width:EStyleSheet.value("45rem")}}>
                     <FontAwesome name="search" size={EStyleSheet.value("17rem")} color="black" />
                     </View>
-                    <TextInput style={{width:"100%",paddingHorizontal:EStyleSheet.value("10rem")}}></TextInput>
+                    <TextInput placeholder="Country" style={{width:"100%",paddingHorizontal:EStyleSheet.value("0rem")}}></TextInput>
                 </View>
                 <View style={{flex:1,height:EStyleSheet.value("350rem"),marginBottom:EStyleSheet.value("20rem")}}>
                     <FlatList

@@ -22,7 +22,11 @@ import EditProfileDetailScreen from './screen/EditProfileDetailScreen';
 import EditProfileEmailScreen from './screen/EditProfileEmailScreen';
 import EditProfilePasswordScreen from './screen/EditProfilePasswordScreen';
 import CurrencyConverter from './screen/Essentials/CurrencyConverter';
-
+import HandyTips from './screen/Essentials/HandyTips';
+import DetailHandyTips from './screen/Essentials/DetailHandyTips';
+import UsefulContact from './screen/Essentials/UsefulContact';
+import About from './screen/Essentials/About';
+import DetailAbout from './screen/Essentials/DetailAbout';
 
 import DetailWeeklySpotlight from './screen/WeeklySpotlight/DetailWeeklySpolight';
 import DetailWhatsNew from './screen/WhatsNew/DetailWhatsNew';
@@ -416,7 +420,37 @@ export default function App() {
                   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
                 }}
                 name="CurrencyConverter" component={CurrencyConverter} />
-            
+             <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="HandyTips" component={HandyTips} />
+                 <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                  animationEnabled:false
+                }}
+                name="DetailHandyTips" component={DetailHandyTips} />
+                  <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="UsefulContact" component={UsefulContact} />
+                    <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="About" component={About} />
+                   <Stack.Screen 
+                options={{
+                  headerShown:false,
+                  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+                }}
+                name="DetailAbout" component={DetailAbout} />
             </Stack.Navigator>
           </NavigationContainer>
       </GlobalContext.Provider>

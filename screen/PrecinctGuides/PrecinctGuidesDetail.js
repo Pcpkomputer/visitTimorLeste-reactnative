@@ -32,6 +32,8 @@ import {
 
       let [favourite, setFavourite] = useState([]);
 
+      let [textWidth, setTextWidth] = useState(0);
+
      
       let fetchItemTours = async()=>{
             let listfavourite = [];
@@ -75,7 +77,7 @@ import {
 
       const translateXTrack =  trackScroll.interpolate({
         inputRange:[0,196,9999],
-        outputRange:[0,Dimensions.get("screen").width/2-35,Dimensions.get("screen").width/2-35]
+        outputRange:[0,(Dimensions.get("screen").width/2)-(textWidth/2)-(EStyleSheet.value("20rem")),(Dimensions.get("screen").width/2)-(textWidth/2)-(EStyleSheet.value("20rem"))]
     })
 
     const trackColor =  trackScroll.interpolate({
@@ -94,11 +96,13 @@ import {
                 <Animated.View style={{backgroundColor:"white",borderBottomWidth:0.5,borderBottomColor:"grey",opacity:opacityTrack,zIndex:100,position:"absolute",width:"100%",height:EStyleSheet.value("80rem")}}>
                 </Animated.View>
                 <Animated.View style={{position:"absolute",justifyContent:"center",zIndex:100,top:0,paddingTop:EStyleSheet.value("30rem"),width:"100%",height:EStyleSheet.value("80rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
-                    <Animated.View style={{transform:[{translateX:translateXTrack}]}}>
-                        <Text style={{color:"black",display:(blackText) ? null:"none",fontSize:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("1rem"),fontFamily:"HeeboBold"}}>{props.route.params.item.precinct_name}</Text>
+                    <Animated.View 
+                    style={{transform:[{translateX:translateXTrack}]}}>
+                        <Text 
+                        style={{color:"black",display:(blackText) ? null:"none",fontSize:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("1rem"),fontFamily:"HeeboBold"}}>{props.route.params.item.precinct_name}</Text>
                     </Animated.View>
                 </Animated.View>
-                <View style={{position:"absolute",opacity:(stickyDescShowed) ? 1:0,top:EStyleSheet.value("80rem"),zIndex:100,backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),paddingVertical:EStyleSheet.value("10rem")}}>
+                <View style={{position:"absolute",opacity:(stickyDescShowed) ? 1:0,top:EStyleSheet.value("80rem"),zIndex:100,backgroundColor:"white",paddingHorizontal:EStyleSheet.value("20rem"),width:"100%",paddingVertical:EStyleSheet.value("10rem")}}>
                     <Text style={{lineHeight:EStyleSheet.value("18rem"),fontFamily:"QuicksandMedium"}}>{props.route.params.item.description}</Text>
                 </View>
             </View>
@@ -127,7 +131,12 @@ import {
                     style={{backgroundColor:"grey",height:EStyleSheet.value("270rem")}}>
                         <View style={{position:"absolute",zIndex:12,bottom:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("20rem")}}>
                             <View style={{backgroundColor:"red",height:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("30rem")}}></View>
-                            <Animated.View style={{transform:[{translateX:translateXTrack}]}}>
+                            <Animated.View 
+                             onLayout={(e)=>{
+                                alert(e.nativeEvent.layout.width);
+                                setTextWidth(e.nativeEvent.layout.width)
+                            }}
+                            style={{transform:[{translateX:translateXTrack}]}}>
                                 <Text style={{color:"white",fontFamily:"QuicksandBold",opacity:(blackText) ? 0:1,fontSize:EStyleSheet.value("20rem"),marginBottom:EStyleSheet.value("1rem"),fontFamily:"HeeboBold"}}>{props.route.params.item.precinct_name}</Text>
                             </Animated.View>
                             <Text style={{color:"white",fontFamily:"QuicksandMedium"}}>{props.route.params.item.mini_description}</Text>

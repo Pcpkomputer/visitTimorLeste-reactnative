@@ -61,7 +61,11 @@ export default function EssentialsScreen(props){
                 </View>
                 <View style={{paddingHorizontal:EStyleSheet.value("20rem")}}>
                     <View style={{flexDirection:'row',marginBottom:EStyleSheet.value("30rem")}}>
-                        <View style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
+                        <Pressable 
+                        onPress={()=>{
+                            props.navigation.navigate("HandyTips");
+                        }}
+                        style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                     <Svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +83,7 @@ export default function EssentialsScreen(props){
                             <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("5rem")}}>
                                 <Text style={{fontFamily:"HeeboBold"}}>Handy Tips</Text>
                             </View>
-                        </View>
+                        </Pressable>
                         <Pressable 
                         onPress={()=>{
                             props.navigation.navigate("CurrencyConverter");
@@ -141,7 +145,11 @@ export default function EssentialsScreen(props){
                         </View>
                     </View>
                     <View style={{flexDirection:'row',marginBottom:EStyleSheet.value("30rem")}}>
-                        <View style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
+                        <Pressable 
+                        onPress={()=>{
+                            props.navigation.navigate("UsefulContact");
+                        }}
+                        style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                 <Svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -156,8 +164,12 @@ export default function EssentialsScreen(props){
                             <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("5rem")}}>
                                 <Text style={{fontFamily:"HeeboBold"}}>Useful Contacts</Text>
                             </View>
-                        </View>
-                        <View style={{flex:1,marginLeft:EStyleSheet.value("3rem")}}>
+                        </Pressable>
+                        <Pressable 
+                        onPress={()=>{
+                            props.navigation.navigate("About");
+                        }}
+                        style={{flex:1,marginLeft:EStyleSheet.value("3rem")}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                 <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 width={EStyleSheet.value("90rem")}
@@ -170,7 +182,7 @@ export default function EssentialsScreen(props){
                             <View style={{justifyContent:"center",alignItems:"center",marginTop:EStyleSheet.value("5rem")}}>
                                 <Text style={{fontFamily:"HeeboBold"}}>About</Text>
                             </View>
-                        </View>
+                        </Pressable>
                     </View>
                 </View>
             </ScrollView>
