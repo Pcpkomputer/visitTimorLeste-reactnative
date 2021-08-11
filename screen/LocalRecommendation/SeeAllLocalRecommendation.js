@@ -87,7 +87,11 @@ const FirstRoute = (props) =>
             data={listrecommendation}
             renderItem={({item,index})=>{
                 return (
-                    <View style={{flexDirection:"row",marginBottom:EStyleSheet.value("20rem")}}>
+                    <Pressable 
+                    onPress={()=>{
+                        props.navigation.navigate("DetailLocal", {item:item});
+                    }}
+                    style={{flexDirection:"row",marginBottom:EStyleSheet.value("20rem")}}>
                         <ImageBackground source={{uri:item.avatar}} style={{overflow:"hidden",backgroundColor:"whitesmoke",width:EStyleSheet.value("80rem"),borderRadius:999,height:EStyleSheet.value("80rem")}}>
                         </ImageBackground>
                         <View style={{flex:1,justifyContent:"center",borderBottomWidth:0.5,borderColor:"grey",paddingHorizontal:EStyleSheet.value("12rem")}}>
@@ -97,7 +101,7 @@ const FirstRoute = (props) =>
                         <View style={{borderBottomWidth:0.5,borderColor:"grey",justifyContent:"center",alignItems:"center"}}>
                             <Entypo name="chevron-thin-right" size={24} color="grey" />
                         </View>
-                    </View>
+                    </Pressable>
                 )
             }}
             />

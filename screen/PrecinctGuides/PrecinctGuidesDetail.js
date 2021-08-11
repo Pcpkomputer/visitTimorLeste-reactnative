@@ -133,7 +133,7 @@ import {
                             <View style={{backgroundColor:"red",height:EStyleSheet.value("5rem"),marginBottom:EStyleSheet.value("5rem"),width:EStyleSheet.value("30rem")}}></View>
                             <Animated.View 
                              onLayout={(e)=>{
-                                alert(e.nativeEvent.layout.width);
+                             
                                 setTextWidth(e.nativeEvent.layout.width)
                             }}
                             style={{transform:[{translateX:translateXTrack}]}}>
