@@ -190,7 +190,7 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                     <Surface style={{elevation:4,backgroundColor:"white",borderRadius:EStyleSheet.value("15rem"),padding:EStyleSheet.value("20rem"),paddingHorizontal:EStyleSheet.value("15rem")}}>
                             <View>
                                 <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                                        <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>{props?.route?.params?.category || ""}</Text>
+                                        <Text style={{color:"#d1222c",fontFamily:"QuicksandBold"}}>{props?.route?.params?.category.toUpperCase() || ""}</Text>
                                         <View style={{flexDirection:"row"}}>
                                             <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />
                                             <Entypo name="star" size={EStyleSheet.value('14rem')} color="whitesmoke" />

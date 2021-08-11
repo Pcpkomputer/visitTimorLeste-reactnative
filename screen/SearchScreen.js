@@ -471,7 +471,7 @@ export default function SearchScreen(props){
                                 <View style={{flexDirection:"row",justifyContent:"space-between"}}>
                                     <View>
                                         <Text style={{color:"white",fontSize:EStyleSheet.value("13rem"),fontFamily:"QuicksandMedium"}}>{item.category}</Text>
-                                        <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem")}}>{item.place_name}</Text>
+                                        <Text style={{fontFamily:"HeeboBold",color:"white",fontSize:EStyleSheet.value("15rem"),width:EStyleSheet.value("200rem")}}>{item.place_name}</Text>
                                     </View>
                                     <View style={{justifyContent:"flex-end"}}>
                                         <View style={{flexDirection:'row'}}>

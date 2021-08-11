@@ -15,6 +15,37 @@ import { useIsFocused } from "@react-navigation/native";
 import {ip} from '../../utils/env';
 
 export default function CurrencyConverter(){
+
+let [originValue, setOriginValue] = useState("");
+let [convertedValue, setConvertedValue ] = useState("");
+
+let [currencies, setCurrencies] = useState([
+    {
+        lang:"USD",
+        name:"United States America",
+        flag:"https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png",
+        origin:1
+    },
+    {
+        lang:"IDR",
+        name:"Indonesia",
+        flag:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAIVBMVEX////OESfOESbq6urssrfMAA3NFirMABTfpKnr7+/a2tqcCwSUAAABf0lEQVR4nO3SwQ3CMAAEQSeGJNB/wYgXMlsAPGYqOK1uHBurYxz7tvOx7cdQ5Nv2bvLrs/4VTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqTejc576zOcd1YXeMxWD3G/PWEvzM1CU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9KkNClNSpPSpDQpTUqT0qQ0KU1Kk9Kk5nhOVs8XvjdzZbCXb9MAAAAASUVORK5CYII=",
+        origin:15000
+    }
+])
+
+let [showFiltered, setShowFiltered] = useState(false);
+let [textFiltered, setTextFiltered] = useState("");
+let [filteredCurrencies, setFilteredCurrencies] = useState([]);
+
+    let [selectedCurrencies, setSelectedCurrencies] = useState(-1);
+
+    useEffect(()=>{
+        setConvertedValue("");
+        setOriginValue("");
+    },[selectedCurrencies])
+
+
     return (
         <ScrollView style={{flex:1,backgroundColor:"white"}}>
            <View style={{height:EStyleSheet.value('10rem'),zIndex:100}}></View>
@@ -34,10 +65,10 @@ export default function CurrencyConverter(){
                     <View style={{flexDirection:"row",zIndex:100,justifyContent:"space-around",paddingHorizontal:EStyleSheet.value("30rem"),paddingVertical:EStyleSheet.value("10rem")}}>
                         
                         <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                            <View style={{backgroundColor:"whitesmoke",height:EStyleSheet.value("50rem"),width:EStyleSheet.value("70rem"),borderRadius:EStyleSheet.value("5rem")}}>
+                            <ImageBackground source={{uri:selectedCurrencies!==-1 ? currencies[selectedCurrencies].flag:null}} style={{backgroundColor:"whitesmoke",height:EStyleSheet.value("50rem"),width:EStyleSheet.value("70rem"),borderRadius:EStyleSheet.value("5rem")}}>
                                 
-                            </View>
-                            <Text style={{marginLeft:EStyleSheet.value("10rem"),color:"white",fontWeight:"bold"}}>SGD</Text>
+                            </ImageBackground>
+                            <Text style={{marginLeft:EStyleSheet.value("10rem"),color:"white",fontWeight:"bold"}}>{(selectedCurrencies===-1) ? "...":currencies[selectedCurrencies].lang}</Text>
                         </View>
                         <View style={{justifyContent:"center",alignItems:"center"}}>
                             <AntDesign name="arrowright" size={24} color="white" />
@@ -52,11 +83,23 @@ export default function CurrencyConverter(){
                 </View>
                 <View style={{backgroundColor:"#e8e8e8",borderBottomLeftRadius:EStyleSheet.value("20rem"),borderBottomRightRadius:EStyleSheet.value("20rem"),flexDirection:"row",padding:EStyleSheet.value("10rem")}}>
                     <View style={{flex:1,borderRightWidth:1,borderColor:"grey",paddingRight:EStyleSheet.value("10rem")}}>
-                        <TextInput style={{fontSize:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem")}} placeholder=""></TextInput>
-                        <Text style={{color:"grey",marginBottom:EStyleSheet.value("5rem")}}>Singapore Dollar</Text>
+                        <TextInput 
+                        onChangeText={(text)=>{
+                            let result = parseInt(text)/currencies[selectedCurrencies].origin;
+                            if(isNaN(result)){
+                                setOriginValue("");
+                            }else{
+                                setOriginValue(text);
+                                setConvertedValue(result.toString());
+                            }
+                        }}
+                        value={originValue}
+                        editable={selectedCurrencies!==-1 ? true:false}
+                        style={{fontSize:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem")}} placeholder=""></TextInput>
+                        <Text style={{color:"grey",marginBottom:EStyleSheet.value("5rem")}}>{selectedCurrencies===-1 ? "...":currencies[selectedCurrencies].name}</Text>
                     </View>
                     <View style={{flex:1,paddingLeft:EStyleSheet.value("10rem")}}>
-                        <TextInput style={{fontSize:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem")}} placeholder=""></TextInput>
+                        <TextInput value={convertedValue} editable={false} style={{color:"black",fontSize:EStyleSheet.value("20rem"),height:EStyleSheet.value("50rem")}} placeholder=""></TextInput>
                         <Text style={{color:"grey",marginBottom:EStyleSheet.value("5rem")}}>Timor Leste Dollar</Text>
                     </View>
                 </View>
@@ -67,23 +110,44 @@ export default function CurrencyConverter(){
                     <View style={{justifyContent:"center",alignItems:"center",height:"100%",width:EStyleSheet.value("45rem")}}>
                     <FontAwesome name="search" size={EStyleSheet.value("17rem")} color="black" />
                     </View>
-                    <TextInput placeholder="Country" style={{width:"100%",paddingHorizontal:EStyleSheet.value("0rem")}}></TextInput>
+                    <TextInput 
+                    onChangeText={(text)=>{
+                        setTextFiltered(text);
+                        if(text.length===0){
+                            setShowFiltered(false);
+                        }else{
+                            let filter = currencies.filter((item,index)=>{
+                                let regex = new RegExp(`${text}`,'i');
+                                return item.name.match(regex);
+                            })
+                            console.log(filter);
+                            setFilteredCurrencies(filter);
+                            setShowFiltered(true);
+                        }
+                    }}
+                    value={textFiltered}
+                    placeholder="Country" style={{width:"100%",paddingHorizontal:EStyleSheet.value("0rem")}}></TextInput>
                 </View>
                 <View style={{flex:1,height:EStyleSheet.value("350rem"),marginBottom:EStyleSheet.value("20rem")}}>
                     <FlatList
                     keyExtractor={(item,index)=>`currencies-${index}`}
-                    data={[1,2,3,4,5]}
+                    data={showFiltered ? filteredCurrencies:currencies}
                     showsVerticalScrollIndicator={false}
                     renderItem={({item,index})=>{
                         return (
-                            <View style={{flexDirection:"row",marginBottom:([1,2,3,4,5].length-1===index) ? EStyleSheet.value("10rem"):null,borderBottomWidth:0.5,borderColor:"grey",paddingHorizontal:EStyleSheet.value("10rem"),alignItems:"center",marginTop:(index===0) ? EStyleSheet.value("20rem"):null,paddingVertical:EStyleSheet.value("8rem")}}>
-                                <View style={{backgroundColor:"whitesmoke",width:EStyleSheet.value("70rem"),height:EStyleSheet.value("50rem")}}>
-                                </View>
+                            <TouchableOpacity 
+                            activeOpacity={0.8}
+                            onPress={()=>{
+                                setSelectedCurrencies(index);
+                            }}
+                            style={{flexDirection:"row",marginBottom:(currencies.length-1===index) ? EStyleSheet.value("10rem"):null,borderBottomWidth:0.5,borderColor:"grey",paddingHorizontal:EStyleSheet.value("10rem"),alignItems:"center",marginTop:(index===0) ? EStyleSheet.value("20rem"):null,paddingVertical:EStyleSheet.value("8rem")}}>
+                                <ImageBackground source={{uri:item.flag}} imageStyle={{borderRadius:EStyleSheet.value("5rem")}} style={{backgroundColor:"whitesmoke",overflow:"hidden",width:EStyleSheet.value("70rem"),height:EStyleSheet.value("50rem")}}>
+                                </ImageBackground>
                                 <View style={{marginLeft:EStyleSheet.value("10rem")}}>
-                                    <Text style={{fontWeight:"bold"}}>Australian Dollar</Text>
-                                    <Text style={{marginTop:EStyleSheet.value("5rem"),fontWeight:"bold"}}>AUD</Text>
+                                    <Text style={{fontWeight:"bold"}}>{item.name}</Text>
+                                    <Text style={{marginTop:EStyleSheet.value("5rem"),fontWeight:"bold"}}>{item.lang}</Text>
                                 </View>
-                            </View>
+                            </TouchableOpacity>
                         )
                     }}
                     />

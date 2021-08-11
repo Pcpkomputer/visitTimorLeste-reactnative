@@ -107,7 +107,7 @@ export default function EssentialsScreen(props){
                         </Pressable>
                     </View>
                     <View style={{flexDirection:'row',marginBottom:EStyleSheet.value("30rem")}}>
-                        <View style={{flex:1,marginRight:EStyleSheet.value("3rem")}}>
+                        <View style={{flex:1,marginRight:EStyleSheet.value("3rem"),opacity:0.5}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                 <Svg
                                 width={EStyleSheet.value("90rem")}
@@ -126,7 +126,7 @@ export default function EssentialsScreen(props){
                                 <Text style={{fontFamily:"HeeboBold"}}>Money Changer</Text>
                             </View>
                         </View>
-                        <View style={{flex:1,marginLeft:EStyleSheet.value("3rem")}}>
+                        <View style={{flex:1,marginLeft:EStyleSheet.value("3rem"), opacity:0.5}}>
                             <View style={{backgroundColor:"#e8e8e8",justifyContent:'center',alignItems:'center',borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value("170rem")}}>
                                 <Svg
                                 xmlns="http://www.w3.org/2000/svg"

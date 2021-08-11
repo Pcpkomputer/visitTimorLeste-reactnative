@@ -159,6 +159,12 @@ import {
                         data={tours}
                         style={{paddingHorizontal:EStyleSheet.value("20rem")}}
                         renderItem={({item,index})=>{
+
+                            item = {
+                                ...item,
+                                place_name:item.name
+                            }
+
                             return (
                                 <Pressable
                                 onPress={()=>{
