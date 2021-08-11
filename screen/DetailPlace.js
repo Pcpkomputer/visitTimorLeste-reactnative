@@ -431,7 +431,7 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                             }}
                             style={{position:"absolute",right:EStyleSheet.value("15rem"),bottom:EStyleSheet.value("12rem"),zIndex:100,paddingHorizontal:EStyleSheet.value("8rem"),paddingVertical:EStyleSheet.value("3rem")}}>
                                 {
-                                    (descHeight>150) &&
+                                    (descHeight.__getValue()>150) &&
                                     <Text style={{zIndex:11,textShadowColor:"white",fontSize:EStyleSheet.value("12rem"),textShadowRadius:5,color:"#d1222c"}}>{descriptionExpanded ? "Less":"More"}</Text>
                                 }
                                 <LinearGradient
@@ -440,7 +440,7 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                                     style={{position:'absolute',top:0,zIndex:10,width:"100%",borderRadius:EStyleSheet.value("5rem"),height:EStyleSheet.value('80rem')}}
                                 />
                             </Pressable>
-                            <Animated.View style={{overflow:"hidden",height:(firstLoaded) ? (descHeight>150) ? descHeight:null:null}}>
+                            <Animated.View style={{overflow:"hidden",height:(firstLoaded) ? (descHeight.__getValue()>150) ? descHeight:null:null}}>
                                 <Text style={{lineHeight:EStyleSheet.value("20rem"),textAlign:"auto",fontSize:EStyleSheet.value("12rem"),fontFamily:"QuicksandMedium"}}>
                                     {
                                         detail?.tours?.description || ""
@@ -449,7 +449,7 @@ import DetailWhatsNew from './WhatsNew/DetailWhatsNew';
                             </Animated.View>
                             <View style={{position:"absolute",bottom:0,height:EStyleSheet.value("30rem"),width:"100%"}}>
                                {
-                                   (descHeight>150) &&
+                                   (descHeight.__getValue()>150) &&
                                    <LinearGradient
                                    // Background Linear Gradient
                                    colors={[ 'transparent','white','white','white','white','white']}
